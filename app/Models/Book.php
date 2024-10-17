@@ -29,4 +29,16 @@ class Book extends Model
     {
         return $this->belongsTo(Author::class, 'author_id');
     }
+
+    public function getAvgReviewAttribute()
+    {
+        $total_reviews = $this->reviews->count();
+        $sum_of_reviews = 0;
+        foreach($this->reviews as $review)
+        {
+            $sum_of_reviews += $review->review_start;
+        }
+
+        return ($total_reviews > 0) ? $sum_of_reviews / $total_reviews : 0;
+    }
 }

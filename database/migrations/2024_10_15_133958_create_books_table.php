@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->on('people')->references('id')->onDelete('set null')->onUpdate('cascade');
             $table->text('description')->nullable();
-            $table->string('cover')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->on('books_categories')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('downloadable')->default(false);

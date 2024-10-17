@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('books_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('is_child');
-            $table->unsignedBigInteger('parent_id');
-            $table->foreign('parent_id')->on('books_categories')->references('id')->onDelete('set null')->onUpdate('cascade');
+            // $table->boolean('is_child');
+            // $table->unsignedBigInteger('parent_id');
+            // $table->foreign('parent_id')->on('books_categories')->references('id')->onDelete('set null')->onUpdate('cascade');
             $table->timestamps();
         });
     }

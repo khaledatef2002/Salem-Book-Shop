@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+    font-family: "Inter", sans-serif;
+    --btn-bg-primary: #0d405c;
+    --btn-text-primary: #fff;
+    background-color: #cedde5;
+}
+
+.btn-primary {
+    background-color: var(--btn-bg-primary) !important;
+    color: var(--btn-text-primary) !important;
+    border: 0;
+}
+
+.text-primary {
+    color: var(--btn-text-primary) !important;
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+.special-button {
+    color: #2b2d30;
+    border: 1px solid #2b2d30;
+}
+
+.view-all-link
+{
+    color: #0d405c;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.read-more-link
+{
+    color: #0d405c;
+    font-size: 0.8rem;
+}
+.read-more-link i 
+{
+    font-size: 0.7rem;
+}
+.section-back 
+{
+    background-color: #bdd2dc;
+}
+
+
+/* Owl Customization */
+.owl-nav {
+    position: absolute;
+    top: 50%;
+    transform: translate(-2%, -50%);
+    width: 103%;
+    display: flex;
+    justify-content: space-between;
+}
+.owl-nav button.disabled {
+    visibility: hidden;
+}
+.owl-nav button span {
+    font-size: 3rem;
+}
+
+/* Navbar & Header */
+header, .nav-container {
+    background-color: #0d405c;
+}
+.nav-container {
+    transition: 0.3s ease-in-out;
+}
+.floating-nav {
+    position: sticky;
+    top: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 9999;
+    border-bottom: 1px solid #0d405c;
+}
+.floating-nav nav {
+    border-radius: 0 !important;
+}
+
+div.nav-container nav li a {
+    color: black !important;
+    font-weight: 500;
+}
+
+div.nav-container nav div a#log-in-button {
+    font-weight: 500;
+    color: black;
+}
+div.nav-container nav div a#sign-up-button {
+    border: 0;
+}
+header {
+    border-radius: 0% 0% 40% 40% / 25% 25% 25% 25%;
+}
+header img {
+    max-width: 90%;
+}
+header div.hero h2 {
+    color: #3ebac2;
+}
+header div.hero {
+    background-image: url(../imgs/blimp.png), url(../imgs/cloud.png), url(../imgs/blimp.png), url(../imgs/cloud.png), url(../imgs/hero-textures.png);
+    background-position: 15% 25%, 5% 5%, 85% 25%, 95% 5%, center;
+    animation-name: hero-assets;
+    animation-duration: 2.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Comming Events */
+#comming-event .event
+{
+    background-image: url('../imgs/comming_event.png');
+    background-attachment: fixed;
+    background-position: center;
+    overflow: hidden;
+    aspect-ratio: 1/0.45;
+    min-height: 500px;
+    max-width: 100%;
+}
+#comming-event .event .backgound-overlay
+{
+    background-color: #000000b3;
+    color: white;
+}
+#comming-event .event .backgound-overlay .frame {
+    
+}
+#comming-event .event .backgound-overlay .frame .number {
+    color: #808488;
+    font-weight: bold;
+}
+#comming-event .event .backgound-overlay button 
+{
+    background-color: #0d405c;
+}
+
+/* Sepcial picks */
+section#special-picks-for-you .activity-carousel .item-container {
+    background-color: #f4f4f4;
+}
+section#special-picks-for-you .activity-carousel .item-container div:has(> img) {
+    overflow: hidden;
+}
+section#special-picks-for-you .activity-carousel .item-container div > img {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/* Quotes */
+section#quotes .quote-back
+{
+    background-image: url(../imgs/parallax.jpg);
+    background-position: 50% 60.654%;
+    height: 650px;
+    width: 100%;
+    background-attachment: fixed;
+    position: relative;
+}
+section#quotes .quote-back > div
+{
+    height: calc(100% - 100px);
+}
+section#quotes .quote-back::after
+{
+    position: absolute;
+    content: "";
+    right: 0;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    height: 180px;
+    width: 100%;
+    background: url(../imgs/pattern.png) repeat-x scroll center bottom;
+    background-size: cover;
+}
+section#quotes .quote-back .author-image-container
+{
+    border-radius: 50%;
+    border: 3px solid white;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+}
+section#quotes .quote-back .author-image-container img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+section#quotes .quote-back .quotes-carousel .owl-nav button span
+{
+    color: white;
+}
+section#quotes .quote-back .quotes-carousel .owl-dots
+{
+    display: flex;
+    column-gap: 7px;
+    justify-content: center;
+}
+section#quotes .quote-back .quotes-carousel .owl-dots button
+{
+    background-color: #c0c0c0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+section#quotes .quote-back .quotes-carousel .owl-dots button.active
+{
+    background-color: #0d405c;
+}
+
+/* Video & Top Author */
+section#video-and-top-authors iframe
+{
+    width: 100%;
+    aspect-ratio: 1/0.562;
+}
+section#video-and-top-authors .top-authors-header
+{
+    background-color: #0d405c;
+    color: white;
+}
+
+section#video-and-top-authors .author
+{
+    background-color: #abc3dc;
+}
+
+section#video-and-top-authors .author-image
+{
+    width: 100px;
+    min-width: 100px;
+    max-height: 120px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section#video-and-top-authors .author-image img
+{
+    min-height: 100%;
+    min-width: 100%;
+    width: 100%;
+}
+
+section#video-and-top-authors .author-info p
+{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;     /* Limits the text to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;           /* Hide the overflow content */
+    text-overflow: ellipsis;    /* Display '...' */
+}
+
+/* Latest Articles */
+#latest-articles
+{
+    
+}
+
+#latest-articles .article-meta
+{
+    font-size: 0.8rem;
+}
+
+#latest-articles .article-contnet
+{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;     /* Limits the text to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;           /* Hide the overflow content */
+    text-overflow: ellipsis;    /* Display '...' */
+    height: calc(1.5em * 3);    /* Optional: Set height based on line height */
+}
+
+/* Latest Blogs */
+#latest-blogs .blog-meta
+{
+    font-size: 0.8rem;
+}
+
+#latest-blogs .blog-contnet
+{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;     /* Limits the text to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;           /* Hide the overflow content */
+    text-overflow: ellipsis;    /* Display '...' */
+    height: calc(1.5em * 3);    /* Optional: Set height based on line height */
+}
+
+/* Footer */
+footer {
+    background-color: #00101f;
+}
+footer hr {
+    border-color: white;
+}
+
+
+/* Auth Design */
+
+.auth-container
+{
+    min-height: 100vh;
+}
+.auth-container .form-container
+{
+    margin-top: -180px;
+}
+.auth-container .auth-header
+{
+    background-image: url(../imgs/auth-header.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 380px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+.auth-container .auth-header .bg-overlay
+{
+    background: linear-gradient(to left, #0d405c, #05354f);
+    opacity: 0.85;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+}
+.auth-container .auth-header .shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.auth-container .auth-header .shape > svg {
+    width: 100%;
+    height: auto;
+    fill: #cedde5;
+}
+.auth-container .form-container, .auth-container .logo
+{
+    z-index: 2;
+}
+.auth-container .card .card-body .input-holder i
+{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.auth-container .card .card-body .form-title
+{
+    color: #0d405c;
+}
+.auth-container .card .card-body i 
+{
+    color: #0d405c;
+}
+.auth-container .card .card-body p a 
+{
+    color: #0d405c;
+}
+.auth-container footer 
+{
+    background-color: transparent;
+}
+
+/* Hero Image Animation */
+header div.hero img
+{
+    animation-name: header-book;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-out;
+}
+@keyframes header-book {
+    0%{
+        transform: translateY(7px) rotateX(0);
+    }
+    100%{
+        transform: translateY(-7px) rotateX(20deg);
+    }
+}
+
+/* Whats app icon */
+.whatsapp-contact
+{
+    position: fixed;
+    z-index: 9999;
+    bottom: 10px;
+    right: 10px;
+}
+.whatsapp-contact img
+{
+    width: 50px;
+}

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->timestamp('date');
-            $table->string('cover');
+            $table->string('cover')->nullable();
             $table->timestamps();
         });
     }

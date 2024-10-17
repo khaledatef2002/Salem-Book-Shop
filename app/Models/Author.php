@@ -26,4 +26,9 @@ class Author extends Person
     {
         return $this->hasMany(Book::class, 'author_id');
     }
+
+    public function bookReviews()
+    {
+        return $this->hasManyThrough(BookReview::class, Book::class, 'author_id', 'book_id');
+    }
 }

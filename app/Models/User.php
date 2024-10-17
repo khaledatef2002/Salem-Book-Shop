@@ -71,4 +71,8 @@ class User extends Authenticatable
         return $this->hasMany(BookReview::class, 'user_id');
     }
 
+    public function getFullNameAttributes()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
 }

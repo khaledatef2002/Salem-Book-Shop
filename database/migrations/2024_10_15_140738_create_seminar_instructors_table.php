@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('seminar_id');
             
             // Foreign key constraints
-            $table->foreign('instructor_id')->references('id')->on('instructors')->onDelete('cascade');
-            $table->foreign('seminar_id')->references('id')->on('seminars')->onDelete('cascade');
+            $table->foreign('instructor_id')->on('people')->references('id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('seminar_id')->on('seminars')->references('id')->onDelete('cascade')->onUpdate('cascade');
 
             $table->primary(['instructor_id', 'seminar_id']); // composite primary key
             $table->timestamps();
