@@ -1,7 +1,7 @@
 <footer class="pt-5">
     <div class="container-lg container-md">
         <div class="row text-white">
-            <div class="col-md-3 col-12 d-flex flex-column align-items-md-center align-items-center px-3">
+            <div class="col-md-3 col-12 d-flex flex-column align-items-md-start align-items-center px-3">
                 <div class="website d-flex align-items-center gap-2 mb-3">
                     <img src="{{ asset('front') }}/imgs/logo-white.png" alt="" width="40">
                     <p class="mb-0">Salem Book</p>
@@ -28,7 +28,7 @@
                 </ul>
             </div>
             <hr class="d-md-none d-block">
-            <div class="col-md-3 col-12 d-flex flex-column align-items-md-center align-items-center px-3">
+            <div class="col-md-3 col-12 d-flex flex-column align-items-md-start align-items-center px-3">
                 <p class="fw-bold mb-3 d-flex">Social Media</p>
                 <ul class="list-style-none ps-0 d-flex flex-wrap gap-3 justify-content-between">
                     <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
