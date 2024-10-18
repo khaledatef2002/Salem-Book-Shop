@@ -54,8 +54,11 @@
             </div>
         </div>
         <div class="d-flex justify-content-center gap-2 mt-1">
-            <img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="rounded-2" role="button">
-            <!-- <span>Switch to AR.</span> -->
+            @if (LaravelLocalization::getCurrentLocale() == 'ar')
+                <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"><img src="{{ asset('front') }}/imgs/en.svg" height="25" class="rounded-2" role="button"></a>
+            @else
+                <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="rounded-2" role="button"></a>
+            @endif
         </div>
     </div>
     <footer class="position-absolute bottom-0 w-100 text-center">

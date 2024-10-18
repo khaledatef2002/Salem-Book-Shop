@@ -58,7 +58,11 @@
                     <a href="{{ route('register') }}" class="btn btn-primary rounded-5 px-4 py-2 fw-bold ms-2" id="sign-up-button">Sign Up</a>
                 </div>
             @endif
-            <img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="ms-3 rounded-2" role="button">
+            @if (LaravelLocalization::getCurrentLocale() == 'ar')
+                <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"><img src="{{ asset('front') }}/imgs/en.svg" height="25" class="ms-3 rounded-2" role="button"></a>
+            @else
+                <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="ms-3 rounded-2" role="button"></a>
+            @endif
         </div>
     </div>
 </nav>
