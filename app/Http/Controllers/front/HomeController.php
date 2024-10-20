@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\BooksCategory;
+use App\Models\Contact;
 use App\Models\Quote;
 use App\Models\Seminar;
 use App\PeopleType;
@@ -17,7 +18,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $book_categories = BooksCategory::get(['id', 'name']);
         $comming_events = Seminar::where('date', '>', now())->inRandomOrder()->first(['id', 'title', 'date']);
 
         $date = Carbon::parse($comming_events->date);
@@ -38,7 +38,7 @@ class HomeController extends Controller
         
         $blogs = Article::with(['category', 'users'])->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
 
-        return view('front.home', compact('book_categories', 'comming_events', 'books', 'quotes', 'top_authors', 'articles', 'blogs'));
+        return view('front.home', compact('comming_events', 'books', 'quotes', 'top_authors', 'articles', 'blogs'));
     }
 
     private function getTopAuthors()
@@ -55,5 +55,29 @@ class HomeController extends Controller
         ->get();
 
         return $top_authors;
+    }
+
+    public function about()
+    {
+        return view('front.about');
+    }
+
+    public function contact()
+    {
+        return view('front.contact');
+    }
+    
+    public function add_contact(Request $request)
+    {
+        $request->validate([
+            'message' => ['required', 'max:300']
+        ]);
+
+        $user_id = auth()->user()->id;
+
+        Contact::create([
+            'user_id' => $user_id,
+            'message' => $request->message
+        ]);
     }
 }

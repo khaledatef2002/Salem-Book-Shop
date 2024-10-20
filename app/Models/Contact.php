@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QuoteLike extends Model
+class Contact extends Model
 {
 
     use HasFactory;
 
     protected $guarded = [];
-    
-    public function quote()
+
+    public function user()
     {
-        return $this->belongsTo(Quote::class, 'quote_id');
+        return $this->belongsTo(Contact::class);
     }
 }

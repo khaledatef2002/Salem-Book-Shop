@@ -13,6 +13,12 @@ body {
     border: 0;
 }
 
+.btn-outline-primary,.btn-outline-primary:hover, .btn-outline-primary:focus {
+    border-color: var(--btn-bg-primary) !important;
+    color: var(--btn-bg-primary) !important;
+    background-color: transparent !important;
+}
+
 .text-primary {
     color: var(--btn-text-primary) !important;
 }
@@ -47,6 +53,11 @@ body {
     background-color: #bdd2dc;
 }
 
+.pagination
+{
+    display: flex;
+    justify-content: center;
+}
 
 /* Owl Customization */
 .owl-nav {
@@ -87,18 +98,35 @@ header, .nav-container {
     border-radius: 0 !important;
 }
 
-div.nav-container nav li a {
+nav li a {
     color: black !important;
     font-weight: 500;
 }
 
-div.nav-container nav div a#log-in-button {
+nav div a#log-in-button {
     font-weight: 500;
     color: black;
 }
-div.nav-container nav div a#sign-up-button {
+nav div a#sign-up-button {
     border: 0;
 }
+
+.navbar .user-info .user-image
+{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.navbar .user-info .user-image img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+
 header {
     border-radius: 0% 0% 40% 40% / 25% 25% 25% 25%;
 }
@@ -119,7 +147,7 @@ header div.hero {
 
 /* Auth List */
 
-.navbar .auth-list a i
+.navbar .auth-list a.nav-link i
 {
     background: #184257;
     color: white;
@@ -381,11 +409,12 @@ footer hr {
 {
     z-index: 2;
 }
-.auth-container .card .card-body .input-holder i
+.card .card-body .input-holder i
 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 .auth-container .card .card-body .form-title
 {
@@ -433,4 +462,149 @@ header div.hero img
 .whatsapp-contact img
 {
     width: 50px;
+}
+
+/* Custom Header */
+#page-header
+{
+    background-color: #0d405c;
+    color: white;
+}
+#page-header .badge 
+{
+    background-color: #abc3dc;
+    padding: 7px 13px;
+    font-size: 0.9rem;
+}
+#books-page-body .items img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+#books-page-body .items .content p
+{
+    color: rgb(224 168 0) !important;
+}
+#books-page-body .sort select,#books-page-body .limit select
+{
+    width: unset;
+    min-width: 130px;
+}
+#books-page-body button, .active>.page-link, .page-link.active
+{
+    background-color: #0d405c;
+    color: #fff;
+}
+.active>.page-link, .page-link.active
+{
+    border-color: #0d405c;
+}
+
+.books-container 
+{
+    min-height: 200px;
+}
+
+/* Profile Page */
+.profile-body ul.nav li
+{
+    border-bottom-left-radius: 0 !important;    
+    border-bottom-right-radius: 0 !important;    
+}
+.profile-body .card
+{
+    border-top-left-radius: 0 !important;
+}
+.profile-body .nav-tabs .nav-link:not(.active)
+{
+    background: #bdd2dc;
+    color: black;
+}
+
+.profile-body .image-upload input
+{
+    display: none;  
+}
+.profile-body .image-upload div.image-holder
+{
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+}
+.profile-body .image-upload div.image-holder img
+{
+    min-height: 100%;
+    min-width: 100%;
+}
+.profile-body .image-upload span
+{
+    font-size: 0.7rem;
+}
+
+/* Quotes Page */
+
+#quotes-page-body .quotes-container .card
+{
+    overflow: hidden;
+}
+#quotes-page-body .sort select,#books-page-body .limit select
+{
+    width: unset;
+    min-width: 130px;
+}
+#quotes-page-body .quotes-container .card div:has(> img)
+{
+    width: 70px;
+    min-width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#quotes-page-body .quotes-container .card div > img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+#quotes-page-body .quotes-container .card .author span
+{
+    width: max-content;
+}
+
+#quotes-page-body .quotes-container .card h3 div button
+{
+    width: max-content;
+}
+#quotes-page-body .quotes-container .card h3 > div
+{
+    align-self: flex-end;
+}
+
+
+/* Book Info Page */
+#book-info .book-image-holder
+{
+    overflow: hidden;
+}
+#book-info .book-image-holder img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.book-carousel .owl-nav
+{
+    transform: translate(-50%, -50%);
+    width: 113%;
+    left: 50%;
+}
+
+/* About Us */
+section#about-us-page a 
+{
+    color: #05354f;
+}
+/* Contact Us */
+section#contact-page div:has(> a), section#contact-page div > a 
+{
+    color: #05354f;
 }

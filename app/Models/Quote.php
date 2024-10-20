@@ -18,4 +18,9 @@ class Quote extends Model
     {
         return $this->belongsTo(Author::class);
     }
+    public function authLikes()
+    {
+        return $this->hasMany(QuoteLike::class)->where('user_id', auth()->user()->id);
+    }
+
 }

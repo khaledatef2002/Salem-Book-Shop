@@ -1,6 +1,6 @@
 @extends('front.main2')
 
-@section('title', 'Sign  Up')
+@section('title', __('custom.signup'))
 
 @section('content')
 
@@ -24,45 +24,47 @@
             <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
                 <div class="card w-100">
                     <div class="card-body py-4">
-                        <form action="{{ route('register') }}" method="post">
+                        <form id="register-form" action="{{ route('register') }}" method="post">
                             @csrf
-                            <h4 class="text-center mb-4 fw-bold form-title">Sign Up</h4>
+                            <h4 class="text-center mb-4 fw-bold form-title">@lang('custom.signup')</h4>
                             <div class="d-flex gap-2">
                                 <div class="input-group d-flex flex-column mb-3">
-                                    <label for="first_name" class="fw-bold">First Name:</label>
-                                    <input id="first_name" name="first_name" value="{{ old('first_name') }}" class="form-control w-100" type="text" placeholder="Enter your first name">
-                                    <x-input-error :messages="$errors->get('first_name')" class="mt-2" /> 
+                                    <label for="first_name" class="fw-bold">@lang('custom.first-name')</label>
+                                    <input id="first_name" name="first_name" value="{{ old('first_name') }}" class="form-control w-100" type="text" placeholder="@lang('custom.first-name')">
                                 </div>
                                 <div class="input-group d-flex flex-column mb-3">
-                                    <label for="last_name" class="fw-bold">Last Name:</label>
-                                    <input id="last_name" name="last_name" value="{{ old('last_name') }}" class="form-control w-100" type="text" placeholder="Enter your last name">
-                                    <x-input-error :messages="$errors->get('last_name')" class="mt-2" /> 
+                                    <label for="last_name" class="fw-bold">@lang('custom.last-name')</label>
+                                    <input id="last_name" name="last_name" value="{{ old('last_name') }}" class="form-control w-100" type="text" placeholder="@lang('custom.enter-last-name')">
                                 </div>
                             </div>
                             <div class="input-group d-flex flex-column mb-3">
-                                <label for="email" class="fw-bold">Email:</label>
-                                <input id="email" name="email" value="{{ old('email') }}" class="form-control w-100" type="email" placeholder="Enter your email">
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" /> 
+                                <label for="email" class="fw-bold">@lang('custom.email')</label>
+                                <input id="email" name="email" value="{{ old('email') }}" class="form-control w-100" type="email" placeholder="@lang('custom.enter-email')">
                             </div>
                             <div class="input-group d-flex flex-column mb-3">
-                                <label for="password" class="fw-bold">Password:</label>
+                                <label for="phone" class="fw-bold">@lang('custom.phone')</label>
+                                <input id="phone" name="phone" value="{{ old('phone') }}" class="form-control w-100" type="number" placeholder="@lang('custom.enter-phone')">
+
+                            </div>
+                            <div class="input-group d-flex flex-column mb-3">
+                                <label for="password" class="fw-bold">@lang('custom.password')</label>
                                 <div class="input-holder position-relative d-flex justify-content-end">
                                     <i class="fa-solid fa-eye me-2"></i>
-                                    <input id="password" name="password" class="form-control" type="password" placeholder="Enter your password">
+                                    <input id="password" name="password" class="form-control" type="password" placeholder="@lang('custom.password')">
                                 </div>
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
                             <div class="input-group d-flex flex-column mb-3">
-                                <label for="password_confirmation" class="fw-bold">Password Confirmation:</label>
+                                <label for="password_confirmation" class="fw-bold">@lang('custom.password-confirm')</label>
                                 <div class="input-holder position-relative d-flex justify-content-end">
-                                    <input id="password_confirmation" name="password_confirmation" class="form-control" type="password" placeholder="Confirm your password">
+                                    <input id="password_confirmation" name="password_confirmation" class="form-control" type="password" placeholder="@lang('custom.enter-password-confirm')">
                                 </div>
                                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                             </div>
                             <div class="mt-4">
-                                <button class="btn btn-primary w-100" type="submit">Sign Up</button>
+                                <button class="btn btn-primary w-100" type="submit">@lang('custom.signup')</button>
                             </div>
-                            <p class="mb-0 text-center mt-3">Already have account? <a href="{{ route('login') }}" class="text-decoration-none fw-bold">login</a></p>
+                            <p class="mb-0 text-center mt-3">@lang('custom.signup.have-account') <a href="{{ route('login') }}" class="text-decoration-none fw-bold">@lang('custom.login')</a></p>
                         </form>
                     </div>
                 </div>
@@ -75,7 +77,7 @@
     </div>
     <footer class="position-absolute bottom-0 w-100 text-center">
         <p class="mb-0 text-muted">
-            Copyright &copy; 2024 Salem Book Store.
+            @lang('custom.footer.copyright') &copy; 2024 {{ $website_settings->site_title }}.
         </p>
     </footer>
 </div>

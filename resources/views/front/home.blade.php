@@ -1,6 +1,6 @@
 @extends('front.main')
 
-@section('title', 'Salem Home')
+@section('title', __('custom.home'))
 
 @section('content')
 
@@ -13,29 +13,29 @@
         <div class="container-lg container-md px-lg-0">
             <div class="event rounded-5">
                 <div class="backgound-overlay d-flex flex-column justify-content-evenly align-items-center h-100">
-                    <h2 class="text-center fw-bold fs-1">Comming Soon!</h2>
+                    <h2 class="text-center fw-bold fs-1">@lang('custom.home.events.comming')</h2>
                     <div>
                         <h3 class="text-center fs-1 mb-4">{{ $comming_events->title }}</h3>
                         <div class="time-frame d-flex flex-md-row flex-column justify-content-center align-items-center gap-2">
                             <p class="frame day-frame border rounded-4 py-2 px-4 fs-4 mb-0">
                                 <span class="number">{{ $comming_events->remaining['days'] }}</span>
-                                <span class="text">Days</span>
+                                <span class="text">@lang('custom.days')</span>
                             </p>
                             <span class="colon fs-4 d-md-block d-none">:</span>
                             <p class="frame hours-frame border rounded-4 py-2 px-4 fs-4 mb-0">
                                 <span class="number">{{ $comming_events->remaining['hours'] }}</span>
-                                <span class="text">Hours</span>
+                                <span class="text">@lang('custom.hours')</span>
                             </p>
                             <span class="colon fs-4 d-md-block d-none">:</span>
                             <p class="frame min-frame border rounded-4 py-2 px-4 fs-4 mb-0">
                                 <span class="number">{{ $comming_events->remaining['min'] }}</span>
-                                <span class="text">Minutes</span>
+                                <span class="text">@lang('custom.minutes')</span>
                             </p>
                         </div>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                        <button class="reservation border-0 rounded-4 text-white py-2 px-4 fs-5">Reserve Now!</button>
-                        <a href="" class="read-more d-block mt-1 text-white">read more</a>
+                        <button class="reservation border-0 rounded-4 text-white py-2 px-4 fs-5">@lang('custom.home.events.reserve')</button>
+                        <a href="" class="read-more d-block mt-1 text-white">@lang('custom.readmore')</a>
                     </div>
                 </div>
             </div>
@@ -47,11 +47,11 @@
     <section id="special-picks-for-you" class="py-5 section-back">
         <div class="container-lg container-md px-lg-0">
             <div class="row">
-                <h2 class="text-center text-dark mb-4 fw-bold fs-1">Special Picks For You</h2>
+                <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.books.title')</h2>
             </div>
             <div class="row">
-                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none">
-                    <span>View All </span>
+                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none" href="{{ route('front.book.index') }}">
+                    <span>@lang('custom.viewall') </span>
                     <i class="fa-solid fa-angles-right ms-1 fs-6"></i>
                 </a>
                 <div class="owl-carousel activity-carousel pe-0">
@@ -120,7 +120,7 @@
         @if($top_authors->count() > 0)
             <div class="top-authors col-lg-6 d-flex flex-column px-2 gap-2">
                 <div class="top-authors-header py-2 rounded-3">
-                    <h2 class="text-center mb-0">Top Authors</h2>
+                    <h2 class="text-center mb-0">@lang('custom.home.top-authors')</h2>
                 </div>
                 <div class="top-authors-body d-flex flex-column gap-3">
                     @foreach ($top_authors as $author)
@@ -144,11 +144,11 @@
     <section id="latest-articles" class="py-5">
         <div class="container-lg container-md">
             <div class="row">
-                <h2 class="text-center text-dark mb-4 fw-bold fs-1">Lates News</h2>
+                <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.latest-news')</h2>
             </div>
             <div class="row">
                 <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button">
-                    <span>View All </span>
+                    <span>@lang('custom.viewall') </span>
                     <i class="fa-solid fa-angles-right ms-1 fs-6"></i>
                 </a>
                 <div class="owl-carousel articles-carousel pe-0">
@@ -177,7 +177,7 @@
                                     </p>
                                 </div>
                                 <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
-                                    <span>readmore</span>
+                                    <span>@lang('custom.readmore')</span>
                                     <i class="fa-solid fa-angles-right"></i>
                                 </a>
                             </div>
@@ -193,11 +193,11 @@
     <section id="latest-blogs" class="py-5 section-back">
         <div class="container-lg container-md">
             <div class="row">
-                <h2 class="text-center text-dark mb-4 fw-bold fs-1">Lates Blogs</h2>
+                <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.latest-blogs')</h2>
             </div>
             <div class="row">
                 <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button">
-                    <span>View All </span>
+                    <span>@lang('custom.viewall') </span>
                     <i class="fa-solid fa-angles-right ms-1 fs-6"></i>
                 </a>
                 <div class="owl-carousel blogs-carousel pe-0">
@@ -226,7 +226,7 @@
                                     </p>
                                 </div>
                                 <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
-                                    <span>readmore</span>
+                                    <span>@lang('custom.readmore')</span>
                                     <i class="fa-solid fa-angles-right"></i>
                                 </a>
                             </div>

@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
+        'phone',
         'email',
         'password',
     ];
@@ -47,6 +48,8 @@ class User extends Authenticatable
         ];
     }
 
+    protected $appends = ['full_name', 'display_image'];
+
     public function seminars()
     {
         return $this->belongsToMany(Seminar::class, 'attendants', 'user_id', 'seminar_id');
@@ -72,8 +75,13 @@ class User extends Authenticatable
         return $this->hasMany(BookReview::class, 'user_id');
     }
 
-    public function getFullNameAttributes()
+    public function getFullNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;
+    }
+
+    public function getDisplayImageAttribute()
+    {
+        return asset($this->image ? 'storage/' . $this->image : 'front/imgs/user-dummy-img.jpg');
     }
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light rounded-4 px-md-3">
+<nav class="navbar navbar-expand-lg bg-light rounded-{{ $rounded ?? '4' }} px-md-3">
     <div class="container-fluid d-flex justify-content-start">
         <div class="d-flex flex-lg-grow-0 flex-fill">
             <div class="d-flex flex-fill justify-content-between">
@@ -13,29 +13,31 @@
         <div class="collapse navbar-collapse navbarSupportedContent ms-2">
             <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-4">
                 <li class="nav-item text-center">
-                    <a class="nav-link active" aria-current="page" href="{{ route('front.index') }}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('front.index') }}">@lang('custom.home')</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                      Books
+                      @lang('custom.books')
                     </a>
                     <div class="dropdown-menu border-0">
                         @foreach ($book_categories as $category)
-                            <a class="dropdown-item" href="#">{{ $category->name }}</a>
+                            <a class="dropdown-item" href="{{ route('front.book.index', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
                         @endforeach
+                        <hr class="my-1">
+                        <a class="dropdown-item" href="{{ route('front.book.index') }}">@lang('custom.all-books')</a> 
                     </div>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link" href="#">Quotes</a>
+                    <a class="nav-link" href="{{ route('front.quote.index') }}">@lang('custom.quotes')</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link" href="#">Events</a>
+                    <a class="nav-link" href="#">@lang('custom.events')</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link" href="#">Blogs</a>
+                    <a class="nav-link" href="#">@lang('custom.blogs')</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link" href="#">News</a>
+                    <a class="nav-link" href="#">@lang('custom.news')</a>
                 </li>
             </ul>
         </div>
@@ -45,17 +47,26 @@
                     <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user"></i>
                     </a>
-                    <div class="dropdown-menu border-0">
+                    <div class="dropdown-menu border-0 px-2">
+                        <div class="user-info d-flex flex-column align-items-center">
+                            <div class="user-image">
+                                <img src="{{ Auth::user()->display_image }}" alt="">
+                            </div>
+                            <p class="mb-0 fw-bold">{{ ucfirst(Auth::user()->full_name) }}</p>
+                            <span>{{ Auth::user()->email }}</span>
+                        </div>
+                        <hr class="my-2">
+                        <a class="dropdown-item" href="{{ route('front.profile') }}"><i class="fa-solid fa-user"></i> @lang('custom.profile')</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button class="dropdown-item">Logout</button>
+                            <button class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> @lang('custom.logout')</button>
                         </form>
                     </div>
                 </div>
             @else
                 <div class="mb-lg-0 mb-2 d-flex align-items-center">
-                    <a href="{{ route('login') }}" class="text-decoration-none me-2 fs-5 ms-lg-0 ms-4" id="log-in-button">Log in</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary rounded-5 px-4 py-2 fw-bold ms-2" id="sign-up-button">Sign Up</a>
+                    <a href="{{ route('login') }}" class="text-decoration-none me-2 fs-5 ms-lg-0 ms-4" id="log-in-button">@lang('custom.login')</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary rounded-5 px-4 py-2 fw-bold ms-2" id="sign-up-button">@lang('custom.signup')</a>
                 </div>
             @endif
             @if (LaravelLocalization::getCurrentLocale() == 'ar')
