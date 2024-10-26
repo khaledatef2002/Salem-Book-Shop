@@ -36,9 +36,15 @@ class Book extends Model
         $sum_of_reviews = 0;
         foreach($this->reviews as $review)
         {
-            $sum_of_reviews += $review->review_start;
+            $sum_of_reviews += $review->review_star;
         }
 
-        return ($total_reviews > 0) ? $sum_of_reviews / $total_reviews : 0;
+        $avg = number_format(($total_reviews > 0) ? $sum_of_reviews / $total_reviews : 0, 2);
+        return $avg;
+    }
+
+    public function authReview()
+    {
+        return $this->hasMany(BookReview::class)->where('user_id', auth()->user()->id);
     }
 }

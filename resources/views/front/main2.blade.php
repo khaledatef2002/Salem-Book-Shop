@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LaravelLocalization::getCurrentLocale() }}">
 <head>
     @include('front.partials._head')
 </head>
-<body>
+<body dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
     @yield('content')
     

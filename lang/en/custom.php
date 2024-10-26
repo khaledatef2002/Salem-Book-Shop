@@ -52,6 +52,14 @@ return [
     'message' => 'Message',
     'enter-message' => 'Write your message here ...',
     'submit' => 'submit',
+    'send' => 'Send',
+    'cancel' => 'Cancel',
+    'save' => 'Save',
+    'you' => 'You',
+    'status' => 'Status',
+    'reviews' => 'Reviews',
+    'review.tell-others' => 'Tell others about your opinion',
+    'close' => 'Close',
 
     'header.title' => 'Exploring Books',
     'header.sub-title' => 'Through a Modern Lens!',
@@ -81,11 +89,13 @@ return [
     
     'quotes.list-of-all' => 'List Of All Quotes',
     
-    'books.reviews' => 'Reviews',
-    'books.download' => 'Download & Read',
+    'books.download' => 'Download',
     'books.read' => 'Read Online',
     'books.no-download' => 'This book is not available for download.',
     'books.list-of-all' => 'List Of All Books',
+
+    'book.review.rate-this-book' => 'Rate this book',
+    'book.review.sign-in-to-rate' => 'Sign in to rate this book',
 
     'about' => 'About Us',
     'about.title' => 'Salem Library, the responsibility of the community responsible for establishing Sohail Smart Solutions',
@@ -96,4 +106,15 @@ return [
     'about.p5' => 'Salem Library also provides distinctive books such as the book on sustainability with an Emirati vision, and the manager’s book in cooperation with Suhail Smart Solutions.',
     'about.p6' => 'We also have a “Book Seminar” program, which consists of presenting selected books from multiple fields such as human subjects, business administration, mental health, and humanities, in a simple and interesting style, providing you with opportunities to gain deep knowledge and practical application.',
     'about.p7' => 'Visit us and join the science and innovation community today',
+
+    'events.list-of-all' => 'List Of All Events',
+    'events.attendance' => 'Attendance',
+    'events.no-attendance' => 'There is no current attendance',
+    'events.login-to-attend' => 'Login to attend this events',
+    'events.media' => 'Media',
+    'event.review.rate-this-event' => 'Rate this event',
+    'events.attended' => 'Attended',
+    'events.attend' => 'Attend',
+    'events.unattend' => 'Un-Attend',
+
 ];

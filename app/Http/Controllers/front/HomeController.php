@@ -20,14 +20,17 @@ class HomeController extends Controller
     {
         $comming_events = Seminar::where('date', '>', now())->inRandomOrder()->first(['id', 'title', 'date']);
 
-        $date = Carbon::parse($comming_events->date);
-        $now = Carbon::now();
-
-        $diffInDays = str_pad(floor(-$date->diffInDays($now)), 2, "0", STR_PAD_LEFT);
-        $diffInHours = str_pad(floor(-$date->diffInHours($now) % 24), 2, "0", STR_PAD_LEFT);
-        $diffInMinutes = str_pad(floor(-$date->diffInMinutes($now) % 60), 2, "0", STR_PAD_LEFT);
-
-        $comming_events['remaining'] = (['days' => $diffInDays, 'hours' => $diffInHours, 'min' => $diffInMinutes]);
+        if($comming_events)
+        {
+            $date = Carbon::parse($comming_events->date);
+            $now = Carbon::now();
+    
+            $diffInDays = str_pad(floor(-$date->diffInDays($now)), 2, "0", STR_PAD_LEFT);
+            $diffInHours = str_pad(floor(-$date->diffInHours($now) % 24), 2, "0", STR_PAD_LEFT);
+            $diffInMinutes = str_pad(floor(-$date->diffInMinutes($now) % 60), 2, "0", STR_PAD_LEFT);
+    
+            $comming_events['remaining'] = (['days' => $diffInDays, 'hours' => $diffInHours, 'min' => $diffInMinutes]);
+        }
 
         $books = Book::inRandomOrder()->take(10)->with('images', 'author')->get(['id', 'title', 'author_id']);
         $quotes = Quote::inRandomOrder()->take(10)->with('author')->get(['id', 'title', 'author_id']);

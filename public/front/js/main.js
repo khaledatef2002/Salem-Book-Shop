@@ -405,3 +405,131 @@ $("button.like-quote").click(function(e){
         }
     });
 })
+
+$(".review-form i").mouseover(function(){
+    var index = parseInt($(this).attr("data-id"))
+    $(this).parent().find("i").each((i, star) => {
+        console.log(i)
+        if (i < index) {
+            $(star).addClass('text-warning');
+        } else {
+            if(!$(star).hasClass('fa-solid'))
+            {
+                $(star).removeClass('text-warning');
+            }
+        }
+    })
+})
+$(".review-form i").mouseout(function(){
+    console.log("yes")
+    $(".review-form i.text-warning:not(.fa-solid)").removeClass('text-warning');
+})
+
+$(".review-form i").click(function(){
+    var index = parseInt($(this).attr("data-id"))
+    if($(this).attr("data-select") == index)
+    {
+        $(this).parent().find("i").removeAttr("data-select")
+        $(this).parent().find("i").addClass('fa-regular');
+        $(this).parent().find("i").removeClass('fa-solid');
+        $(this).parent().find("i").removeClass('text-warning');
+    }
+    else
+    {
+        $(this).parent().find("i").removeAttr("data-select")
+        $(this).attr("data-select", index)
+        $(this).parent().find("i").each((i, star) => {
+            console.log(i)
+            if (i < index) {
+                $(star).removeClass('fa-regular');
+                $(star).addClass('fa-solid');
+                $(star).addClass('text-warning');
+    
+            } else {
+                $(star).addClass('fa-regular');
+                $(star).removeClass('fa-solid');
+                $(star).removeClass('text-warning');
+            }
+        })
+    }
+})
+
+function main_attend_event(e, form, id)
+{
+    e.preventDefault();
+
+    var formData = new FormData(form);
+    formData.append('event_id', id)
+
+    var form = $(form)
+
+    var submit_button = $(this).find("button[type='submit']")
+    submit_button.prop("disabled", true)
+
+    
+    $.ajax({
+        url: "/event/auth/attend",  // Laravel route to handle name change
+        method: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            Swal.fire({
+                text: "You have attended the event",
+                icon: "success"
+            });
+            submit_button.prop("disabled", false)
+            form.hide()
+            $("#unattend-form").show()
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var firstKey = Object.keys(errors)[0];
+            Swal.fire({
+                text: errors[firstKey][0],
+                icon: "error"
+            });
+            submit_button.prop("disabled", false)
+        }
+    });
+}
+
+function main_unattend_event(e, form, id)
+{
+    e.preventDefault();
+
+    var formData = new FormData(form);
+    formData.append('event_id', id)
+
+    var form = $(form)
+
+    var submit_button = $(this).find("button[type='submit']")
+    submit_button.prop("disabled", true)
+
+    
+    $.ajax({
+        url: "/event/auth/unAttend",  // Laravel route to handle name change
+        method: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            Swal.fire({
+                text: "You have unattended the event",
+                icon: "success"
+            });
+            submit_button.prop("disabled", false)
+            form.hide()
+            $("#attend-form").show()
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var firstKey = Object.keys(errors)[0];
+            Swal.fire({
+                text: errors[firstKey][0],
+                icon: "error"
+            });
+            submit_button.prop("disabled", false)
+        }
+    });
+}

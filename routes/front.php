@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\front\BooksController;
+use App\Http\Controllers\front\EventsController;
 use App\Http\Controllers\front\HomeController;
 use App\Http\Controllers\front\QuotesController;
 use App\Http\Controllers\ProfileController;
@@ -9,21 +10,40 @@ use Illuminate\Support\Facades\Route;
 Route::name('front.')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/about', [HomeController::class, 'about'])->name('about');
-    Route::get('/contact', [HomeController::class, 'contact'])->middleware('auth')->name('contact');
-    Route::post('/contact', [HomeController::class, 'add_contact'])->middleware('auth');
-
+    
     Route::resource('book', BooksController::class);
     Route::get('/getAllBooksAjax', [BooksController::class, 'getAllBooksAjax']);
+    Route::get('books/{id}/download', [BooksController::class, 'download'])->name('books.download');
+    Route::post('/books/{id}/read/{page}', [BooksController::class, 'read'])->name('books.read');
     
+    Route::get('/getAllEventsAjax', [EventsController::class, 'getAllEventsAjax']);
+
+    Route::resource('event', EventsController::class);
+
     Route::middleware('auth')->group(function(){
+        Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+        Route::post('/contact', [HomeController::class, 'add_contact']);
+
+        Route::post('book/review', [BooksController::class, 'addReview']);
+        Route::post('book/editReview', [BooksController::class, 'updateReview']);
+        Route::get('book/review/data', [BooksController::class, 'getReview']);
+        Route::delete('book/review/delete', [BooksController::class, 'deleteReview']);
+
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
         Route::post('/profile/general_info', [ProfileController::class, 'update'])->name('profile.general');
         Route::post('/profile/update_password', [ProfileController::class, 'update_password'])->name('profile.password');
+    
+        Route::post('event/auth/attend', [EventsController::class, 'attend_auth'])->middleware('authEventAction');
+        Route::post('event/auth/unAttend', [EventsController::class, 'unattend_auth'])->middleware('authEventAction');
+        Route::post('event/review', [EventsController::class, 'addReview']);
+        Route::delete('event/review/delete', [EventsController::class, 'deleteReview']);
+        Route::get('event/review/data', [EventsController::class, 'getReview']);
+        Route::post('event/editReview', [EventsController::class, 'updateReview']);
+
+        
     });
     
     Route::resource('quote', QuotesController::class);
     Route::get('/getAllQuotesAjax', [QuotesController::class, 'getAllQuotesAjax']);
     Route::post('quotes/like', [QuotesController::class, 'likeAction']);
-
-    Route::get('books/download/{id}', [BooksController::class, 'download'])->name('books.download');
 });

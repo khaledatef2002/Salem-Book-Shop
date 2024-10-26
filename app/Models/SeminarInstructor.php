@@ -9,6 +9,7 @@ class SeminarInstructor extends Model
 {
 
     use HasFactory;
+    protected $table = 'seminar_instructors';
 
     public function seminar()
     {

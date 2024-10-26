@@ -55,7 +55,7 @@ class QuotesController extends Controller implements HasMiddleware
             });
         }
 
-        switch($request->query('sort'))
+        switch($request->query('sort_by'))
         {
             case 'publish-old':
                 $quotes->orderBy('created_at');

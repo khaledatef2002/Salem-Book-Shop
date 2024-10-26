@@ -31,7 +31,7 @@
                     <a class="nav-link" href="{{ route('front.quote.index') }}">@lang('custom.quotes')</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link" href="#">@lang('custom.events')</a>
+                    <a class="nav-link" href="{{ route('front.event.index') }}">@lang('custom.events')</a>
                 </li>
                 <li class="nav-item text-center">
                     <a class="nav-link" href="#">@lang('custom.blogs')</a>

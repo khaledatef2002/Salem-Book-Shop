@@ -10,12 +10,14 @@ class SeminarReview extends Model
 
     use HasFactory;
 
+    protected $guarded = [];
+
     public function seminar()
     {
         return $this->belongsTo(Seminar::class, 'seminar_id');
     }
 
-    public function review()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

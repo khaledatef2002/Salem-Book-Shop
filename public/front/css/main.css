@@ -1,7 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Cairo:wght@200..1000&display=swap');
+
+body[dir="rtl"]
+{
+    font-family: "Cairo", sans-serif;
+}
+
+body[dir="ltr"]
+{
+    font-family: "Inter", sans-serif;
+}
 
 body {
-    font-family: "Inter", sans-serif;
     --btn-bg-primary: #0d405c;
     --btn-text-primary: #fff;
     background-color: #cedde5;
@@ -59,6 +69,11 @@ body {
     justify-content: center;
 }
 
+textarea
+{
+    resize: none;
+}
+
 /* Owl Customization */
 .owl-nav {
     position: absolute;
@@ -73,6 +88,19 @@ body {
 }
 .owl-nav button span {
     font-size: 3rem;
+}
+.owl-carousel.owl-rtl .owl-item
+{
+    flex-grow: 1;
+}
+.owl-carousel.owl-rtl .owl-item .items,
+.owl-carousel.owl-rtl .owl-item .items .item-container
+{
+    height: 100%;
+}
+.owl-carousel .owl-stage
+{
+    display: flex;
 }
 
 /* Navbar & Header */
@@ -186,10 +214,6 @@ header div.hero {
 #comming-event .event .backgound-overlay .frame .number {
     color: #808488;
     font-weight: bold;
-}
-#comming-event .event .backgound-overlay button 
-{
-    background-color: #0d405c;
 }
 
 /* Sepcial picks */
@@ -485,7 +509,7 @@ header div.hero img
 {
     color: rgb(224 168 0) !important;
 }
-#books-page-body .sort select,#books-page-body .limit select
+#books-page-body .sort select,#books-page-body .limit select, #events-page-body select 
 {
     width: unset;
     min-width: 130px;
@@ -506,19 +530,21 @@ header div.hero img
 }
 
 /* Profile Page */
-.profile-body ul.nav li
+ul.nav-tabs li
 {
     border-bottom-left-radius: 0 !important;    
     border-bottom-right-radius: 0 !important;    
 }
-.profile-body .card
+.card:has(.tab-content)
 {
     border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
-.profile-body .nav-tabs .nav-link:not(.active)
+.nav-tabs .nav-link:not(.active)
 {
     background: #bdd2dc;
     color: black;
+    box-shadow: -1px 0 0 #cedde5 inset;
 }
 
 .profile-body .image-upload input
@@ -598,6 +624,60 @@ header div.hero img
     left: 50%;
 }
 
+#book-info p a
+{
+    color: #05354f;
+}
+
+#reviews .review .user_image img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#reviews .review .user_image
+{
+    overflow: hidden;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+#reviews .review .meta-data p
+{
+    font-size: 0.7rem;
+}
+
+#review-form div:has( > i[data-id='1']:hover):where(i[data-id='1'])
+{
+    color: yellow !important;
+}
+#book-info .tab-pane a
+{
+    color: #05354f;
+}
+
+#book-read .modal-dialog
+{
+    height: 100vh;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: initial;
+}
+#book-read .modal-content
+{
+    background: initial;
+    border: initial;
+}
+#book-read .modal-body button
+{
+    position: absolute;
+    bottom: 0px;
+}
+
 /* About Us */
 section#about-us-page a 
 {
@@ -607,4 +687,144 @@ section#about-us-page a
 section#contact-page div:has(> a), section#contact-page div > a 
 {
     color: #05354f;
+}
+
+#auth-review form button
+{ 
+    border: 0;
+    background-color: transparent;    
+}
+
+/* Events */
+#events-page-body .event-image
+{
+    aspect-ratio: 1 / 0.6;
+    height: 170px;
+    overflow: hidden;
+}
+
+#events-page-body .event-image img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#events-page-body .event-content a
+{
+    color: #05354f;
+}
+
+#events-page-body .time
+{
+    font-size: 0.8rem !important;
+}
+
+#events-page-body .tags
+{
+    font-size: 0.9rem !important;
+}
+
+/* Single Event */
+#event-info .event-image-holder
+{
+    aspect-ratio: 1 / 0.6;
+    width: 100%;
+    overflow: hidden;
+}
+
+#event-info .event-image-holder img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+#event-info a
+{
+    color: #05354f;
+}
+
+#event-info #auth-attendance .user-info .user_image,
+#event-info .attendance-item .user-info .user_image
+{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+#event-info #auth-attendance .user-info #auth-attend-date,
+#event-info .attendance-item .user-info #auth-attend-date
+{
+    font-size: 0.8rem;
+}
+
+#event-info .event-media-container
+{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+#event-info .event-media-container:hover img
+{
+    transform: scale(1.3);
+}
+#event-info .event-media-container img
+{
+    min-width: 100%;
+    min-height: 100%;
+    transition: 0.4s ease-in-out;
+}
+
+#event-info .event-media-container .zoom-over
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000096;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    transition: 0.4s ease-in-out;
+    opacity: 0;
+}
+
+#event-info .event-media-container:hover .zoom-over
+{
+    opacity: 1;
+}
+
+#mediaZoom.show {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+#mediaZoom .modal-dialog
+{
+    max-width: 90%;
+    width: 700px;
+}
+#mediaZoom img
+{
+    width: 100%;
+    border-radius: 7px;
+}
+
+#mediaZoom .modal-content
+{
+    background-color: transparent;
+}
+
+#mediaZoom i
+{
+    position: absolute;
+    color: white;
+    font-size: 1.5rem;
+    margin: 5px;
+    cursor: pointer;
 }

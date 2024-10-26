@@ -8,7 +8,7 @@
 
 @include('front.partials._header')
 
-@if ($comming_events->count() > 0)
+@if ($comming_events?->count() > 0)
     <section id="comming-event" class="py-5">
         <div class="container-lg container-md px-lg-0">
             <div class="event rounded-5">
@@ -34,8 +34,17 @@
                         </div>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                        <button class="reservation border-0 rounded-4 text-white py-2 px-4 fs-5">@lang('custom.home.events.reserve')</button>
-                        <a href="" class="read-more d-block mt-1 text-white">@lang('custom.readmore')</a>
+                        @if (Auth::check())
+                            <form id="unattend-form" style="display: {{ $comming_events->authAttendants->count() ? 'block' : 'none' }}" onsubmit="main_unattend_event(event, this, {{ $comming_events->id }})">
+                                @csrf
+                                <button class="btn btn-danger border-0 rounded-4 text-white py-2 px-5 fs-5" type="submit">@lang('custom.events.unattend')</button>
+                            </form>    
+                            <form id="attend-form" style="display: {{ $comming_events->authAttendants->count() ? 'none' : 'block' }}" onsubmit="main_attend_event(event, this, {{ $comming_events->id }})">
+                                @csrf
+                                <button class="btn btn-primary border-0 rounded-4 text-white py-2 px-5 fs-5" type="submit">@lang('custom.events.attend')</button>
+                            </form> 
+                        @endif
+                        <a href="{{ route('front.event.show', $comming_events) }}" class="read-more d-block mt-1 text-white">@lang('custom.readmore')</a>
                     </div>
                 </div>
             </div>
@@ -52,25 +61,27 @@
             <div class="row">
                 <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none" href="{{ route('front.book.index') }}">
                     <span>@lang('custom.viewall') </span>
-                    <i class="fa-solid fa-angles-right ms-1 fs-6"></i>
+                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
                 </a>
                 <div class="owl-carousel activity-carousel pe-0">
                     @foreach ($books as $book)
                         <div class="items">
-                            <div class="item-container px-4 py-4 rounded-4">
+                            <div class="item-container px-4 py-4 rounded-4 d-flex flex-column justify-content-between">
                                 <h3 class="mb-3 fs-4 text-center fw-bold">{{ $book->title }}</h3>
-                                <div class="px-4 d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('') }}/{{ $book->images->first()->url }}" class="mx-2">
-                                </div>
-                                <div class="content d-flex justify-content-between align-items-center mt-3">
-                                    <h3 class="text-dark fs-6 mb-0">
-                                        <i class="fa-solid fa-feather"></i>
-                                        <span>{{ $book->author->name }}</span>
-                                    </h3>
-                                    <p class="fw-bold fs-6 text-warning mb-0">
-                                        <i class="fa-regular fa-star"></i>
-                                        <span>({{ $book->avg_review }})</span>
-                                    </p>
+                                <div>
+                                    <div class="px-4 d-flex justify-content-center align-items-center">
+                                        <img src="{{ asset('') }}/{{ $book->images->first()->url }}" class="mx-2">
+                                    </div>
+                                    <div class="content d-flex justify-content-between align-items-center mt-3">
+                                        <h3 class="text-dark fs-6 mb-0">
+                                            <i class="fa-solid fa-feather"></i>
+                                            <span>{{ $book->author->name }}</span>
+                                        </h3>
+                                        <p class="fw-bold fs-6 text-warning mb-0">
+                                            <i class="fa-regular fa-star"></i>
+                                            <span>({{ $book->avg_review }})</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +160,7 @@
             <div class="row">
                 <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button">
                     <span>@lang('custom.viewall') </span>
-                    <i class="fa-solid fa-angles-right ms-1 fs-6"></i>
+                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
                 </a>
                 <div class="owl-carousel articles-carousel pe-0">
                     @foreach ($articles as $article)
@@ -178,7 +189,7 @@
                                 </div>
                                 <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
                                     <span>@lang('custom.readmore')</span>
-                                    <i class="fa-solid fa-angles-right"></i>
+                                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}}"></i>
                                 </a>
                             </div>
                         </div>
@@ -198,7 +209,7 @@
             <div class="row">
                 <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button">
                     <span>@lang('custom.viewall') </span>
-                    <i class="fa-solid fa-angles-right ms-1 fs-6"></i>
+                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
                 </a>
                 <div class="owl-carousel blogs-carousel pe-0">
                     @foreach ($blogs as $blog)
@@ -227,7 +238,7 @@
                                 </div>
                                 <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
                                     <span>@lang('custom.readmore')</span>
-                                    <i class="fa-solid fa-angles-right"></i>
+                                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}}"></i>
                                 </a>
                             </div>
                         </div>
