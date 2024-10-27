@@ -15,7 +15,7 @@
                     <li><a href="{{ route('front.index') }}" class="text-decoration-none text-white">@lang('custom.home')</a></li>
                     <li><a href="{{ route('front.about') }}" class="text-decoration-none text-white">@lang('custom.about-us')</a></li>
                     <li><a href="{{ route('front.contact') }}" class="text-decoration-none text-white">@lang('custom.contact-us')</a></li>
-                    <li>@lang('custom.news')</li>
+                    <li><a href="{{ route('front.article.index') }}" class="text-decoration-none text-white">@lang('custom.news')</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-6 d-flex flex-column px-3">

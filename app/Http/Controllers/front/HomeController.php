@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Author;
+use App\Models\Blog;
 use App\Models\Book;
 use App\Models\BooksCategory;
 use App\Models\Contact;
@@ -39,7 +40,7 @@ class HomeController extends Controller
 
         $articles = Article::with('category')->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
         
-        $blogs = Article::with(['category', 'users'])->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
+        $blogs = Blog::with('users')->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'created_at', 'cover']);
 
         return view('front.home', compact('comming_events', 'books', 'quotes', 'top_authors', 'articles', 'blogs'));
     }

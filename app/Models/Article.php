@@ -24,4 +24,13 @@ class Article extends Model
     {
         return $this->hasMany(ArticleLike::class, 'article_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
+    public function authLikes()
+    {
+        return $this->hasMany(ArticleLike::class)->where('user_id', auth()->user()->id);
+    }
 }

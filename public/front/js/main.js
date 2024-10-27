@@ -533,3 +533,31 @@ function main_unattend_event(e, form, id)
         }
     });
 }
+
+function articles_filter()
+{
+    var search = $(".search-bar input").val()
+    var sort_by = $(".sort select").val()
+    var limit = $(".limit select").val()
+
+    var categories = [];
+    $('input[name="category"]:checked').each(function() {
+        categories.push($(this).val());
+    });
+
+    $(".articles-container").html(`<div class="spinner-grow text-info d-block mx-auto mt-4" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>`)
+
+    $.get('getAllArticlesAjax', {search, sort_by, limit, categories}, function(response){
+        $(".articles-container").html(response)
+    })
+}
+
+$(".auth-to-like").click(function(){
+    Swal.fire({
+        text: 'Please login to be able to react',
+        icon: 'error',
+        confirmButtonColor: "#00101f",
+    })
+})

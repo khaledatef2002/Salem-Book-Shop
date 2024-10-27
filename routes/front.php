@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\front\ArticlesController;
 use App\Http\Controllers\front\BooksController;
 use App\Http\Controllers\front\EventsController;
 use App\Http\Controllers\front\HomeController;
+use App\Http\Controllers\front\NewsController;
 use App\Http\Controllers\front\QuotesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -39,9 +41,10 @@ Route::name('front.')->group(function(){
         Route::delete('event/review/delete', [EventsController::class, 'deleteReview']);
         Route::get('event/review/data', [EventsController::class, 'getReview']);
         Route::post('event/editReview', [EventsController::class, 'updateReview']);
-
-        
     });
+
+    Route::resource('article', ArticlesController::class);
+    Route::get('/getAllArticlesAjax', [ArticlesController::class, 'getAllArticlesAjax']);
     
     Route::resource('quote', QuotesController::class);
     Route::get('/getAllQuotesAjax', [QuotesController::class, 'getAllQuotesAjax']);

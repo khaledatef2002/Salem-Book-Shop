@@ -70,7 +70,7 @@
                                 <h3 class="mb-3 fs-4 text-center fw-bold">{{ $book->title }}</h3>
                                 <div>
                                     <div class="px-4 d-flex justify-content-center align-items-center">
-                                        <img src="{{ asset('') }}/{{ $book->images->first()->url }}" class="mx-2">
+                                        <img src="{{ asset($book->images->first()->url) }}" class="mx-2">
                                     </div>
                                     <div class="content d-flex justify-content-between align-items-center mt-3">
                                         <h3 class="text-dark fs-6 mb-0">
@@ -170,14 +170,26 @@
                                     <img src="{{ asset('front') }}/{{ $article->cover }}">
                                 </div>
                                 <div class="article-meta d-flex justify-content-between mt-1">
-                                    <span class="article-category">
-                                        <i class="fa-solid fa-certificate"></i>
-                                        {{ $article->category->name }}
-                                    </span>
-                                    <span class="article-publish-date">
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        {{ $article->created_at->format('d M, Y') }} 
-                                    </span>
+                                    <div class="d-flex gap-3">
+                                        <span class="article-likes">
+                                            <i class="fa-regular fa-thumbs-up"></i>
+                                            {{ $article->likes->count() }}
+                                        </span>
+                                        <span class="article-comments">
+                                            <i class="fa-regular fa-comments"></i>
+                                            {{ $article->comments->count() }}
+                                        </span>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <span class="article-category">
+                                            <i class="fa-solid fa-certificate"></i>
+                                            {{ $article->category->name }}
+                                        </span>
+                                        <span class="article-publish-date">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            {{ $article->created_at->format('d M, Y') }} 
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="d-flex flex-column mt-3">
                                     <h3 class="text-dark fs-3 fw-bold mb-2">
@@ -187,7 +199,7 @@
                                         {{ $article->content }}
                                     </p>
                                 </div>
-                                <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
+                                <a href="{{ route('front.article.show', $article) }}" class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
                                     <span>@lang('custom.readmore')</span>
                                     <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}}"></i>
                                 </a>

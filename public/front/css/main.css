@@ -509,7 +509,10 @@ header div.hero img
 {
     color: rgb(224 168 0) !important;
 }
-#books-page-body .sort select,#books-page-body .limit select, #events-page-body select 
+#books-page-body .sort select,
+#books-page-body .limit select, 
+#events-page-body select,
+#articles-page-body select
 {
     width: unset;
     min-width: 130px;
@@ -827,4 +830,26 @@ section#contact-page div:has(> a), section#contact-page div > a
     font-size: 1.5rem;
     margin: 5px;
     cursor: pointer;
+}
+
+/* Articles */
+#articles-page-body .items div:has( > img)
+{
+    overflow: hidden;
+    aspect-ratio: 1/0.65;
+}
+#articles-page-body .items .article-meta {
+    font-size: 0.8rem;
+}
+#articles-page-body .items .article-contnet
+{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;     /* Limits the text to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;           /* Hide the overflow content */
+    text-overflow: ellipsis;    /* Display '...' */
+}
+#article-info a
+{
+    color: #05354f;
 }

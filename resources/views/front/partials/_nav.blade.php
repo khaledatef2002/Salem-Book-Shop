@@ -37,7 +37,7 @@
                     <a class="nav-link" href="#">@lang('custom.blogs')</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link" href="#">@lang('custom.news')</a>
+                    <a class="nav-link" href="{{ route('front.article.index') }}">@lang('custom.news')</a>
                 </li>
             </ul>
         </div>
