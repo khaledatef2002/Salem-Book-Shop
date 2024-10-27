@@ -16,15 +16,8 @@
                                     <i class="fa-solid fa-quote-left fs-3 me-3"></i> 
                                     {{ $quote->title }}
                                     <div class="likes-count d-flex flex-fill flex-column align-items-center justify-content-end ms-2">
-                                        @if (Auth::check())
-                                            <small class="fs-6">{{ $quote->likes_count }}</small>
-                                            @csrf
-                                            <button class="btn btn-sm btn-{{$quote->authLikes->isNotEmpty() ? '' : 'outline-'}}primary like-quote" data-quote-id="{{ $quote->id }}"><i class="fa-solid fa-thumbs-up"></i> <span> @lang($quote->authLikes->isNotEmpty() ? 'custom.liked' : 'custom.like')</span></button>
-                                        @else
-                                            <div class="d-flex justify-content-end w-100">
-                                                <small class="fs-6 d-flex flex-row-reverse justify-content-start"><i class="fa-solid fa-thumbs-up ms-1"></i> {{ $quote->likes_count }}</small>
-                                            </div>
-                                        @endif
+                                        @csrf
+                                        <button class="btn btn-sm btn-{{auth()->check() && $quote->authLikes->isNotEmpty() ? '' : 'outline-'}}primary {{ auth()->check() ? 'like-quote' : 'auth-to-like'}}" data-quote-id="{{ $quote->id }}"><i class="fa-solid fa-thumbs-up"></i> <span class="text"> @lang(auth()->check() && $quote->authLikes->isNotEmpty() ? 'custom.liked' : 'custom.like')</span> (<span class="count">{{ $quote->likes_count }}</span>)</button>
                                     </div>
                                 </h3>
                             </div>

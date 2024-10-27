@@ -107,6 +107,7 @@ return [
     'about.p6' => 'We also have a “Book Seminar” program, which consists of presenting selected books from multiple fields such as human subjects, business administration, mental health, and humanities, in a simple and interesting style, providing you with opportunities to gain deep knowledge and practical application.',
     'about.p7' => 'Visit us and join the science and innovation community today',
 
+    'all-events' => 'All Events',
     'events.list-of-all' => 'List Of All Events',
     'events.attendance' => 'Attendance',
     'events.no-attendance' => 'There is no current attendance',
@@ -117,4 +118,5 @@ return [
     'events.attend' => 'Attend',
     'events.unattend' => 'Un-Attend',
 
+    'articles.comments' => 'Comments',
 ];

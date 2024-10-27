@@ -10,8 +10,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="col-9 article-image-holder d-flex justify-content-center align-items-center">
-                    <img src="{{ asset('front/' . $article->cover) }}">
+                <div class="col-9 article-image-holder d-flex justify-content-center align-items-center rounded-3">
+                    <img src="{{ asset('front/' . $article->cover) }}" class="rounded-3">
                 </div>
                 <div class="col-12 d-flex gap-4 mt-3">
                     <div class="col-9 card border-0 rounded-3 p-3">
@@ -22,26 +22,19 @@
                         <div class="article-meta d-flex justify-content-between mt-3">
                             <div class="d-flex gap-3">
                                 <div class="likes-count d-flex flex-fill flex-column align-items-center justify-content-end ms-2">
-                                    @if (Auth::check())
-                                        @csrf
-                                        <button class="btn btn-sm btn-{{$article->authLikes->isNotEmpty() ? '' : 'outline-'}}primary like-article" 
-                                            data-article-id="{{ $article->id }}">
-                                                <i class="fa-solid fa-thumbs-up"></i>
-                                                <p class="mb-0"> @lang($article->authLikes->isNotEmpty() ? 'custom.liked' : 'custom.like') (<span>{{ $article->likes->count() }}</span>)</p>
-                                        </button>
-                                    @else
-                                        <small class="fs-6"></small>
-                                        @csrf
-                                        <button class="btn btn-sm btn-outline-primary auth-to-like d-flex gap-2 align-items-center">
-                                                <i class="fa-solid fa-thumbs-up"></i>
-                                                <p class="mb-0"> @lang('custom.like') (<span class="count">{{ $article->likes->count() }}</span>)</p>
-                                        </button>
-                                    @endif
+                                    @csrf
+                                    <button class="d-flex align-items-center gap-2 btn btn-sm btn-{{auth()->check() && $article->authLikes->isNotEmpty() ? '' : 'outline-'}}primary {{ auth()->check() ? 'like-article' : 'auth-to-like' }}" 
+                                        data-article-id="{{ $article->id }}">
+                                            <i class="fa-solid fa-thumbs-up"></i>
+                                            <p class="mb-0"> <span class="text">@lang(auth()->check() && $article->authLikes->isNotEmpty() ? 'custom.liked' : 'custom.like')</span> (<span class="count">{{ $article->likes->count() }}</span>)</p>
+                                    </button>
                                 </div>
-                                <span class="article-comments">
-                                    <i class="fa-regular fa-comments"></i>
-                                    {{ $article->comments->count() }}
-                                </span>
+                                <div>
+                                    <button class="d-flex align-items-center gap-2 btn btn-sm btn-outline-primary {{ auth()->check() ? 'open-article-comment' : 'auth-to-comment' }}" >
+                                            <i class="fa-solid fa-comments"></i>
+                                            <p class="mb-0"> @lang('custom.articles.comments') (<span>{{ $article->comments->count() }}</span>)</p>
+                                    </button>
+                                </div>
                             </div>
                             <div class="d-flex gap-3">
                                 <span class="article-category">

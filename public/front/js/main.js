@@ -390,8 +390,8 @@ $("button.like-quote").click(function(e){
                 button.removeClass("btn-primary")
                 button.addClass("btn-outline-primary")
             }
-            button.parent().find("small").text(data.likes_count)
-            button.parent().find("span").text(data.state)
+            button.parent().find("span.count").text(data.likes_count)
+            button.parent().find("span.text").text(data.state)
             button.prop("disabled", false)
         },
         error: function(xhr) {
@@ -560,4 +560,53 @@ $(".auth-to-like").click(function(){
         icon: 'error',
         confirmButtonColor: "#00101f",
     })
+})
+
+$(".auth-to-comment").click(function(){
+    Swal.fire({
+        text: 'Please login to be able to comment',
+        icon: 'error',
+        confirmButtonColor: "#00101f",
+    })
+})
+
+// Like Quote
+$("button.like-article").click(function(e){
+
+    var button = $(this)
+    var id = button.attr("data-article-id")
+    var _token = button.parent().find("input[name='_token']").val()
+    button.prop("disabled", true)
+
+    $.ajax({
+        url: "/article/like",  // Laravel route to handle name change
+        method: 'POST',
+        data: {id, _token},
+        success: function(response) {
+            console.log(response)
+            var data = JSON.parse(response)
+            if(data.state.toLowerCase() == "liked")
+            {
+                button.removeClass("btn-outline-primary")
+                button.addClass("btn-primary")
+            }
+            else
+            {
+                button.removeClass("btn-primary")
+                button.addClass("btn-outline-primary")
+            }
+            button.find("span.count").text(data.likes_count)
+            button.find("span.text").text(data.state)
+            button.prop("disabled", false)
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var firstKey = Object.keys(errors)[0];
+            Swal.fire({
+                text: errors[firstKey][0],
+                icon: "error"
+            });
+            button.prop("disabled", false)
+        }
+    });
 })

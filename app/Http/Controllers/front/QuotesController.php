@@ -89,12 +89,12 @@ class QuotesController extends Controller implements HasMiddleware
 
         $like = QuoteLike::where('quote_id', $request->id)->where('user_id', auth()->user()->id);
 
-        $state = 'Liked';
+        $state = __('custom.liked');
 
         if($like->count() > 0)
         {
             $like->delete();
-            $state = 'Like';
+            $state = __('custom.like');
         }
         else
         {

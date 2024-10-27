@@ -5,11 +5,22 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleLike;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ArticlesController extends Controller
+class ArticlesController extends Controller implements HasMiddleware
 {
     const page_limit = 13;
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth', only: ['likeAction'])
+        ];
+    }
+
     public function index(Request $request)
     {
         if($request->category_id)
@@ -55,6 +66,33 @@ class ArticlesController extends Controller
         $articles = $articles->paginate($limit);
 
         return view('front.parts.articles-list', compact('articles'));
+    }
+
+    public function likeAction(Request $request)
+    {
+        $request->validate([
+            'id' => 'exists:articles'
+        ]);
+
+        $like = ArticleLike::where('article_id', $request->id)->where('user_id', auth()->user()->id);
+
+        $state = __('custom.liked');
+
+        if($like->count() > 0)
+        {
+            $like->delete();
+            $state = __('custom.like');
+        }
+        else
+        {
+            ArticleLike::create([
+                'article_id' => $request->id,
+                'user_id' => auth()->user()->id
+            ]);
+        }
+        $likes = ArticleLike::where('article_id', $request->id)->count();
+
+        return json_encode(['state' => $state, 'likes_count' => $likes]);
     }
 
     public function show(Article $article)
