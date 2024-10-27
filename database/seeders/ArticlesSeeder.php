@@ -14,19 +14,19 @@ class ArticlesSeeder extends Seeder
      */
     public function run(): void
     {
-        ArticleCategory::findOrCreate(
+        ArticleCategory::updateOrCreate(
             ['id' => 1],
             [
                 'name' => 'Sport'
             ]
         );
-        ArticleCategory::findOrCreate(
+        ArticleCategory::updateOrCreate(
             ['id' => 2],
             [
                 'name' => 'Technologies'
             ]
         );
-        Article::findOrCreate(
+        Article::updateOrCreate(
             ['id' => 1],
             [
                 'title' => 'Test Article 1',
