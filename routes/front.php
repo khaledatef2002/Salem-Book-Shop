@@ -46,6 +46,9 @@ Route::name('front.')->group(function(){
     Route::resource('article', ArticlesController::class);
     Route::get('/getAllArticlesAjax', [ArticlesController::class, 'getAllArticlesAjax']);
     Route::post('article/like', [ArticlesController::class, 'likeAction']);
+    Route::post('article/comment/add', [ArticlesController::class, 'addComment']);
+    Route::delete('article/comment/delete', [ArticlesController::class, 'deleteComment']);
+    Route::post('article/comment/edit', [ArticlesController::class, 'editComment']);
     
     Route::resource('quote', QuotesController::class);
     Route::get('/getAllQuotesAjax', [QuotesController::class, 'getAllQuotesAjax']);

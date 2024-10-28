@@ -118,4 +118,6 @@ return [
     'events.unattend' => 'الغاء الحضور',
 
     'articles.comments' => 'التعليقات',
+    'article.add-comment' => 'إضافة تعليق',
+    'article.comment.sign-in-to-comment' => 'سجل دخول لتستطيع اضافة تعليق',
 ];

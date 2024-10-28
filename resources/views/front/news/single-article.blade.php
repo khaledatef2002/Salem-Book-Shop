@@ -63,6 +63,50 @@
                 </div>
             </div>
         </div>
+        <div class="row px-3 mt-4">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active border-0" aria-current="page" data-bs-toggle="list" href="#comments">@lang('custom.articles.comments')</a>
+                </li>
+            </ul>
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="tab-content p-3">
+                        <div class="tab-pane fade show active" id="comments" role="tabpanel">
+                            @if (Auth::check())
+                                <form id="add-comment-form" class="comment-form">
+                                    @csrf
+                                    <input type="hidden" name="article_id" value="{{ $article->id }}">
+                                    <p class="fw-bold fs-4 mb-0">@lang('custom.article.add-comment')</p>
+                                    <div class="d-flex gap-2">
+                                        <div class="auth-image-holder d-flex align-items-center justify-content-center">
+                                            <img src="{{ asset(auth()->user()->display_image) }}">
+                                        </div>
+                                        <textarea name="comment" class="form-control" placeholder="Leave comment..." rows="4"></textarea>
+                                    </div>
+                                    <button class="btn btn-primary mt-2 px-3 d-block ms-auto" type="submit">@lang('custom.send')</button>
+                                </form>
+                            @else
+                                <p class="fw-bold fs-4 mb-0">@lang('custom.article.add-comment')</p>
+                                <a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> @lang('custom.article.comment.sign-in-to-comment')</a>
+                            @endif
+                            @if ($article->comments->count() > 0)
+                                <div class="comment-list">
+                                    <ul class="list-style-none ps-0 mb-0">
+                                        @include('front.parts.single-article-comments')
+                                    </ul>
+                                </div>
+                                {{ $comments->links('pagination::bootstrap-4') }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+@endsection
+
+@section('custom-js')
+    <script src="{{ asset('front/js/single-article.js') }}"></script>
 @endsection

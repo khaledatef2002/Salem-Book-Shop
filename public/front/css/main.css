@@ -865,3 +865,33 @@ section#contact-page div:has(> a), section#contact-page div > a
     min-height: 100%;
     min-width: 100%;
 }
+
+#article-info .comment-list .user_image
+{
+    overflow: hidden;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+#article-info .comment-list .user_image img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+#article-info .auth-image-holder
+{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#article-info .auth-image-holder img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+#article-info .actions button
+{
+    background-color: initial;
+    border: initial;
+}

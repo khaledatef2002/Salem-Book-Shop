@@ -119,4 +119,6 @@ return [
     'events.unattend' => 'Un-Attend',
 
     'articles.comments' => 'Comments',
+    'article.add-comment' => 'Add Comment',
+    'article.comment.sign-in-to-comment' => 'Sign in to be able to add comment',
 ];
