@@ -23,8 +23,8 @@
                 <ul class="list-style-none ps-0 d-flex flex-column gap-3">
                     <li><a href="{{ route('front.book.index') }}" class="text-decoration-none text-white">@lang('custom.books')</a></li>
                     <li><a href="{{ route('front.quote.index') }}" class="text-decoration-none text-white">@lang('custom.quotes')</a></li>
-                    <li>@lang('custom.events')</li>
-                    <li>@lang('custom.blogs')</li>
+                    <li><a href="{{ route('front.event.index') }}" class="text-decoration-none text-white">@lang('custom.events')</a></li>
+                    <li><a href="{{ route('front.blog.index') }}" class="text-decoration-none text-white">@lang('custom.blogs')</a></li>
                 </ul>
             </div>
             <hr class="d-md-none d-block">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\front\BlogsController;
 use App\Http\Controllers\front\ArticlesController;
 use App\Http\Controllers\front\BooksController;
 use App\Http\Controllers\front\EventsController;
@@ -50,6 +51,8 @@ Route::name('front.')->group(function(){
     Route::delete('article/comment/delete', [ArticlesController::class, 'deleteComment']);
     Route::post('article/comment/edit', [ArticlesController::class, 'editComment']);
     
+    Route::resource('blog', BlogsController::class);
+
     Route::resource('quote', QuotesController::class);
     Route::get('/getAllQuotesAjax', [QuotesController::class, 'getAllQuotesAjax']);
     Route::post('quotes/like', [QuotesController::class, 'likeAction']);

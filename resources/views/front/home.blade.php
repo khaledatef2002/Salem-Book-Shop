@@ -219,39 +219,36 @@
                 <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.latest-blogs')</h2>
             </div>
             <div class="row">
-                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button">
+                <a href="{{ route('front.blog.index') }}" class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button">
                     <span>@lang('custom.viewall') </span>
                     <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
                 </a>
                 <div class="owl-carousel blogs-carousel pe-0">
                     @foreach ($blogs as $blog)
                         <div class="items">
-                            <div class="item-container rounded-3">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('') }}/{{ $blog->cover }}">
+                            <div class="item-container rounded-3 d-flex flex-column">
+                                <div class="d-flex gap-2">
+                                    <div class="d-flex justify-content-center align-items-center image-container">
+                                        <img src="{{ asset($blog->user->display_image) }}">
+                                    </div>
+                                    <div>
+                                        <h3 class="text-dark fs-3 fw-bold mb-0">
+                                            {{ $blog->user->full_name }}
+                                        </h3>
+                                        <p class="mb-0">
+                                            {{ $blog->created_at->format('d M, Y') }} 
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="blog-meta d-flex justify-content-between mt-1">
-                                    <span class="blog-user">
-                                        <i class="fa-solid fa-user"></i>
-                                        {{ $blog->user->full_name }}
-                                    </span>
-                                    <span class="blog-publish-date">
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        {{ $blog->created_at->format('d M, Y') }} 
-                                    </span>
-                                </div>
-                                <div class="d-flex flex-column mt-3">
-                                    <h3 class="text-dark fs-3 fw-bold mb-2">
-                                        {{ $blog->title }} 
-                                    </h3>
+                                <div class="d-flex flex-column mt-1">
                                     <p class="blog-contnet mb-0">
                                         {{ $blog->content }} 
                                     </p>
+                                    <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
+                                        <span>@lang('custom.readmore')</span>
+                                        <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}}"></i>
+                                    </a>
                                 </div>
-                                <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
-                                    <span>@lang('custom.readmore')</span>
-                                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}}"></i>
-                                </a>
                             </div>
                         </div>
                     @endforeach

@@ -40,7 +40,7 @@ class HomeController extends Controller
 
         $articles = Article::with('category')->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
         
-        $blogs = Blog::with('users')->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'created_at', 'cover']);
+        $blogs = Blog::with('user')->orderByDesc('created_at')->take(10)->get(['id', 'user_id', 'content', 'created_at']);
 
         return view('front.home', compact('comming_events', 'books', 'quotes', 'top_authors', 'articles', 'blogs'));
     }
