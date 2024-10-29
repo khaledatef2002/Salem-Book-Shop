@@ -212,7 +212,7 @@
     </section>
 @endif
 
-@if($blogs->count() > 0 )
+@if($blogs->count() > 0 && false)
     <section id="latest-blogs" class="py-5 section-back">
         <div class="container-lg container-md">
             <div class="row">
@@ -242,7 +242,7 @@
                                 </div>
                                 <div class="d-flex flex-column mt-1">
                                     <p class="blog-contnet mb-0">
-                                        {{ $blog->content }} 
+                                        {!! $blog->content !!} 
                                     </p>
                                     <a class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
                                         <span>@lang('custom.readmore')</span>

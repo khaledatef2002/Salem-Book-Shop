@@ -41,6 +41,13 @@ class HomeController extends Controller
         $articles = Article::with('category')->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
         
         $blogs = Blog::with('user')->orderByDesc('created_at')->take(10)->get(['id', 'user_id', 'content', 'created_at']);
+        
+        foreach ($blogs as $blog)
+        {
+            $blog->isTruncated = isTrunctable($blog->content, 50);
+            $blog->content = truncatePostAndRemoveImages($blog->content, 50);
+        }
+
 
         return view('front.home', compact('comming_events', 'books', 'quotes', 'top_authors', 'articles', 'blogs'));
     }

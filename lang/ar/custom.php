@@ -120,4 +120,15 @@ return [
     'articles.comments' => 'التعليقات',
     'article.add-comment' => 'إضافة تعليق',
     'article.comment.sign-in-to-comment' => 'سجل دخول لتستطيع اضافة تعليق',
+
+    'all-blogs' => 'جميع التدوينات',
+    'blogs.list-of-all' => 'قائمة بجميع التدوينات',
+    'blogs.all' => 'جميع التدوينات',
+    'blogs.my' => 'تدويناتي',
+    'blogs.what-do-you-think' => 'فيما تفكر؟',
+    'blogs.comments' => 'التعليقات',
+    'blogs.form-edit-title' => 'تعديل التدوينة',
+    'blogs.form-add-title' => 'اضافة تدوينة',
+    'blogs.save' => 'حفظ',
+    'blogs.add' => 'اضافة',
 ];

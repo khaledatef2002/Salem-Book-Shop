@@ -121,4 +121,15 @@ return [
     'articles.comments' => 'Comments',
     'article.add-comment' => 'Add Comment',
     'article.comment.sign-in-to-comment' => 'Sign in to be able to add comment',
+
+    'all-blogs' => 'All Blogs',
+    'blogs.list-of-all' => 'List Of All Blogs',
+    'blogs.all' => 'All Blogs',
+    'blogs.my' => 'My Blogs',
+    'blogs.what-do-you-think' => 'What do you think?',
+    'blogs.comments' => 'Comments',
+    'blogs.form-edit-title' => 'Edit Blog',
+    'blogs.form-add-title' => 'Add Blog',
+    'blogs.save' => 'Save',
+    'blogs.add' => 'Add',
 ];

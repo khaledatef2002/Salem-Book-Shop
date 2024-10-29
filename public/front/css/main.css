@@ -363,17 +363,19 @@ section#video-and-top-authors .author-info p
 {
     font-size: 0.8rem;
 }
-
-#latest-blogs .blog-contnet
+#latest-blogs p
 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;     /* Limits the text to 3 lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;           /* Hide the overflow content */
-    text-overflow: ellipsis;    /* Display '...' */
-    height: calc(1.5em * 3);    /* Optional: Set height based on line height */
+    margin: initial;
 }
-
+#latest-blogs .items
+{
+    height: 100%;
+}
+#latest-blogs .item-container
+{
+    height: 100%;
+    justify-content: space-between;
+}
 /* Footer */
 footer {
     background-color: #00101f;

@@ -33,3 +33,9 @@ function isTrunctable($text, $limit = 100)
 
     return true;
 }
+function truncatePostAndRemoveImages($text, $limit = 100) {
+    $textWithoutFigures = preg_replace('/<figure class="image">.*?<\/figure>/is', '', $text);
+    $textWithoutImages = preg_replace('/<img[^>]*>/i', '', $textWithoutFigures);
+
+    return $textWithoutImages;
+}
