@@ -693,6 +693,10 @@ section#about-us-page a
 {
     color: #05354f;
 }
+section#about-us-page p
+{
+    line-height: 1;
+}
 /* Contact Us */
 section#contact-page div:has(> a), section#contact-page div > a 
 {
@@ -703,6 +707,11 @@ section#contact-page div:has(> a), section#contact-page div > a
 { 
     border: 0;
     background-color: transparent;    
+}
+
+section#contact-page ul li:not(:last-of-type)
+{
+    border-bottom: 1px solid #d9d9d9;
 }
 
 /* Events */
