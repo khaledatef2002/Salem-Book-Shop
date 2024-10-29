@@ -212,7 +212,7 @@
     </section>
 @endif
 
-@if($blogs->count() > 0 && false)
+@if(false && $blogs->count() > 0)
     <section id="latest-blogs" class="py-5 section-back">
         <div class="container-lg container-md">
             <div class="row">
