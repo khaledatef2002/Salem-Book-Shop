@@ -610,3 +610,20 @@ $("button.like-article").click(function(e){
         }
     });
 })
+
+function blogs_filters()
+{
+    var search = $(".search-bar input").val()
+    var sort_by = $(".sort select").val()
+    var limit = $(".limit select").val()
+
+    var type = $('input[name="type"]:checked').val()
+
+    $(".blogs-container").html(`<div class="spinner-grow text-info d-block mx-auto mt-4" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>`)
+
+    $.get('getAllBlogsAjax', {search, sort_by, limit, type}, function(response){
+        $(".blogs-container").html(response)
+    })
+}

@@ -10,6 +10,8 @@ class Blog extends Model
 
     use HasFactory;
 
+    protected $guarded = [];
+
     public function comments()
     {
         return $this->hasMany(BlogComment::class, 'blog_id');

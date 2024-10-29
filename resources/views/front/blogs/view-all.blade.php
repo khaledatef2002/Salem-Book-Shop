@@ -46,7 +46,7 @@
         <div class="col-9 d-flex flex-wrap py-5">
             <div class="container-fluid px-1 mb-1">
                 @if (Auth::check())
-                    <div class="row px-3 mb-3">
+                    <div class="row px-3 mb-3" data-bs-toggle="modal" data-bs-target="#addBlog">
                         <div class="open-create-post bg-white rounded-2 py-2 d-flex align-items-center gap-2">
                             <div class="image-holder d-flex justify-content-center align-items-center">
                                 <img src="{{ Auth::user()->display_image }}" alt="">
@@ -93,4 +93,58 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="addBlog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@lang('custom.blogs.form-add-title')</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="add-blog-form" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+                    @csrf
+                    <textarea class="ckEditor" name="content" placeholder="Write your post..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary w-100">@lang('custom.blogs.add')</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editBlog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@lang('custom.blogs.form-edit-title')</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit-blog-form" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="blog_id">
+                    <textarea class="ckEditor" name="content" placeholder="Write your post..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary w-100">@lang('custom.blogs.save')</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('custom-js')
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+    <script src="https://unpkg.com/emoji-mart/dist/emoji-mart.js"></script>
+    <script src="{{ asset('front/js/blogs.js') }}"></script>
+@endsection
+
+@section('custom-css')
+    <link rel="stylesheet" href="https://unpkg.com/emoji-mart/dist/style.css" />
 @endsection
