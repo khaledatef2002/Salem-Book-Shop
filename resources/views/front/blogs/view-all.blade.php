@@ -141,10 +141,5 @@
 
 @section('custom-js')
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
-    <script src="https://unpkg.com/emoji-mart/dist/emoji-mart.js"></script>
     <script src="{{ asset('front/js/blogs.js') }}"></script>
-@endsection
-
-@section('custom-css')
-    <link rel="stylesheet" href="https://unpkg.com/emoji-mart/dist/style.css" />
 @endsection

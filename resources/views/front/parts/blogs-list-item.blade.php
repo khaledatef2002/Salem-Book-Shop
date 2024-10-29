@@ -41,7 +41,7 @@
                 </button>
             </div>
             <div>
-                <a class="d-flex align-items-center gap-2 btn btn-sm btn-outline-primary" href="{{ route('front.blog.show', $blog) }}">
+                <a class="d-flex align-items-center gap-2 btn btn-sm btn-outline-primary comment_button" href="{{ route('front.blog.show', $blog) }}">
                     <i class="fa-solid fa-comments"></i>
                     <p class="mb-0"> @lang('custom.blogs.comments') (<span>{{ $blog->comments->count() }}</span>)</p>
                 </a>

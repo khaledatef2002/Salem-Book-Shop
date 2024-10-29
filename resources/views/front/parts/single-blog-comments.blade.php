@@ -1,4 +1,4 @@
-@foreach ($article->comments as $key => $comment)
+@foreach ($comments as $key => $comment)
     <div>
         <hr>
         <li class="d-flex gap-2 comment">

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\ArticleComment;
 use App\Models\Blog;
+use App\Models\BlogComment;
 use App\Models\BlogLike;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -157,9 +160,10 @@ class BlogsController extends Controller implements HasMiddleware
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Blog $blog)
     {
-        //
+        $comments = $blog->comments()->orderByDesc('created_at')->paginate(13);
+        return view('front.blogs.single-blog', compact('blog', 'comments'));
     }
 
     /**
@@ -202,5 +206,53 @@ class BlogsController extends Controller implements HasMiddleware
         }
 
         $blog->delete();
+
+        if($request->return == 'all-blogs')
+            return view('front.blogs.deleted');
+    }
+
+    public function addComment(Request $request)
+    {
+        $request->validate([
+            'blog_id' => ['required', 'exists:blogs,id'],
+            'comment' => ['required', 'min:1', 'max:400']
+        ]);
+        
+        $user_id = Auth::user()->id;
+
+        BlogComment::create([
+            'blog_id' => $request->blog_id,
+            'user_id' => $user_id,
+            'comment' => $request->comment
+        ]);
+
+        $blog = Blog::find($request->blog_id)->first();
+
+        return view('front.parts.single-blog-comments', compact('blog'));
+    }
+
+    public function deleteComment(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $request->validate([
+            'comment_id' => ['required', 'exists:blog_comments,id'],
+        ]);
+        
+        BlogComment::where('id', $request->comment_id)->where('user_id', $user_id)->first()->delete();
+    }
+
+    public function editComment(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $request->validate([
+            'comment_id' => ['required', 'exists:blog_comments,id'],
+            'comment' => ['required', 'min:1', 'max:400']
+        ]);
+        
+        BlogComment::where('id', $request->comment_id)->where('user_id', $user_id)->first()->update([
+            'comment' => $request->comment
+        ]);
+
+        return $request->comment;
     }
 }

@@ -36,7 +36,7 @@ $("form#add-comment-form").submit(function(e){
     });
 })
 
-function delete_review(e, form, comment_id)
+function delete_comment(e, form, comment_id)
 {
     e.preventDefault();
 

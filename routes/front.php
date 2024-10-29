@@ -55,6 +55,9 @@ Route::name('front.')->group(function(){
     Route::post('blog/like', [BlogsController::class, 'likeAction']);
     Route::get('/getAllBlogsAjax', [BlogsController::class, 'getAllBlogsAjax']);
     Route::post('ckEditorUploadImage', [BlogsController::class, 'uploadImage']);
+    Route::post('blog/comment/add', [BlogsController::class, 'addComment']);
+    Route::delete('blog/comment/delete', [BlogsController::class, 'deleteComment']);
+    Route::post('blog/comment/edit', [BlogsController::class, 'editComment']);
 
 
     Route::resource('quote', QuotesController::class);

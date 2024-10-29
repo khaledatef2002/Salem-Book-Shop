@@ -103,6 +103,10 @@ textarea
     display: flex;
 }
 
+a {
+    color: #05354f;
+}
+
 /* Navbar & Header */
 .navbar .dropdown-menu
 {
@@ -961,4 +965,55 @@ section#contact-page div:has(> a), section#contact-page div > a
 #blogs-page-body .blog-readmore
 {
     color: #05354f;
+}
+
+/* Single Blog */
+#blog-info .image-holder
+{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#blog-info .image-holder img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+#blog-info .actions button
+{
+    background-color: initial;
+    border: initial;
+}
+
+#blog-info .content p
+{
+    margin: initial;
+}
+
+#blog-info .auth-image-holder
+{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#blog-info .auth-image-holder img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#blog-info .comment-list .user_image
+{
+    overflow: hidden;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+#blog-info .comment-list .user_image img {
+    min-width: 100%;
+    min-height: 100%;
 }
