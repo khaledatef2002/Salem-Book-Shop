@@ -228,7 +228,6 @@ class BooksController extends Controller
 
     public function getImages(Request $request)
     {
-        ini_set('display_erros', 1);
         $book = Book::findOrFail($request->id);
         $page = $request->page;
 
@@ -240,7 +239,7 @@ class BooksController extends Controller
 
         $pdf = new Pdf(storage_path('app/public/pdf/' . $book->source));
 
-        $outputDirectory = storage_path('app/public/pdf-images/{$book->id}/');
+        $outputDirectory = storage_path("app/public/pdf-images/{$book->id}/");
         if (!file_exists($outputDirectory)) {
             mkdir($outputDirectory, 0777, true);
         }
