@@ -43,8 +43,19 @@
                             </div>
                             <div class="input-group d-flex flex-column mb-3">
                                 <label for="phone" class="fw-bold">@lang('custom.phone')</label>
-                                <input id="phone" name="phone" value="{{ old('phone') }}" class="form-control w-100" type="number" placeholder="@lang('custom.enter-phone')">
-
+                                <div class="select-box">
+                                    <div class="selected-option">
+                                        <div class="country_data d-flex align-items-center me-2">
+                                            <span id="default-country-icon"></span>&nbsp;
+                                            <strong id="default-tel-code">+971</strong>
+                                        </div>
+                                        <input id="phone" name="phone" value="{{ old('phone') }}" class="form-control w-100" type="number" placeholder="@lang('custom.enter-phone')">
+                                        <input type="hidden" name="country_code" id="country_code" value="971">
+                                    </div>
+                                    <div class="options">
+                                        <ol id="countries_list"></ol>
+                                    </div>
+                                </div>
                             </div>
                             <div class="input-group d-flex flex-column mb-3">
                                 <label for="password" class="fw-bold">@lang('custom.password')</label>
@@ -82,4 +93,10 @@
     </footer>
 </div>
 
+@endsection
+
+@section('custom-js')
+    <script src="{{ asset('front/libs/countries-data.js') }}"></script>
+    <script src="{{ asset('front/libs/countries-flag.js') }}"></script>
+    <script src="{{ asset('front/js/country-code.js') }}"></script>
 @endsection

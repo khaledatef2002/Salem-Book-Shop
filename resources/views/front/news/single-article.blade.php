@@ -2,6 +2,10 @@
 
 @section('title', $article->title)
 
+@section('og-image', asset($article->cover))
+
+@section('description', truncatePostAndRemoveImages($article->content, 70))
+
 @section('content')
 
 @include('front.partials._nav', ['rounded' => 0])

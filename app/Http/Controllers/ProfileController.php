@@ -65,6 +65,7 @@ class ProfileController extends Controller
             'first_name' => ['required', 'string', 'max:12'],
             'last_name' => ['required', 'string', 'max:12'],
             'phone' => ['required', 'numeric'],
+            'country_code' => ['required', 'numeric', 'digits_between:1,4'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:100', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
@@ -72,6 +73,7 @@ class ProfileController extends Controller
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->phone = $request->phone;
+        $user->country_code = $request->country_code;
         $user->email = $request->email;
         $user->save();
 

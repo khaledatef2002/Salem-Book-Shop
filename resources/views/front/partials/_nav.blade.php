@@ -57,7 +57,7 @@
                     <div class="dropdown-menu border-0 px-2">
                         <div class="user-info d-flex flex-column align-items-center">
                             <div class="user-image">
-                                <img src="{{ Auth::user()->display_image }}" alt="">
+                                <img src="{{ Auth::user()->display_image }}">
                             </div>
                             <p class="mb-0 fw-bold">{{ ucfirst(Auth::user()->full_name) }}</p>
                             <span>{{ Auth::user()->email }}</span>

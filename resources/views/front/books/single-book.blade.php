@@ -1,6 +1,8 @@
 @extends('front.main')
 
-@section('title', 'All Books')
+@section('title', $book->title)
+
+@section('og-image', asset($book->images->first()->url))
 
 @section('content')
 

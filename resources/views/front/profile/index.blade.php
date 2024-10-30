@@ -42,29 +42,36 @@
                                     <span class="text-danger">*Only .jpeg .jpg .png images file</span>
                                 </label>
                                 <input type="file" id="image" name="image" accept=".jpg,.png,.jpeg">
-                                <x-input-error :messages="$errors->get('image')" class="mt-2" /> 
                             </div>
                             <div class="d-flex gap-2 mb-2">
                                 <div class="input-group d-flex flex-column">
                                     <label for="first_name" class="fw-bold">First Name:</label>
                                     <input type="text" value="{{ Auth::user()->first_name }}" id="first_name" name="first_name" class="form-control w-100">
-                                    <x-input-error :messages="$errors->get('first_name')" class="mt-2" /> 
                                 </div>
                                 <div class="input-group d-flex flex-column">
                                     <label for="last_name" class="fw-bold">Last Name:</label>
                                     <input type="text" value="{{ Auth::user()->last_name }}" id="last_name" name="last_name" class="form-control w-100">
-                                    <x-input-error :messages="$errors->get('last_name')" class="mt-2" /> 
                                 </div>
                             </div>
                             <div class="input-group d-flex flex-column">
                                 <label for="email" class="fw-bold">Email:</label>
                                 <input type="email" value="{{ Auth::user()->email }}" id="email" name="email" class="form-control w-100">
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" /> 
                             </div>
                             <div class="input-group d-flex flex-column">
                                 <label for="phone" class="fw-bold">phone:</label>
-                                <input type="phone" value="{{ Auth::user()->phone }}" id="phone" name="phone" class="form-control w-100">
-                                <x-input-error :messages="$errors->get('phone')" class="mt-2" /> 
+                                <div class="select-box">
+                                    <div class="selected-option">
+                                        <div class="country_data d-flex align-items-center me-2">
+                                            <span id="default-country-icon"></span>&nbsp;
+                                            <strong id="default-tel-code">+{{ Auth::user()->country_code }}</strong>
+                                        </div>
+                                        <input type="phone" value="{{ Auth::user()->phone }}" id="phone" name="phone" class="form-control w-100">
+                                        <input type="hidden" name="country_code" id="country_code" value="{{Auth::user()->country_code }}">
+                                    </div>
+                                    <div class="options">
+                                        <ol id="countries_list"></ol>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mt-4">
                                 <button class="btn btn-primary w-100" type="submit">Save</button>
@@ -80,14 +87,12 @@
                                     <i class="fa-solid fa-eye me-2"></i>
                                     <input id="password" name="password" class="form-control" type="password" placeholder="Enter your password">
                                 </div>
-                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
                             <div class="input-group d-flex flex-column mb-3">
                                 <label for="password_confirmation" class="fw-bold">Password Confirmation:</label>
                                 <div class="input-holder position-relative d-flex justify-content-end">
                                     <input id="password_confirmation" name="password_confirmation" class="form-control" type="password" placeholder="Confirm your password">
                                 </div>
-                                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                             </div>
                             <div class="mt-4">
                                 <button class="btn btn-primary w-100" type="submit">Save</button>
@@ -100,4 +105,15 @@
     </div>
 </div>
 
+@endsection
+
+
+@section('custom-js')
+    <script src="{{ asset('front/libs/countries-data.js') }}"></script>
+    <script src="{{ asset('front/libs/countries-flag.js') }}"></script>
+    <script src="{{ asset('front/js/country-code.js') }}"></script>
+    <script>
+        var user_code = window.CountryList.findOneByDialCode('+{{ Auth::user()->country_code }}')
+        $("#default-country-icon").html(window.CountryFlagSvg[user_code.code])
+    </script>
 @endsection

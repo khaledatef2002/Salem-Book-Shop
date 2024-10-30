@@ -65,26 +65,26 @@
                 </a>
                 <div class="owl-carousel activity-carousel pe-0">
                     @foreach ($books as $book)
-                        <div class="items">
-                            <div class="item-container px-4 py-4 rounded-4 d-flex flex-column justify-content-between">
-                                <h3 class="mb-3 fs-4 text-center fw-bold">{{ $book->title }}</h3>
-                                <div>
-                                    <div class="px-4 d-flex justify-content-center align-items-center">
-                                        <img src="{{ asset($book->images->first()->url) }}" class="mx-2">
-                                    </div>
-                                    <div class="content d-flex justify-content-between align-items-center mt-3">
-                                        <h3 class="text-dark fs-6 mb-0">
-                                            <i class="fa-solid fa-feather"></i>
-                                            <span>{{ $book->author->name }}</span>
-                                        </h3>
-                                        <p class="fw-bold fs-6 text-warning mb-0">
-                                            <i class="fa-regular fa-star"></i>
-                                            <span>({{ $book->avg_review }})</span>
-                                        </p>
-                                    </div>
+                    <a href="{{ route('front.book.show', $book) }}" class="text-decoration-none text-dark">
+                        <div class="items h-100">
+                            <div class="item-container h-100 px-1 py-4 rounded-4 d-flex flex-column justify-content-between">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="{{ asset($book->images->first()->url) }}" class="mx-2">
+                                </div>
+                                <div class="content d-flex flex-column justify-content-evenly align-items-center mt-3">
+                                    <h3 class="mb-3 fs-4 text-center fw-bold">{{ $book->title }}</h3>
+                                    <h3 class="text-dark fs-6 mb-0">
+                                        <i class="fa-solid fa-feather"></i>
+                                        <span>{{ $book->author->name }}</span>
+                                    </h3>
+                                    <p class="fw-bold fs-6 mb-0" style="color: rgb(224 168 0) !important">
+                                        <i class="fa-regular fa-star"></i>
+                                        <span>({{ $book->avg_review }})</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                    </a>
                     @endforeach
                 </div>
             </div>
@@ -167,7 +167,9 @@
                         <div class="items">
                             <div class="item-container rounded-3">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('front') }}/{{ $article->cover }}">
+                                    <a href="{{ route('front.article.show', $article) }}" class="w-100 h-100">
+                                        <img src="{{ asset('front') }}/{{ $article->cover }}">
+                                    </a>
                                 </div>
                                 <div class="article-meta d-flex justify-content-between mt-1">
                                     <div class="d-flex gap-3">

@@ -1,6 +1,8 @@
 @extends('front.main')
 
-@section('title', 'All Events')
+@section('title', $event->title)
+
+@section('og-image', asset($event->cover))
 
 @section('content')
 

@@ -38,7 +38,7 @@ class HomeController extends Controller
 
         $top_authors = $this->getTopAuthors();
 
-        $articles = Article::with('category')->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
+        $articles = Article::with(['category', 'user'])->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
         
         $blogs = Blog::with('user')->orderByDesc('created_at')->take(10)->get(['id', 'user_id', 'content', 'created_at']);
         

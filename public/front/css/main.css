@@ -221,9 +221,6 @@ header div.hero {
 }
 
 /* Sepcial picks */
-section#special-picks-for-you .activity-carousel .item-container {
-    background-color: #f4f4f4;
-}
 section#special-picks-for-you .activity-carousel .item-container div:has(> img) {
     overflow: hidden;
 }
@@ -1051,4 +1048,49 @@ section#contact-page ul li:not(:last-of-type)
 #blog-info .comment-list .user_image img {
     min-width: 100%;
     min-height: 100%;
+}
+
+/* Country Code */
+div.select-box .selected-option
+{
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 0;
+    cursor: pointer;
+}
+div.select-box .selected-option #default-country-icon {
+    width: 50px;
+}
+div.select-box .options {
+    position: absolute;
+    top: 4rem;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    z-index: 99;
+    display: none;
+    box-shadow: -1px 1px 2px 1px #c8c8c8;
+}
+div.select-box ol {
+    list-style: none;
+    max-height: 23rem;
+    overflow: auto;
+}
+div.select-box ol li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    justify-content: space-between;
+    cursor: pointer;
+}
+#countries_list .flag {
+    width: 30px;
+}
+.select-box ol li > div {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
 }
