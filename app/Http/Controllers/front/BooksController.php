@@ -244,7 +244,7 @@ class BooksController extends Controller
         }
         
         
-        // $pdf = new Pdf(storage_path('app/public/pdf/' . $book->source));
+        $pdf = new Pdf(storage_path('app/public/pdf/' . $book->source));
         // $outputPath = $outputDirectory . "/page-$page.jpg";
         // $pdf->setPage($page)
         //     ->saveImage($outputPath);
