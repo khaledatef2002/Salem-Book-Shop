@@ -155,7 +155,6 @@
       <div class="modal-content">
         <div class="modal-body p-0 vh-100">
           <button class="btn btn-danger px-5 m-4" data-bs-dismiss="modal" aria-label="Close">@lang('custom.close')</button>
-            <iframe src="{{ asset('uploads/pdf/' . $book->source) }}"></iframe>
         </div>
       </div>
     </div>

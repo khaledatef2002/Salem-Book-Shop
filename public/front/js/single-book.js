@@ -209,7 +209,7 @@ $(document).ready(function() {
     $.ajax({
         url: `/pdf/image`,
         type: 'GET',
-        data: { _token: csrf, id: 1, page:1 },
+        data: { _token: csrf, id: book_id, page:1 },
         xhrFields: {
             responseType: 'blob' // Ensure binary data is handled as a Blob
         },
