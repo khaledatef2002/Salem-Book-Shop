@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\ImageManager;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BooksController extends Controller
 {
@@ -82,6 +83,7 @@ class BooksController extends Controller
 
         return view('front.parts.books-list', compact('books'));
     }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -9,7 +9,7 @@
 <section id="about-us-page" class="py-5">
     <div class="container text-center">
         <div class="border-0 p-4 rounded-4">
-            <a href="https://suhail.ae"><img src="{{ asset('front/imgs/sohail-logo.png') }}" height="150" class="mb-4"></a>
+            <a href="https://suhail.ae"><img src="{{ asset('front/imgs/sohail-logo.png') }}" class="mb-4"></a>
             <h1 class="fw-bold fs-1 mb-4">@lang('custom.about.title')</h1>
             <p class="fs-5">@lang('custom.about.p1')</p>
             <p class="fs-5">@lang('custom.about.p2')</p>

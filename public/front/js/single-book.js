@@ -206,27 +206,41 @@ $(document).on("contextmenu", function (e) {
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
-    $.ajax({
-        url: `/books/${book_id}/read/1`,
-        type: 'POST',
-        data: { _token: csrf },
-        xhrFields: {
-            responseType: 'blob' // Ensure binary data is handled as a Blob
-        },
-        success: function(response) {
-            if (response instanceof Blob) { // Check if response is a Blob
-                const url = URL.createObjectURL(response);
-                console.log(url);
-                body.append(`
-                    <iframe src="${url}#toolbar=0" style="width:100%;height:100%"></iframe>
-                `);
-                setTimeout(() => URL.revokeObjectURL(url), 1000);
-            } else {
-                console.error("Response is not a Blob");
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error:', error);
-        }
-    });
+    // $.ajax({
+    //     url: `/books/${book_id}/read/1`,
+    //     type: 'POST',
+    //     data: { _token: csrf },
+    //     xhrFields: {
+    //         responseType: 'blob' // Ensure binary data is handled as a Blob
+    //     },
+    //     success: function(response) {
+    //         if (response instanceof Blob) { // Check if response is a Blob
+    //             const url = URL.createObjectURL(response);
+    //             console.log(url);
+    //             body.append(`
+    //                 <iframe src="${url}#toolbar=0" style="width:100%;height:100%"></iframe>
+    //             `);
+    //             setTimeout(() => URL.revokeObjectURL(url), 1000);
+    //         } else {
+    //             console.error("Response is not a Blob");
+    //         }
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error:', error);
+    //     }
+    // });
+
+    // $.ajax({
+    //     url: `/books/${book_id}/read/1`,
+    //     type: 'get',
+    //     data: { _token: csrf },
+    //     success: function(response) {
+    //         body.append(`
+    //             <iframe src="${response}#toolbar=0" style="width:100%;height:100%"></iframe>
+    //         `);
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error:', error);
+    //     }
+    // });
 });

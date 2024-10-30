@@ -21,7 +21,7 @@
 <section id="contact-page" class="py-5">
     <div class="container">
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="col-md-10 col-12 mx-auto">
                 <form id="contact-form" class="d-flex flex-column align-items-center card border-0 p-3">
                     @csrf
                     <div class="user-info mx-auto d-block">
@@ -40,8 +40,8 @@
                 </form>
             </div>
         </div>
-        <div class="row mt-3 col-10 mx-auto">
-            <div class="col-6 p-1">
+        <div class="row mt-3 col-md-10 col-12 mx-auto">
+            <div class="col-md-6 col-12 p-1">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4458.146987456637!2d55.937766884978544!3d25.77999318362851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDQ2JzQ4LjAiTiA1NcKwNTYnMDguMSJF!5e1!3m2!1sar!2seg!4v1729442170942!5m2!1sar!2seg" 
                 width="100%"
                 height="100%"
@@ -50,7 +50,7 @@
                 loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                 class="rounded-3"></iframe>
             </div>
-            <div class="col-6 card p-2 d-flex flex-column justify-content-between">
+            <div class="col-md-6 col-12 card p-2 d-flex flex-column justify-content-between">
                 <ul class="m-0 px-3 border-0 h-100 list-style-none d-flex flex-column justify-content-center">
                     <h3 class="mb-3">@lang('custom.general-contact')</h3>
                     <li class="py-2 mx-3 ps-1">

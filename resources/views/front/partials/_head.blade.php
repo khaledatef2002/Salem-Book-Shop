@@ -24,6 +24,6 @@
 <link rel="stylesheet" href="{{ asset('front') }}/libs/owlcarousel/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/owlcarousel/assets/owl.theme.default.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/sweetalert2/sweet.css">
-<link rel="stylesheet" href="{{ asset('front') }}/css/main.css">
+<link rel="stylesheet" href="{{ asset('front') }}/css/main.css?id=1">
 <link rel="stylesheet" href="{{ asset('front') }}/css/responsive.css">
 @yield('custom-css')

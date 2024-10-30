@@ -705,6 +705,10 @@ section#about-us-page p
 {
     line-height: 1;
 }
+section#about-us-page img
+{
+    max-width: 100%;
+}
 /* Contact Us */
 section#contact-page div:has(> a), section#contact-page div > a 
 {

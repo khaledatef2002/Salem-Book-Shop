@@ -17,7 +17,7 @@ Route::name('front.')->group(function(){
     Route::resource('book', BooksController::class);
     Route::get('/getAllBooksAjax', [BooksController::class, 'getAllBooksAjax']);
     Route::get('books/{id}/download', [BooksController::class, 'download'])->name('books.download');
-    Route::post('/books/{id}/read/{page}', [BooksController::class, 'read'])->name('books.read');
+    Route::get('/books/{id}/read/{page}', [BooksController::class, 'read'])->name('books.read');
     
     Route::get('/getAllEventsAjax', [EventsController::class, 'getAllEventsAjax']);
 
