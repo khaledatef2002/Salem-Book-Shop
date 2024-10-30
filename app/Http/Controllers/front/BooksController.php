@@ -231,25 +231,24 @@ class BooksController extends Controller
         $book = Book::findOrFail($request->id);
         $page = $request->page;
 
-        // check if page already converted
-        $pageFile = storage_path("app/public/pdf-images/{$book->id}/page-1.jpg");
+        // Check if the page has already been converted
+        $pageFile = storage_path("app/public/pdf-images/{$book->id}/page-$page.jpg");
         if (file_exists($pageFile)) {
-            return $pageFile;
+            return response()->file($pageFile);
         }
 
-        
+        // Create output directory if it doesn't exist
         $outputDirectory = storage_path("app/public/pdf-images/{$book->id}/");
         if (!file_exists($outputDirectory)) {
             mkdir($outputDirectory, 0777, true);
         }
-        
-        
-        $pdf = new Pdf(storage_path('app/public/pdf/' . $book->source));
-        $outputPath = $outputDirectory . "/page-$page.jpg";
-        $pdf->setPage($page)
-            ->saveImage($outputPath);
 
-        return $outputPath;
+        // Convert the specific page to an image
+        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/pdf/' . $book->source));
+        $outputPath = $outputDirectory . "page-$page.jpg";
+        $pdf->setPage($page)->saveImage($outputPath);
+
+        return response()->file($outputPath);
     }
 
     /**
