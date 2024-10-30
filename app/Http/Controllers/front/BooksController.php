@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\ImageManager;
+use Spatie\PdfToImage\Pdf;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BooksController extends Controller
@@ -225,24 +226,30 @@ class BooksController extends Controller
         return response($pdf, 200)->header('Content-Type', 'application/pdf');
     }
 
-    public function countPages($id, $page)
+    public function getImages(Request $request)
     {
-        putenv('PATH=' . getenv('PATH') . ';C:\Program Files\gs\gs10.04.0\bin');
-    
-        // Retrieve the book
-        $book = Book::findOrFail($id);
+        $book = Book::findOrFail($request->id);
+        $page = $request->page;
 
-        if(!Storage::disk('local')->exists("/books_images/" . $book->id))
-        {
-            Storage::disk('local')->makeDirectory("/books_images/" . $book->id);
+        // check if page already converted
+        $pageFile = storage_path("app/public/pdf-images/{$book->id}/page-1.jpg");
+        if (file_exists($pageFile)) {
+            return $pageFile;
         }
 
-        $pdfPath = storage_path("app/private/{$book->source}");
+        $pdf = new Pdf(storage_path('app/public/pdf/' . $book->source));
 
-        $pdf = new \Drenso\PdfToImage\Pdf($pdfPath);
-        $number = $pdf->getNumberOfPages();
+        $outputDirectory = storage_path('app/public/pdf-images/{$book->id}/');
+        if (!file_exists($outputDirectory)) {
+            mkdir($outputDirectory, 0777, true);
+        }
 
-        return response($number);
+
+        $outputPath = $outputDirectory . "/page-$page.jpg";
+        $pdf->setPage($page)
+            ->saveImage($outputPath);
+
+        return $outputPath;
     }
 
     /**

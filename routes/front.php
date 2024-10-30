@@ -63,4 +63,6 @@ Route::name('front.')->group(function(){
     Route::resource('quote', QuotesController::class);
     Route::get('/getAllQuotesAjax', [QuotesController::class, 'getAllQuotesAjax']);
     Route::post('quotes/like', [QuotesController::class, 'likeAction']);
+
+    Route::get('/test', [BooksController::class, 'getImages']);
 });

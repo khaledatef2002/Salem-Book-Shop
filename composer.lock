@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e151393edc37baae65a71bcd3875144a",
+    "content-hash": "ac063b30c5782e96531924f29d47f308",
     "packages": [
         {
             "name": "brick/math",
@@ -442,77 +442,6 @@
                 }
             ],
             "time": "2024-10-09T13:47:03+00:00"
-        },
-        {
-            "name": "drenso/pdf-to-image",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Drenso/pdf-to-image.git",
-                "reference": "2e8d9eb4d2f624b1e501035b789096875d39f6ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Drenso/pdf-to-image/zipball/2e8d9eb4d2f624b1e501035b789096875d39f6ff",
-                "reference": "2e8d9eb4d2f624b1e501035b789096875d39f6ff",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "ext-random": "*",
-                "php": ">=8.2",
-                "symfony/filesystem": "^5.4 || ^6.4 || ^7.0",
-                "symfony/finder": "^5.4 || ^6.4 || ^7.0",
-                "symfony/process": "^5.4 || ^6.4 || ^7.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^1.21"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Drenso\\PdfToImage\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
-                },
-                {
-                    "name": "Tobias Feijten",
-                    "email": "tobias@drenso.nl",
-                    "homepage": "https://drenso.nl"
-                },
-                {
-                    "name": "Bob van de Vijver",
-                    "email": "bob@drenso.nl",
-                    "homepage": "https://drenso.nl"
-                }
-            ],
-            "description": "Convert a pdf to an image",
-            "homepage": "https://github.com/drenso/pdf-to-image",
-            "keywords": [
-                "convert",
-                "image",
-                "pdf",
-                "pdf-to-image"
-            ],
-            "support": {
-                "source": "https://github.com/Drenso/pdf-to-image/tree/3.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-02-13T10:01:43+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3997,72 +3926,6 @@
                 }
             ],
             "time": "2024-04-18T09:32:20+00:00"
-        },
-        {
-            "name": "symfony/filesystem",
-            "version": "v7.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/filesystem.git",
-                "reference": "61fe0566189bf32e8cfee78335d8776f64a66f5a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/61fe0566189bf32e8cfee78335d8776f64a66f5a",
-                "reference": "61fe0566189bf32e8cfee78335d8776f64a66f5a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/polyfill-ctype": "~1.8",
-                "symfony/polyfill-mbstring": "~1.8"
-            },
-            "require-dev": {
-                "symfony/process": "^6.4|^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Filesystem\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Provides basic utilities for the filesystem",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.1.5"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-09-17T09:16:35+00:00"
         },
         {
             "name": "symfony/finder",
