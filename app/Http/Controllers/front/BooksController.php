@@ -228,6 +228,7 @@ class BooksController extends Controller
 
     public function getImages(Request $request)
     {
+        ini_set('display_erros', 1);
         $book = Book::findOrFail($request->id);
         $page = $request->page;
 
