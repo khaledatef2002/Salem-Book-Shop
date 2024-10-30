@@ -11,7 +11,7 @@
         <div>
             <img src="{{ asset('front/imgs/articles.png') }}" height="120">
         </div>
-        <div class="d-flex flex-column align-items-start justify-content-evenly ps-5">
+        <div class="d-flex flex-column align-items-start justify-content-evenly ps-md-5 ps-2">
             <span class="badge text-dark fw-bold">{{ $website_settings->site_title }}</span>
             <h2>@lang('custom.articles.list-of-all')</h2>
         </div>
@@ -19,8 +19,8 @@
 </div>
 
 <div id="articles-page-body">
-    <div class="container d-flex">
-        <div class="col-2 py-5">
+    <div class="container d-flex flex-wrap">
+        <div class="col-lg-2 col-md-4 col-12 py-md-5 pt-5">
             <div class="card border-0">
                 <div class="card-body py-2">
                     <p class="fw-bold">@lang('custom.categories')</p>
@@ -37,12 +37,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-10 d-flex flex-wrap py-5">
-            <div class="container-fluid px-1 mb-3">
+        <div class="col-lg-10 col-md-8 col-12 d-flex flex-wrap py-md-5 pt-2">
+            <div class="container-fluid px-md-1 px-0 mb-3">
                 <div class="row px-3">
                     <div class="bg-white rounded-2 py-2">
                         <form action="{{ url()->current() }}" method="get" class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
-                            <div class="search-bar d-flex">
+                            <div class="search-bar d-flex flex-fill">
                                 <input type="text" class="form-control me-1" placeholder="Search..." name="search" onkeyup="articles_filter()">
                             </div>
                             <div class="d-flex flex-wrap gap-2">

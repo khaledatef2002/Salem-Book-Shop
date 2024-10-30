@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ArticleCategory;
 use App\Models\BooksCategory;
 use App\Models\WebsiteSetting;
 use Illuminate\Support\Facades\View;
@@ -24,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('book_categories', BooksCategory::get(['id', 'name']));
         View::share('website_settings', WebsiteSetting::first());
+        View::share('news_categories', ArticleCategory::get(['id', 'name']));
     }
 }

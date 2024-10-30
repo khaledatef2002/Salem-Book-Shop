@@ -9,7 +9,6 @@
 <div id="page-header" class="py-5">
     <div class="container d-flex">
         <div class="d-flex align-items-center">
-            {{-- <img src="{{ asset('front/imgs/group-of-books.png') }}" height="120"> --}}
             <i class="fa-solid fa-quote-left fs-1"></i> 
         </div>
         <div class="d-flex flex-column align-items-start justify-content-evenly ps-5">
@@ -26,7 +25,7 @@
                 <div class="row px-3">
                     <div class="bg-white rounded-2 py-2">
                         <form action="{{ url()->current() }}" method="get" class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
-                            <div class="search-bar d-flex">
+                            <div class="search-bar d-flex flex-fill">
                                 <input type="text" class="form-control me-1" placeholder="@lang('custom.search') @lang('custom.author')" name="search" onkeyup="quotes_filters()">
                             </div>
                             <div class="d-flex flex-wrap gap-2">

@@ -1,8 +1,8 @@
 <footer class="pt-5">
     <div class="container-lg container-md">
         <div class="row text-white">
-            <div class="col-md-3 col-12 d-flex flex-column align-items-md-start align-items-center px-3">
-                <div class="website d-flex align-items-center gap-2 mb-3">
+            <div class="col-md-3 col-12 d-flex flex-column px-3">
+                <div class="website d-flex gap-2 mb-3">
                     <img src="{{ asset('front') }}/imgs/logo-white.png" alt="" width="40">
                     <p class="mb-0">{{ $website_settings->site_title }}</p>
                 </div>
@@ -49,6 +49,16 @@
                     <a href="https://www.instagram.com/salembookshop?igsh=cGdzcHZzcWozdnN2" class="text-decoration-none">
                         <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
                             <i class="fa-brands fa-instagram text-dark fs-5"></i>
+                        </li>
+                    </a>
+                    <a href="https://x.com/SalemBookshop?t=7pXv6eEzfPM66d62TV0JBw&s=09" class="text-decoration-none">
+                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-x text-dark fs-5"></i>
+                        </li>
+                    </a>
+                    <a href="https://www.linkedin.com/in/salem-library-3289a7335?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-decoration-none">
+                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-linkedin text-dark fs-5"></i>
                         </li>
                     </a>
                 </ul>

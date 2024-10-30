@@ -1,5 +1,5 @@
-<div class="border-0 items col-12 p-2">
-    <div class="item-container card border-0 d-flex flex-column justify-content-between p-2 rounded-4 h-100">
+<div class="border-0 items col-12 p-1">
+    <div class="item-container card border-0 d-flex flex-column justify-content-between p-2 rounded-3 h-100">
         <div class="header d-flex align-items-enter gap-2">
             <div class="d-flex image-holder justify-content-center align-items-center">
                 <img src="{{ asset($blog->user->display_image) }}">

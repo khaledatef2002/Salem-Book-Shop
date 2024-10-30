@@ -60,6 +60,7 @@ return [
     'reviews' => 'Reviews',
     'review.tell-others' => 'Tell others about your opinion',
     'close' => 'Close',
+    'type' => 'Type',
 
     'header.title' => 'Exploring Books',
     'header.sub-title' => 'Through a Modern Lens!',
@@ -121,6 +122,7 @@ return [
     'articles.comments' => 'Comments',
     'article.add-comment' => 'Add Comment',
     'article.comment.sign-in-to-comment' => 'Sign in to be able to add comment',
+    'all-articles' => 'All Articles',
 
     'all-blogs' => 'All Blogs',
     'blogs.list-of-all' => 'List Of All Blogs',

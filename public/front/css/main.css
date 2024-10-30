@@ -280,6 +280,11 @@ section#quotes .quote-back .quotes-carousel .owl-nav button span
 {
     color: white;
 }
+section#quotes .quote-back .quotes-carousel .owl-item
+{
+    display: flex;
+    align-items: center;
+}
 section#quotes .quote-back .quotes-carousel .owl-dots
 {
     display: flex;
@@ -506,10 +511,16 @@ header div.hero img
     padding: 7px 13px;
     font-size: 0.9rem;
 }
+#books-page-body .items .image-container
+{
+    width: 100%;
+    overflow: hidden;
+}
 #books-page-body .items img
 {
     min-width: 100%;
     min-height: 100%;
+    width: 100%;
 }
 #books-page-body .items .content p
 {
@@ -761,17 +772,21 @@ section#contact-page ul li:not(:last-of-type)
     color: #05354f;
 }
 
-#event-info #auth-attendance .user-info .user_image,
-#event-info .attendance-item .user-info .user_image
+#event-info .user-info .user_image
 {
     width: 60px;
     height: 60px;
     overflow: hidden;
     border-radius: 50%;
 }
+#event-info .user-info .user_image img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
 
-#event-info #auth-attendance .user-info #auth-attend-date,
-#event-info .attendance-item .user-info #auth-attend-date
+#event-info .user-info #auth-attend-date,
+#event-info .user-info #auth-attend-date
 {
     font-size: 0.8rem;
 }
@@ -854,6 +869,13 @@ section#contact-page ul li:not(:last-of-type)
     overflow: hidden;
     aspect-ratio: 1 / 0.45;
 }
+
+#articles-page-body .items div > img
+{
+    min-width: 100%;
+    min-height: 100%;
+}
+
 #articles-page-body .items .article-meta {
     font-size: 0.8rem;
 }
@@ -886,6 +908,7 @@ section#contact-page ul li:not(:last-of-type)
 {
     overflow: hidden;
     width: 55px;
+    min-width: 55px;
     height: 55px;
     border-radius: 50%;
 }
@@ -897,6 +920,7 @@ section#contact-page ul li:not(:last-of-type)
 #article-info .auth-image-holder
 {
     width: 55px;
+    min-width: 55px;
     height: 55px;
     border-radius: 50%;
     overflow: hidden;
@@ -1003,6 +1027,7 @@ section#contact-page ul li:not(:last-of-type)
 #blog-info .auth-image-holder
 {
     width: 55px;
+    min-width: 55px;
     height: 55px;
     border-radius: 50%;
     overflow: hidden;
@@ -1018,6 +1043,7 @@ section#contact-page ul li:not(:last-of-type)
 {
     overflow: hidden;
     width: 55px;
+    min-width: 55px;
     height: 55px;
     border-radius: 50%;
 }

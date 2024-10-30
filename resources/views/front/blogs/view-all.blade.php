@@ -11,7 +11,7 @@
         <div>
             <img src="{{ asset('front/imgs/blogs.png') }}" height="120">
         </div>
-        <div class="d-flex flex-column align-items-start justify-content-evenly ps-5">
+        <div class="d-flex flex-column align-items-start justify-content-evenly ps-md-5 ps-2">
             <span class="badge text-dark fw-bold">{{ $website_settings->site_title }}</span>
             <h2>@lang('custom.blogs.list-of-all')</h2>
         </div>
@@ -19,8 +19,8 @@
 </div>
 
 <div id="blogs-page-body">
-    <div class="container d-flex">
-        <div class="col-3 py-5">
+    <div class="container d-flex flex-wrap">
+        <div class="col-md-3 col-12 py-md-5 pt-5">
             <div class="card border-0">
                 <div class="card-body py-2">
                     <p class="fw-bold">@lang('custom.type')</p>
@@ -43,8 +43,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-9 d-flex flex-wrap py-5">
-            <div class="container-fluid px-1 mb-1">
+        <div class="col-md-9 col-12 d-flex flex-wrap py-md-5 pt-2">
+            <div class="container-fluid px-md-1 px-0 mb-1">
                 @if (Auth::check())
                     <div class="row px-3 mb-3" data-bs-toggle="modal" data-bs-target="#addBlog">
                         <div class="open-create-post bg-white rounded-2 py-2 d-flex align-items-center gap-2">

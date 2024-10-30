@@ -60,6 +60,7 @@ return [
     'reviews' => 'المراجعات',
     'review.tell-others' => 'أخبر الاخرين عن رايك',
     'close' => 'إغلاق',
+    'type' => 'النوع',
 
     'header.title' => 'استكشف الكتب',
     'header.sub-title' => 'من خلال عدسات حديثة!',
@@ -96,7 +97,8 @@ return [
 
     'book.review.rate-this-book' => 'قييم هذا الكتاب',
     'book.review.sign-in-to-rate' => 'تسجيل الدخول لتقييم الكتاب',
-
+    
+    
     'about' => 'من نحن',
     'about.title' => 'مكتبة سالم مسؤولية مجتمعية برعاية سهيل للحلول الذكية',
     'about.p1' => 'حيث نصنع المعرفة بشغف وننشرها كهدف للجميع مجاناً',
@@ -120,6 +122,8 @@ return [
     'articles.comments' => 'التعليقات',
     'article.add-comment' => 'إضافة تعليق',
     'article.comment.sign-in-to-comment' => 'سجل دخول لتستطيع اضافة تعليق',
+    'all-articles' => 'جميع المقالات',
+
 
     'all-blogs' => 'جميع التدوينات',
     'blogs.list-of-all' => 'قائمة بجميع التدوينات',

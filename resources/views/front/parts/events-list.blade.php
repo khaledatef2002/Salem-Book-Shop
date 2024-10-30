@@ -2,14 +2,14 @@
     @if ($events->count())
         @foreach ($events as $event)
             <div class="items col-12 p-1">
-                    <div class="card">
-                        <div class="card-body d-flex gap-3">
+                    <div class="card border-0">
+                        <div class="card-body d-flex flex-lg-row flex-column gap-lg-3">
                             <div class="event-image rounded-3 d-flex justify-content-center align-items-center">
                                 <img src="{{ asset($event->cover) }}" alt="">
                             </div>
                             <div class="event-content flex-fill py-2 d-flex flex-column justify-content-between">
                                 <div>
-                                    <div class="event-content-header d-flex justify-content-between">
+                                    <div class="event-content-header d-flex justify-content-between align-items-center">
                                         <h2 class="fs-4 text-center text-dark fw-bold">{{ $event->title }}</h2>
                                         <span class="time fw-bold">
                                             <bdi>{{ $event->date->format("Y, M d h:ia") }}</bdi>
@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="tags d-flex align-items-end gap-3">
+                                    <div class="tags d-flex flex-wrap align-items-end column-gap-3">
                                         <div class="instructors">
                                             <i class="fa-solid fa-person-chalkboard me-1"></i>
                                             {{ implode(',', $event->instructors()->pluck('name')->toArray()) }}

@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="profile-body p-5">
+<div class="profile-body py-5">
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="nav-item">

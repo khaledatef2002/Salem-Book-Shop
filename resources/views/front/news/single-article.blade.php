@@ -10,18 +10,18 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="col-9 article-image-holder d-flex justify-content-center align-items-center rounded-3">
+                <div class="col-lg-9 col-12 article-image-holder d-flex justify-content-center align-items-center rounded-3">
                     <img src="{{ asset('front/' . $article->cover) }}" class="rounded-3">
                 </div>
-                <div class="col-12 d-flex gap-4 mt-3">
-                    <div class="col-9 card border-0 rounded-3 p-3">
+                <div class="col-12 d-flex flex-wrap gap-4 mt-3">
+                    <div class="col-lg-9 col-12 card border-0 rounded-3 p-3">
                         <h1 class="text-center">{{ $article->title }}</h1>
                         <div class="content">
                             {{ $article->content }}
                         </div>
-                        <div class="article-meta d-flex justify-content-between mt-3">
+                        <div class="article-meta d-flex flex-wrap justify-content-between mt-3 gap-2">
                             <div class="d-flex gap-3">
-                                <div class="likes-count d-flex flex-fill flex-column align-items-center justify-content-end ms-2">
+                                <div class="likes-count d-flex flex-fill flex-column align-items-center justify-content-end">
                                     @csrf
                                     <button class="d-flex align-items-center gap-2 btn btn-sm btn-{{auth()->check() && $article->authLikes->isNotEmpty() ? '' : 'outline-'}}primary {{ auth()->check() ? 'like-article' : 'auth-to-like' }}" 
                                         data-article-id="{{ $article->id }}">
@@ -71,14 +71,14 @@
             </ul>
             <div class="card border-0">
                 <div class="card-body">
-                    <div class="tab-content p-3">
+                    <div class="tab-content p-md-3">
                         <div class="tab-pane fade show active" id="comments" role="tabpanel">
                             @if (Auth::check())
                                 <form id="add-comment-form" class="comment-form">
                                     @csrf
                                     <input type="hidden" name="article_id" value="{{ $article->id }}">
                                     <p class="fw-bold fs-4 mb-0">@lang('custom.article.add-comment')</p>
-                                    <div class="d-flex gap-2">
+                                    <div class="d-flex flex-md-row flex-column gap-2">
                                         <div class="auth-image-holder d-flex align-items-center justify-content-center">
                                             <img src="{{ asset(auth()->user()->display_image) }}">
                                         </div>
