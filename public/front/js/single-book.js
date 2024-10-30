@@ -220,7 +220,7 @@ $(document).ready(function() {
                 body.append(`
                     <img src="${url}" style="width:100%;height:100%">
                 `);
-                URL.revokeObjectURL(url)
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
             } else {
                 console.error("Response is not a Blob");
             }
