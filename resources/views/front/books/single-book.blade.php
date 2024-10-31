@@ -160,7 +160,7 @@
                 </div>
             @endfor
             <div class="pages-navigator">
-                <button class="btn btn-danger px-5 m-4" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button class="btn text-white px-3" data-bs-dismiss="modal" aria-label="Close">X</button>
                 <input type="number" value="1">
                 <span>/{{ $pagesCount }}</span>
             </div>

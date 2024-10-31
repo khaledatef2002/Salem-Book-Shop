@@ -692,8 +692,7 @@ ul.nav-tabs li
 }
 #book-read .modal-body button
 {
-    position: fixed;
-    bottom: 0px;
+    line-height: 1;
 }
 
 /* About Us */
