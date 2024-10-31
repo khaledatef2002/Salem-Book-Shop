@@ -1100,6 +1100,10 @@ div.select-box ol li {
 }
 
 /* Reader */
+#book-read .modal-body
+{
+    overflow: auto;
+}
 #book-read .page
 {
     height: 100%;

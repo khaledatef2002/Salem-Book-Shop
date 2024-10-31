@@ -254,7 +254,9 @@ $('.modal-body').on('scroll', function() {
 
         // Check if the element is in view
         if (elementTop < viewBottom && elementBottom > viewTop) {
-            console.log("Currently viewing: ", $page.attr("data-page"));
+            let page_number = Number($page.attr("data-page"))
+            load_page(page_number)
+            $("#book-read .pages-navigator input").val(page_number)
         }
     });
 });
