@@ -271,7 +271,7 @@ $('.modal-body').on('scroll', function() {
 $("#book-read .pages-navigator input").change(function(){
     var page_number = $(this).val()
     $('#book-read .modal-body').animate({
-        scrollTop: $(`#book-read .page[data-page='${page_number}']`).offset().top
+        scrollTop: $(`#book-read .page[data-page='${page_number}']`).offset().top - $("#book-read .modal-body").offset().top + $("#book-read .modal-body").scrollTop() - 100
     }, 500);
 })
 
