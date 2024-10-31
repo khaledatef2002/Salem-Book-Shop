@@ -203,7 +203,7 @@ $(document).on("contextmenu", function (e) {
     e.preventDefault();
 });
 
-const pdfWorker = new Worker('pdf-worker.js');
+const pdfWorker = new Worker('/front/js/pdf-worker.js');
 
 pdfWorker.onmessage = function(e) {
     const { status, blob, page, error } = e.data;
