@@ -1103,6 +1103,7 @@ div.select-box ol li {
 #book-read .page
 {
     height: 100%;
+    margin-top: 10px;
 }
 #book-read .page img
 {

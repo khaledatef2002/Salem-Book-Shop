@@ -225,6 +225,7 @@ $(document).ready(function() {
 
     load_page(1)
     load_page(2)
+    load_page(3)
 });
 
 function load_page(page)
