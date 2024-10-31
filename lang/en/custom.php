@@ -61,6 +61,7 @@ return [
     'review.tell-others' => 'Tell others about your opinion',
     'close' => 'Close',
     'type' => 'Type',
+    'dashboard' => 'Dashboard',
 
     'header.title' => 'Exploring Books',
     'header.sub-title' => 'Through a Modern Lens!',

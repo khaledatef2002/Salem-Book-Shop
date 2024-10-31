@@ -63,6 +63,9 @@
                             <span>{{ Auth::user()->email }}</span>
                         </div>
                         <hr class="my-2">
+                        @if (Auth::user()->is_admin)
+                            <a class="dropdown-item" href="{{ route('dashboard.index') }}"><i class="fa-solid fa-gauge"></i> @lang('custom.dashboard')</a>
+                        @endif
                         <a class="dropdown-item" href="{{ route('front.profile') }}"><i class="fa-solid fa-user"></i> @lang('custom.profile')</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

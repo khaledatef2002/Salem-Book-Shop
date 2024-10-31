@@ -61,6 +61,7 @@ return [
     'review.tell-others' => 'أخبر الاخرين عن رايك',
     'close' => 'إغلاق',
     'type' => 'النوع',
+    'dashboard' => 'لوحة التحكم',
 
     'header.title' => 'استكشف الكتب',
     'header.sub-title' => 'من خلال عدسات حديثة!',

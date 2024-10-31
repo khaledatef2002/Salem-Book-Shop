@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\EventAuthAttendActionsMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,7 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
             'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
             'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
-            'authEventAction'         => EventAuthAttendActionsMiddleware::class
+            'authEventAction'         => EventAuthAttendActionsMiddleware::class,
+            'admin' => AdminMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
