@@ -234,7 +234,8 @@ class BooksController extends Controller
 
         $pageFile = storage_path("app/public/pdf-images/{$book->id}/page-$page.jpg");
         if (file_exists($pageFile)) {
-            return response()->file($pageFile);
+            $imageData = base64_encode(file_get_contents($pageFile));
+            return response()->json(['image' => $imageData]);
         }
 
         // Create output directory if it doesn't exist
@@ -249,7 +250,6 @@ class BooksController extends Controller
         $pdf->selectPage($page)->save($outputPath);
 
         $imageData = base64_encode(file_get_contents($pageFile));
-
         return response()->json(['image' => $imageData]);
     }
 
