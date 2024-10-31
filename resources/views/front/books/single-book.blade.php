@@ -156,7 +156,7 @@
         <div class="modal-body p-0 vh-100">
           <button class="btn btn-danger px-5 m-4" data-bs-dismiss="modal" aria-label="Close">@lang('custom.close')</button>
             @for ($i = 1; $i <= $pagesCount; $i++)
-                <div class="page d-flex justify-content-center" data-page="{{ $i }}">
+                <div class="page d-flex justify-content-center align-items-center" data-page="{{ $i }}">
                     <div class="spinner-grow text-primary" role="status"></div>
                 </div>
             @endfor
@@ -173,9 +173,9 @@
 
 @section('custom-js')
     <script>
-        var book_id = {{ $book->id }}
-        var pages_count = {{ $pagesCount }}
-        var csrf = "{{ csrf_token() }}"
+        let book_id = {{ $book->id }}
+        let pages_count = {{ $pagesCount }}
+        let csrf = "{{ csrf_token() }}"
     </script>
-    <script src="{{ asset('front/js/single-book.js') }}?id=5"></script>
+    <script src="{{ asset('front/js/single-book.js') }}?id=6"></script>
 @endsection
