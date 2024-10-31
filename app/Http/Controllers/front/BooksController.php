@@ -248,7 +248,9 @@ class BooksController extends Controller
         $outputPath = $outputDirectory . "page-$page.jpg";
         $pdf->selectPage($page)->save($outputPath);
 
-        return response()->file($outputPath);
+        $imageData = base64_encode(file_get_contents($pageFile));
+
+        return response()->json(['image' => $imageData]);
     }
 
     private function getPagesCount(Book $book)

@@ -203,24 +203,26 @@ $(document).on("contextmenu", function (e) {
     e.preventDefault();
 });
 
-const pdfWorker = new Worker('/front/js/pdf-worker.js');
+const pdfWorker = new Worker('/front/js/pdf-worker.js?id=1');
 
 pdfWorker.onmessage = function(e) {
-    const { status, blob, page, error } = e.data;
+    const { status, image, page, error } = e.data;
 
     if (status === 'success') {
-        const url = URL.createObjectURL(blob);
-        document.querySelector(`.page[data-page='${page}']`).innerHTML = `
-        <img src="${url}">
-        `;
-        loaded_pages.push(Number(page))
-        pending_pages.shift()
-        is_loading = false
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        const imgElement = document.createElement('img');
+        imgElement.src = `data:image/jpeg;base64,${image}`;
+        
+        // Insert the image in the appropriate page element
+        document.querySelector(`.page[data-page='${page}']`).appendChild(imgElement);
+        
+        loaded_pages.push(Number(page));
+        pending_pages.shift();
+        is_loading = false;
     } else if (status === 'error') {
         console.error('Error:', error);
     }
 };
+
 
 var is_loading = false
 

@@ -11,10 +11,14 @@ self.onmessage = function(e) {
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-        return response.blob(); // Convert response to Blob
+        return response.json(); // Parse JSON response
     })
-    .then(blob => {
-        self.postMessage({ status: 'success', blob, page }); // Send the Blob back to main thread
+    .then(data => {
+        if (data.image) {
+            self.postMessage({ status: 'success', image: data.image, page });
+        } else {
+            throw new Error('No image data received');
+        }
     })
     .catch(error => {
         self.postMessage({ status: 'error', error: error.message });
