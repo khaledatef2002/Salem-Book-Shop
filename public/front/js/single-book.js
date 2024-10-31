@@ -209,6 +209,7 @@ pdfWorker.onmessage = function(e) {
     const { status, blob, page, error } = e.data;
 
     if (status === 'success') {
+        loaded_pages.push(page)
         const url = URL.createObjectURL(blob);
         console.log(url);
         document.querySelector(`.page[data-page='${page}']`).innerHTML = `
@@ -220,6 +221,8 @@ pdfWorker.onmessage = function(e) {
     }
 };
 
+const loaded_pages = []
+
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
@@ -227,14 +230,30 @@ $(document).ready(function() {
 
     for(var i = 1; i <= limit;i++)
     {
-        console.log(i)
+        load_page(1)
     }
-    load_page(1)
-    load_page(2)
-    load_page(3)
 });
 
 function load_page(page)
 {
     pdfWorker.postMessage({ csrf, book_id, page });
 }
+
+$('.modal-body').on('scroll', function() {
+    $('.page').each(function() {
+        const $page = $(this);
+        const modalBody = $('.modal-body');
+
+        // Calculate element's position relative to the modal body
+        const elementTop = $page.offset().top - modalBody.offset().top;
+        const elementBottom = elementTop + $page.outerHeight();
+
+        const viewTop = modalBody.scrollTop();
+        const viewBottom = viewTop + modalBody.height();
+
+        // Check if the element is in view
+        if (elementTop < viewBottom && elementBottom > viewTop) {
+            console.log("Currently viewing: ", $page.attr("data-page"));
+        }
+    });
+});
