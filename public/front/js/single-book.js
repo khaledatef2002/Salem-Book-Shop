@@ -218,7 +218,7 @@ pdfWorker.onmessage = function(e) {
         loaded_pages.push(Number(page));
         pending_pages.shift();
         is_loading = false;
-        elementWithHiddenContent = document.querySelector("#book-read");
+        elementWithHiddenContent = document.querySelector("#book-read .page");
         innerHtml = elementWithHiddenContent.innerHTML;
     } else if (status === 'error') {
         console.error('Error:', error);
@@ -303,7 +303,7 @@ setInterval(function(){
 
 var currentInnerHtml;
 var element = new Image();
-var elementWithHiddenContent = document.querySelector("#book-read");
+var elementWithHiddenContent = document.querySelector("#book-read .page");
 var innerHtml = elementWithHiddenContent.innerHTML;
 
 element.__defineGetter__("id", function() {
