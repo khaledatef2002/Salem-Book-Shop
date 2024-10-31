@@ -19,5 +19,9 @@
 <!-- Dashboard init -->
 <script src="{{ asset('back') }}/js/pages/dashboard-ecommerce.init.js"></script>
 
+{{-- Sweet Alert 2 --}}
+<script src="{{ asset('back/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <!-- App js -->
 <script src="{{ asset('back') }}/js/app.js"></script>
+<script src="{{ asset('front/libs/jquery/jquery-3.6.4.min.js') }}"></script>
+<script src="{{ asset('back') }}/js/custom.js"></script>

@@ -5,7 +5,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('front/'. $website_settings->logo) }}">
+    <link rel="shortcut icon" href="{{ asset('storage/'. $website_settings->logo) }}">
 
     <!-- jsvectormap css -->
     <link href="{{ asset('back') }}/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
@@ -29,6 +29,8 @@
         <link href="{{ asset('back') }}/css/app.min.css" rel="stylesheet" type="text/css" />
     @endif
 
+    {{-- Sweet Alert2 --}}
+    <link href="{{ asset('back/libs/sweetalert2/sweetalert2.all.min.js') }}" rel="stylesheet" type="text-/css" />
     <!-- Icons Css -->
     <link href="{{ asset('back') }}/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->

@@ -7,15 +7,15 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <meta property="og:title" content="{{ View::hasSection('full-title') ? View::getSection('full-title') : $website_settings->site_title . " - " . View::getSection('title') }}">
-<meta property="og:image" content="{{ View::hasSection('og-image') ? View::getSection('og-image') : asset('front/' . $website_settings->banner) }}">
+<meta property="og:image" content="{{ View::hasSection('og-image') ? View::getSection('og-image') : asset('storage/' . $website_settings->banner) }}">
 <meta property="og:type" content="{{ View::hasSection('type') ? View::getSection('type') : 'website' }}">
 
-<meta name="twitter:card" content="{{ View::hasSection('og-image') ? View::getSection('og-image') : asset('front/' . $website_settings->banner) }}">
+<meta name="twitter:card" content="{{ View::hasSection('og-image') ? View::getSection('og-image') : asset('storage/' . $website_settings->banner) }}">
 <meta name="twitter:title" content="{{ View::hasSection('full-title') ? View::getSection('full-title') : $website_settings->site_title . " - " . View::getSection('title') }}">
 <meta name="twitter:description" content="{{ View::hasSection('description') ? View::getSection('description') : $website_settings->description }}">
-<meta name="twitter:image" content="{{ View::hasSection('og-image') ? View::getSection('og-image') : asset('front/' . $website_settings->banner) }}">
+<meta name="twitter:image" content="{{ View::hasSection('og-image') ? View::getSection('og-image') : asset('storage/' . $website_settings->banner) }}">
 
-<link rel="icon" href="{{ asset('front/' . $website_settings->logo) }}" type="image/x-icon">
+<link rel="icon" href="{{ asset('storage/' . $website_settings->logo) }}" type="image/x-icon">
 
 <title>{{ View::hasSection('full-title') ? View::getSection('full-title') : $website_settings->site_title . " - " . View::getSection('title') }}</title>
 <link rel="shortcut icon" href="imgs/logo.png">
