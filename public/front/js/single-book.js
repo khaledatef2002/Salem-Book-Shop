@@ -206,7 +206,7 @@ $(document).on("contextmenu", function (e) {
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
-    for(let i = 1; i <= (pages_count < 3) ? pages_count : 3;i++)
+    for(let i = 1; i <= 3;i++)
     {
         $.ajax({
             url: `/pdf/image`,
