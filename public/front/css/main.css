@@ -1110,8 +1110,12 @@ div.select-box ol li {
 }
 #book-read .pages-navigator
 {
-    position: absolute;
-    bottom: 10px;
+    position: fixed;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
+    background: #333333;
+    color: white;
+    border-radius: 7px;
+    padding: 5px;
 }
