@@ -206,15 +206,10 @@ $(document).on("contextmenu", function (e) {
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
-    load_page(1)
-});
-
-function load_page(page)
-{
     $.ajax({
         url: `/pdf/image`,
         type: 'GET',
-        data: { _token: csrf, id: book_id, page:page },
+        data: { _token: csrf, id: book_id, page:1 },
         xhrFields: {
             responseType: 'blob' // Ensure binary data is handled as a Blob
         },
@@ -222,7 +217,7 @@ function load_page(page)
             if (response instanceof Blob) { // Check if response is a Blob
                 const url = URL.createObjectURL(response);
                 console.log(url);
-                body.find(`.page[data-page='${page}']`).append(`
+                body.find(".page[data-page='1']").append(`
                     <img src="${url}">
                 `);
                 setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -234,4 +229,4 @@ function load_page(page)
             console.error('Error:', error);
         }
     });
-}
+});
