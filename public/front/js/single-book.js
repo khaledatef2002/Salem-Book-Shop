@@ -213,7 +213,7 @@ pdfWorker.onmessage = function(e) {
         imgElement.src = `data:image/jpeg;base64,${image}`;
         
         // Insert the image in the appropriate page element
-        document.querySelector(`.page[data-page='${page}']`).innerHTML = imgElement;
+        $(`.page[data-page='${page}']`).html(imgElement);
         
         loaded_pages.push(Number(page));
         pending_pages.shift();
