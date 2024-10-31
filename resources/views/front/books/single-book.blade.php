@@ -155,12 +155,11 @@
       <div class="modal-content">
         <div class="modal-body p-0 vh-100">
           <button class="btn btn-danger px-5 m-4" data-bs-dismiss="modal" aria-label="Close">@lang('custom.close')</button>
-        
-            @foreach ($pagesCount as $page)
-                <div class="page" data-page="{{ $page }}">
+            @for ($i = 0; $i < $pagesCount; $i++)
+                <div class="page" data-page="{{ $i }}">
 
                 </div>
-            @endforeach
+            @endfor
         </div>
       </div>
     </div>
