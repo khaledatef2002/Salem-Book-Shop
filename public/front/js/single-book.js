@@ -218,8 +218,6 @@ pdfWorker.onmessage = function(e) {
         loaded_pages.push(Number(page));
         pending_pages.shift();
         is_loading = false;
-        elementWithHiddenContent = document.querySelector("#book-read .page");
-        innerHtml = elementWithHiddenContent.innerHTML;
     } else if (status === 'error') {
         console.error('Error:', error);
     }
@@ -299,20 +297,3 @@ setInterval(function(){
         }
     }
 }, 1000)
-
-
-var currentInnerHtml;
-var element = new Image();
-var elementWithHiddenContent = document.querySelector("#book-read .page");
-var innerHtml = elementWithHiddenContent.innerHTML;
-
-element.__defineGetter__("id", function() {
-    currentInnerHtml = "";
-});
-
-setInterval(function() {
-    currentInnerHtml = innerHtml;
-    console.log(element);
-    console.clear();
-    elementWithHiddenContent.innerHTML = currentInnerHtml;
-}, 1000);
