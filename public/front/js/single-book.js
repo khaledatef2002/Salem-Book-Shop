@@ -255,8 +255,11 @@ $('.modal-body').on('scroll', function() {
         // Check if the element is in view
         if (elementTop < viewBottom && elementBottom > viewTop) {
             let page_number = Number($page.attr("data-page"))
-            load_page(page_number)
-            $("#book-read .pages-navigator input").val(page_number)
+            if(!loaded_pages.includes(page_number))
+            {
+                load_page(page_number)
+                $("#book-read .pages-navigator input").val(page_number)
+            }
         }
     });
 });
