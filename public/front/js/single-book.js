@@ -211,7 +211,7 @@ pdfWorker.onmessage = function(e) {
     if (status === 'success') {
         const url = URL.createObjectURL(blob);
         console.log(url);
-        document.querySelector(`.page[data-page='${page}']`).innerHTML += `
+        document.querySelector(`.page[data-page='${page}']`).innerHTML = `
             <img src="${url}">
         `;
         setTimeout(() => URL.revokeObjectURL(url), 1000);

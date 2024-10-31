@@ -157,7 +157,7 @@
           <button class="btn btn-danger px-5 m-4" data-bs-dismiss="modal" aria-label="Close">@lang('custom.close')</button>
             @for ($i = 1; $i <= $pagesCount; $i++)
                 <div class="page d-flex justify-content-center" data-page="{{ $i }}">
-
+                    <div class="spinner-grow text-primary" role="status"></div>
                 </div>
             @endfor
             <div class="pages-navigator">
@@ -177,5 +177,5 @@
         var pages_count = {{ $pagesCount }}
         var csrf = "{{ csrf_token() }}"
     </script>
-    <script src="{{ asset('front/js/single-book.js') }}?id=4"></script>
+    <script src="{{ asset('front/js/single-book.js') }}?id=5"></script>
 @endsection
