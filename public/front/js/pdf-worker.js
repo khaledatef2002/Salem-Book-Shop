@@ -2,7 +2,7 @@ self.onmessage = function(e) {
     const { csrf, book_id, page } = e.data;
 
     fetch(`/pdf/image?id=${book_id}&page=${page}`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CSRF-TOKEN': csrf
         }
