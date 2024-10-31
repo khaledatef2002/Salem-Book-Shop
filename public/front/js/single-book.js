@@ -258,6 +258,16 @@ $('.modal-body').on('scroll', function() {
             {
                 pending_pages.push(page_number)
             }
+
+            if(page_number + 1 <= pages_count && !loaded_pages.includes(page_number + 1) && !pending_pages.includes(page_number + 1))
+            {
+                pending_pages.push(page_number + 1)
+            }
+
+            if(page_number + 2 <= pages_count && !loaded_pages.includes(page_number + 2) && !pending_pages.includes(page_number + 2))
+            {
+                pending_pages.push(page_number + 2)
+            }
         }
     
     })
