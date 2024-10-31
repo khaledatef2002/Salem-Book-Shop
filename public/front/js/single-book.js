@@ -217,8 +217,8 @@ $(document).ready(function() {
             if (response instanceof Blob) { // Check if response is a Blob
                 const url = URL.createObjectURL(response);
                 console.log(url);
-                body.append(`
-                    <img src="${url}" style="width:100%;height:100%">
+                body.find(".page[data-page='1']").append(`
+                    <img src="${url}">
                 `);
                 setTimeout(() => URL.revokeObjectURL(url), 1000);
             } else {
@@ -229,18 +229,4 @@ $(document).ready(function() {
             console.error('Error:', error);
         }
     });
-
-    // $.ajax({
-    //     url: `/books/${book_id}/read/1`,
-    //     type: 'get',
-    //     data: { _token: csrf },
-    //     success: function(response) {
-    //         body.append(`
-    //             <iframe src="${response}#toolbar=0" style="width:100%;height:100%"></iframe>
-    //         `);
-    //     },
-    //     error: function(xhr, status, error) {
-    //         console.error('Error:', error);
-    //     }
-    // });
 });

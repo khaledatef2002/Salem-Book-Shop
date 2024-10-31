@@ -107,7 +107,8 @@ class BooksController extends Controller
     public function show(Book $book)
     {
         $reviews = $book->reviews()->paginate(5);
-        return view('front.books.single-book', compact('book', 'reviews'));
+        $pagesCount = $this->getPagesCount($book);
+        return view('front.books.single-book', compact('book', 'reviews', 'pagesCount'));
     }
 
     public function addReview(Request $request)
@@ -231,7 +232,6 @@ class BooksController extends Controller
         $book = Book::findOrFail($request->id);
         $page = $request->page;
 
-        // Check if the page has already been converted
         $pageFile = storage_path("app/public/pdf-images/{$book->id}/page-$page.jpg");
         if (file_exists($pageFile)) {
             return response()->file($pageFile);
@@ -249,6 +249,13 @@ class BooksController extends Controller
         $pdf->selectPage($page)->save($outputPath);
 
         return response()->file($outputPath);
+    }
+
+    private function getPagesCount(Book $book)
+    {
+        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/pdf/' . $book->source));
+
+        return $pdf->pageCount();
     }
 
     /**
