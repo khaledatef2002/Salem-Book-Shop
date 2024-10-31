@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="collapse navbar-collapse navbarSupportedContent ms-2">
-            <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-4">
+            <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-md-4 gap-2">
                 <li class="nav-item text-center">
                     <a class="nav-link active" aria-current="page" href="{{ route('front.index') }}">@lang('custom.home')</a>
                 </li>

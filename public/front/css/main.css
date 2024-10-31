@@ -696,17 +696,21 @@ ul.nav-tabs li
 }
 
 /* About Us */
-section#about-us-page a 
+#page-header.about-header
 {
-    color: #05354f;
+    /* background-color: #0078b9; */
 }
-section#about-us-page p
-{
-    line-height: 1;
-}
-section#about-us-page img
+#page-header.about-header img
 {
     max-width: 100%;
+}
+.about-section img
+{
+    max-width: 100%;
+}
+#about-us-page-2
+{
+    background-color: #bdd2dc;
 }
 /* Contact Us */
 section#contact-page div:has(> a), section#contact-page div > a 

@@ -100,13 +100,8 @@ return [
 
     'about' => 'About Us',
     'about.title' => 'Salem Library, the responsibility of the community responsible for establishing Sohail Smart Solutions',
-    'about.p1' => 'Where we create knowledge with passion and spread it as a goal for everyone, free of charge.',
-    'about.p2' => 'Sustaining human development in the Ras Al Khaimah community is our goal.',
-    'about.p3' => 'We offer books in the form of free seminars, and we believe in gamification in the knowledge creation journey.',
-    'about.p4' => 'Our message is to move from education to learning, and joining efforts in a team spirit is the challenge to which we aspire.',
-    'about.p5' => 'Salem Library also provides distinctive books such as the book on sustainability with an Emirati vision, and the manager’s book in cooperation with Suhail Smart Solutions.',
-    'about.p6' => 'We also have a “Book Seminar” program, which consists of presenting selected books from multiple fields such as human subjects, business administration, mental health, and humanities, in a simple and interesting style, providing you with opportunities to gain deep knowledge and practical application.',
-    'about.p7' => 'Visit us and join the science and innovation community today',
+    'about.p1' => 'Salem Library, its responsibility is a social responsibility, Suhail Establishment for Zakat Solutions. Where we create knowledge with passion and spread it as a goal for everyone, free of charge. Sustaining human development in Ras Al Khaimah is our goal. We offer books in the form of free seminars, and we believe in gamification in the journey of knowledge creation. Our message is to move from education to learning, and coming together in a team spirit is the challenge to which we aspire.',
+    'about.p2' => 'Salem Library also provides distinctive books such as the book Sustainability with an Emirati Vision, and the Manager’s Book 101 in cooperation with Suhail Smart Solutions. We also have a “Book Seminar” program, which consists of presenting selected books from multiple fields, such as human resources, business administration, mental health, and humanities. In a simple and elegant style. We offer you opportunities to gain in-depth knowledge and practical application. Visit us and join the science and innovation community today.',
 
     'all-events' => 'All Events',
     'events.list-of-all' => 'List Of All Events',
