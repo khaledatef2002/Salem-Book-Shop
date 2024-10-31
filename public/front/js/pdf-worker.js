@@ -15,7 +15,9 @@ self.onmessage = function(e) {
     })
     .then(data => {
         if (data.image) {
-            self.postMessage({ status: 'success', image: data.image, page });
+            // Convert Base64 string to a Blob
+            const blob = base64ToBlob(data.image);
+            self.postMessage({ status: 'success', blob, page });
         } else {
             throw new Error('No image data received');
         }
@@ -24,3 +26,17 @@ self.onmessage = function(e) {
         self.postMessage({ status: 'error', error: error.message });
     });
 };
+
+function base64ToBlob(base64, mimeType = 'image/jpeg') {
+    // Decode the base64 string into binary data
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    // Convert binary data into a Uint8Array, then create a Blob
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
+}
