@@ -218,6 +218,8 @@ pdfWorker.onmessage = function(e) {
         loaded_pages.push(Number(page));
         pending_pages.shift();
         is_loading = false;
+        elementWithHiddenContent = document.querySelector("#book-read");
+        innerHtml = elementWithHiddenContent.innerHTML;
     } else if (status === 'error') {
         console.error('Error:', error);
     }
