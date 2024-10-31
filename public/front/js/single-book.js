@@ -230,7 +230,7 @@ $(document).ready(function() {
 
     for(var i = 1; i <= limit;i++)
     {
-        load_page(1)
+        load_page(i)
     }
 });
 
@@ -240,6 +240,7 @@ function load_page(page)
 }
 
 $('.modal-body').on('scroll', function() {
+    console.log('scrolled')
     $('.page').each(function() {
         const $page = $(this);
         const modalBody = $('.modal-body');
