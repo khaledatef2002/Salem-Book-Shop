@@ -211,7 +211,7 @@ pdfWorker.onmessage = function(e) {
     if (status === 'success') {
         const url = URL.createObjectURL(blob);
         console.log(url);
-        document.querySelector(`.page[data-page='${page}']`).innerHTML += `
+        document.querySelector(`.page[data-page='${page}']`).innerHTML = `
             <img src="${url}">
         `;
         setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -223,6 +223,12 @@ pdfWorker.onmessage = function(e) {
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
+    var limit = (pages_count < 3) ? pages_count : 3
+
+    for(var i = 1; i <= limit;i++)
+    {
+        console.log(i)
+    }
     load_page(1)
     load_page(2)
     load_page(3)
