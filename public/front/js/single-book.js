@@ -255,11 +255,19 @@ $('.modal-body').on('scroll', function() {
         // Check if the element is in view
         if (elementTop < viewBottom && elementBottom > viewTop) {
             let page_number = Number($page.attr("data-page"))
+            $("#book-read .pages-navigator input").val(page_number)
             if(!loaded_pages.includes(page_number))
             {
+                loaded_pages.push(page_number)
                 load_page(page_number)
-                $("#book-read .pages-navigator input").val(page_number)
             }
         }
     });
 });
+
+$("#book-read .pages-navigator input").change(function(){
+    var page_number = $(this).val()
+    $('#book-read .modal-body').animate({
+        scrollTop: $(`#book-read .page[data-page='${page_number}']`).offset().top
+    }, 500);
+})
