@@ -177,5 +177,5 @@
         let pages_count = {{ $pagesCount }}
         let csrf = "{{ csrf_token() }}"
     </script>
-    <script src="{{ asset('front/js/single-book.js') }}?id=6"></script>
+    <script src="{{ asset('front/js/single-book.js') }}?id=7"></script>
 @endsection
