@@ -245,33 +245,28 @@ function load_page(page)
 
 $('.modal-body').on('scroll', function() {
     console.log('scrolled')
-    $('.page').each(function() {
-        const $page = $(this);
-        const modalBody = $('.modal-body');
 
-        // Calculate element's position relative to the modal body
-        const elementTop = $page.offset().top - modalBody.offset().top;
-        const elementBottom = elementTop + $page.outerHeight();
+    var scroll = $("#book-read .modal-body").scrollTop()
+    $('#book-read .modal-body .page').each(function() {
+        var scrolled = $(this).offset().top - $("#book-read .modal-body").offset().top + $("#book-read .modal-body").scrollTop()
+        if(scroll >= scrolled && scroll <= scrolled + $(this).height())
+        {
+            let page_number = Number($(this).attr("data-page"))
 
-        const viewTop = modalBody.scrollTop();
-        const viewBottom = viewTop + modalBody.height();
-
-        // Check if the element is in view
-        if (elementTop < viewBottom && elementBottom > viewTop) {
-            let page_number = Number($page.attr("data-page"))
             $("#book-read .pages-navigator input").val(page_number)
             if(!loaded_pages.includes(page_number) && !pending_pages.includes(page_number))
             {
                 pending_pages.push(page_number)
             }
         }
-    });
+    
+    })
 });
 
 $("#book-read .pages-navigator input").change(function(){
     var page_number = $(this).val()
     $('#book-read .modal-body').animate({
-        scrollTop: $(`#book-read .page[data-page='${page_number}']`).offset().top - $("#book-read .modal-body").offset().top + $("#book-read .modal-body").scrollTop() - 100
+        scrollTop: $(`#book-read .page[data-page='${page_number}']`).offset().top - $("#book-read .modal-body").offset().top + $("#book-read .modal-body").scrollTop()
     }, 500);
 })
 
