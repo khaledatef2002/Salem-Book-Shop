@@ -206,31 +206,32 @@ $(document).on("contextmenu", function (e) {
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
-    for(let i = 1; i <= 3;i++)
-    {
-        $.ajax({
-            url: `/pdf/image`,
-            type: 'GET',
-            data: { _token: csrf, id: book_id, page:i },
-            xhrFields: {
-                responseType: 'blob' // Ensure binary data is handled as a Blob
-            },
-            success: function(response) {
-                if (response instanceof Blob) { // Check if response is a Blob
-                    const url = URL.createObjectURL(response);
-                    console.log(url);
-                    body.find(`.page[data-page='${page}']`).append(`
-                        <img src="${url}">
-                    `);
-                    setTimeout(() => URL.revokeObjectURL(url), 1000);
-                } else {
-                    console.error("Response is not a Blob");
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-    }
-
+    load_page(1)
 });
+
+function load_page(page)
+{
+    $.ajax({
+        url: `/pdf/image`,
+        type: 'GET',
+        data: { _token: csrf, id: book_id, page:page },
+        xhrFields: {
+            responseType: 'blob' // Ensure binary data is handled as a Blob
+        },
+        success: function(response) {
+            if (response instanceof Blob) { // Check if response is a Blob
+                const url = URL.createObjectURL(response);
+                console.log(url);
+                body.find(`.page[data-page='${page}']`).append(`
+                    <img src="${url}">
+                `);
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+            } else {
+                console.error("Response is not a Blob");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        }
+    });
+}
