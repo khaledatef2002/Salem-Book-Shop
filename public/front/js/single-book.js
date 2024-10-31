@@ -209,19 +209,23 @@ pdfWorker.onmessage = function(e) {
     const { status, blob, page, error } = e.data;
 
     if (status === 'success') {
-        loaded_pages.push(Number(page))
         const url = URL.createObjectURL(blob);
-        console.log(url);
         document.querySelector(`.page[data-page='${page}']`).innerHTML = `
-            <img src="${url}">
+        <img src="${url}">
         `;
+        loaded_pages.push(Number(page))
+        pending_pages.shift()
+        is_loading = false
         setTimeout(() => URL.revokeObjectURL(url), 1000);
     } else if (status === 'error') {
         console.error('Error:', error);
     }
 };
 
+var is_loading = false
+
 const loaded_pages = []
+const pending_pages = []
 
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
@@ -230,7 +234,7 @@ $(document).ready(function() {
 
     for(var i = 1; i <= limit;i++)
     {
-        load_page(i)
+        pending_pages.push(i)
     }
 });
 
@@ -256,10 +260,9 @@ $('.modal-body').on('scroll', function() {
         if (elementTop < viewBottom && elementBottom > viewTop) {
             let page_number = Number($page.attr("data-page"))
             $("#book-read .pages-navigator input").val(page_number)
-            if(!loaded_pages.includes(page_number))
+            if(!loaded_pages.includes(page_number) && !pending_pages.includes(page_number))
             {
-                loaded_pages.push(page_number)
-                load_page(page_number)
+                pending_pages.push(page_number)
             }
         }
     });
@@ -271,3 +274,19 @@ $("#book-read .pages-navigator input").change(function(){
         scrollTop: $(`#book-read .page[data-page='${page_number}']`).offset().top
     }, 500);
 })
+
+setInterval(function(){
+    if(pending_pages.length > 0 && is_loading == false)
+    {
+        var poper = pending_pages[0]
+        if(loaded_pages.includes(poper))
+        {
+            pending_pages.shift()
+        }
+        else
+        {
+            is_loading = true
+            load_page(poper)
+        }
+    }
+}, 1000)
