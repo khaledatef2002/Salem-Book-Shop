@@ -1098,3 +1098,20 @@ div.select-box ol li {
     align-items: center;
     column-gap: 15px;
 }
+
+/* Reader */
+#book-read .page
+{
+    height: 100%;
+}
+#book-read .page img
+{
+    max-height: 100%;
+}
+#book-read .pages-navigator
+{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
