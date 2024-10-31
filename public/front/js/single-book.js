@@ -219,7 +219,7 @@ $(document).ready(function() {
                 if (response instanceof Blob) { // Check if response is a Blob
                     const url = URL.createObjectURL(response);
                     console.log(url);
-                    body.find(".page[data-page='1']").append(`
+                    body.find(`.page[data-page='${page}']`).append(`
                         <img src="${url}">
                     `);
                     setTimeout(() => URL.revokeObjectURL(url), 1000);
