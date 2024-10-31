@@ -72,5 +72,5 @@
 </footer>
 
 <div class="whatsapp-contact">
-    <a href="https://wa.me/+971569755226"><img src="{{ asset('front') }}/imgs/whatsapp.png"></a>
+    <a href="https://wa.me/+971569755226" target="_blank"><img src="{{ asset('front') }}/imgs/whatsapp.png"></a>
 </div>
