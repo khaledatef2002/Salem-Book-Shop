@@ -174,6 +174,7 @@
 @section('custom-js')
     <script>
         var book_id = {{ $book->id }}
+        var pages_count = {{ $pagesCount }}
         var csrf = "{{ csrf_token() }}"
     </script>
     <script src="{{ asset('front/js/single-book.js') }}"></script>
