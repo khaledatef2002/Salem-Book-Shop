@@ -209,7 +209,7 @@ pdfWorker.onmessage = function(e) {
     const { status, blob, page, error } = e.data;
 
     if (status === 'success') {
-        loaded_pages.push(page)
+        loaded_pages.push(Number(page))
         const url = URL.createObjectURL(blob);
         console.log(url);
         document.querySelector(`.page[data-page='${page}']`).innerHTML = `
