@@ -223,6 +223,7 @@ pdfWorker.onmessage = function(e) {
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
+    load_page(1)
     load_page(2)
 });
 
