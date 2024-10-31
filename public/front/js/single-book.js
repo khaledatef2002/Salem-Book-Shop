@@ -223,8 +223,7 @@ pdfWorker.onmessage = function(e) {
 $(document).ready(function() {
     const body = $("#book-read .modal-body");
 
-    for(let i = 1; i <= (pages_count < 3) ? pages_count : 3;i++)
-        load_page(i)
+    load_page(2)
 });
 
 function load_page(page)
