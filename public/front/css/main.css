@@ -692,7 +692,7 @@ ul.nav-tabs li
 }
 #book-read .modal-body button
 {
-    position: absolute;
+    position: fixed;
     bottom: 0px;
 }
 
@@ -1118,4 +1118,13 @@ div.select-box ol li {
     color: white;
     border-radius: 7px;
     padding: 5px;
+}
+#book-read .pages-navigator input
+{
+    background: transparent;
+    color: white;
+    width: 55px;
+    text-align: center;
+    border: 1px solid #7e7e7e;
+    border-radius: 7px;
 }

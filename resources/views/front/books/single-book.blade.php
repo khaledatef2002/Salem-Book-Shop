@@ -162,7 +162,7 @@
             @endfor
             <div class="pages-navigator">
                 <input type="number" value="1">
-                <span>{{ $pagesCount }}</span>
+                <span>/{{ $pagesCount }}</span>
             </div>
         </div>
       </div>
