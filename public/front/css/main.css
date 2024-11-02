@@ -281,6 +281,7 @@ section#quotes .quote-back .quotes-carousel .owl-item
 {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 section#quotes .quote-back .quotes-carousel .owl-dots
 {

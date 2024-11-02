@@ -96,7 +96,7 @@
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="hstack gap-2 justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Updates</button>
+                                        <button type="submit" class="btn btn-primary">@lang('custom.save')</button>
                                     </div>
                                 </div>
                                 <!--end col-->

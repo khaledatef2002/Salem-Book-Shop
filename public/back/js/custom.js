@@ -118,3 +118,18 @@ $("#website-settings-change-form").submit(function(e){
         }
     });
 })
+
+// Remove Action
+function remove_button(button){
+    Swal.fire({
+        title: "Do you really want to delete this person?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        confirmButtonColor: "red",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            remove(button.closest("form"))
+        }
+    });
+}

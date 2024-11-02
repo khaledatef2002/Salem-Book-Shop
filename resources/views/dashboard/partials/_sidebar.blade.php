@@ -35,9 +35,17 @@
                         <i class="ri-home-3-fill"></i> <span>@lang('dashboard.home')</span>
                     </a>
                 </li> <!-- Home -->
-
-                <li class="menu-title"><span>Website</span></li>
-
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.quote.index' ? 'active' : ''}}" href="{{ route('dashboard.quote.index') }}" role="button">
+                        <i class="ri-double-quotes-l"></i> <span>@lang('dashboard.quote')</span>
+                    </a>
+                </li> <!-- end Dashboard Menu -->
+                <li class="menu-title"><span>@lang('dashboard.general')</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.people.index' ? 'active' : ''}}" href="{{ route('dashboard.people.index') }}" role="button">
+                        <i class="ri-team-fill"></i> <span>@lang('dashboard.people')</span>
+                    </a>
+                </li> <!-- end Dashboard Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.website_setting.index' ? 'active' : ''}}" href="{{ route('dashboard.website_setting.index') }}" role="button">
                         <i class="ri-tools-fill"></i> <span>@lang('dashboard.website-settings')</span>
