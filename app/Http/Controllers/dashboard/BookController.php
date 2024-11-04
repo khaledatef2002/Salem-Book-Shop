@@ -243,6 +243,21 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        if(Storage::disk('public')->exists($book->source))
+        {
+            Storage::disk('public')->delete($book->source);
+        }
+
+        $images = $book->images;
+
+        foreach($images as $image)
+        {
+            if(Storage::disk('public')->exists($image->url))
+            {
+                Storage::disk('public')->delete($image->url);
+            }
+        }
+
         $book->delete();
     }
 }
