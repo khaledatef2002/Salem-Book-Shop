@@ -4,6 +4,8 @@
 
 @section('og-image', asset($book->images->first()->url))
 
+@section('keywords', $book->keywords)
+
 @section('content')
 
 @include('front.partials._nav', ['rounded' => 0])
@@ -15,7 +17,7 @@
                 <div class="owl-carousel book-carousel pe-0">
                     @foreach ($book->images as $image)
                         <div class="book-image-holder d-flex justify-content-center align-items-center">
-                            <img src="{{ asset($image->url) }}" alt="" srcset="">
+                            <img src="{{ asset('storage/' . $image->url) }}" alt="" srcset="">
                         </div>
                     @endforeach
                 </div>

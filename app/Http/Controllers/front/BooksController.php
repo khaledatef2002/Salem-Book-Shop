@@ -184,11 +184,11 @@ class BooksController extends Controller
         if (!$book->downloadable) {
             die("This book isn't downloadable");
         }
-        $pdfPath = "{$book->source}";
-        if (!Storage::disk('local')->exists($pdfPath)) {
+        $pdfPath = $book->source;
+        if (!Storage::disk('public')->exists($pdfPath)) {
             die("Invalid book source");
         }
-        return Storage::disk('local')->download($pdfPath);
+        return Storage::disk('public')->download($pdfPath);
     }
 
     public function read($id, $page)
@@ -218,12 +218,12 @@ class BooksController extends Controller
         // Retrieve the book
         $book = Book::findOrFail($id);
 
-        if(!Storage::disk('local')->exists("/books_images/" . $book->id))
+        if(!Storage::disk('public')->exists("/books_images/" . $book->id))
         {
-            Storage::disk('local')->makeDirectory("/books_images/" . $book->id);
+            Storage::disk('public')->makeDirectory("/books_images/" . $book->id);
         }
 
-        $pdf = Storage::disk('local')->get($book->source);
+        $pdf = Storage::disk('public')->get($book->source);
         return response($pdf, 200)->header('Content-Type', 'application/pdf');
     }
 
@@ -245,7 +245,7 @@ class BooksController extends Controller
         }
 
         // Convert the specific page to an image
-        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/pdf/' . $book->source));
+        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/' . $book->source));
         $outputPath = $outputDirectory . "page-$page.jpg";
         $pdf->selectPage($page)->save($outputPath);
 
@@ -255,7 +255,7 @@ class BooksController extends Controller
 
     private function getPagesCount(Book $book)
     {
-        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/pdf/' . $book->source));
+        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/' . $book->source));
 
         return $pdf->pageCount();
     }

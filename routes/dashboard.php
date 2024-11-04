@@ -1,6 +1,10 @@
 <?php
 
 use App\helper\select2;
+use App\Http\Controllers\dashboard\ArticlesCategories;
+use App\Http\Controllers\dashboard\BookController;
+use App\Http\Controllers\dashboard\BooksCategoriesController;
+use App\Http\Controllers\dashboard\BooksReviewsController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\PeopleController;
 use App\Http\Controllers\dashboard\QuotesController;
@@ -18,5 +22,19 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::resource('/people', PeopleController::class);
 
     Route::resource('/quote', QuotesController::class);
+    
+    Route::resource('/books-category', BooksCategoriesController::class);
+    
+    Route::resource('articles-category', ArticlesCategories::class);
+    
+    Route::resource('books', BookController::class);
+    
+    Route::resource('book-review', BooksReviewsController::class);
+    Route::get('book/{book}/review', [BooksReviewsController::class, 'index'])->name('book-review.index');
+    Route::delete('review/{review}', [BooksReviewsController::class, 'destroy']);
+    Route::post('book/upload', [BookController::class, 'upload_images'])->name('book.upload');
+
+
     Route::get('/select2/authors', [select2::class, 'authors'])->name('select2.authors');
+    Route::get('/select2/book_category', [select2::class, 'book_category'])->name('select2.book_category');
 });

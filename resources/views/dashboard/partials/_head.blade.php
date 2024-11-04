@@ -39,6 +39,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 
+    <!-- dropzone css -->
+    <link rel="stylesheet" href="{{ asset('back/libs/dropzone/dropzone.css') }}" type="text/css" />
 
     {{-- Sweet Alert2 --}}
     <link href="{{ asset('back/libs/sweetalert2/sweetalert2.all.min.js') }}" rel="stylesheet" type="text-/css" />
