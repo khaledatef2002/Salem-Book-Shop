@@ -16,4 +16,9 @@ class ArticleLike extends Model
     {
         return $this->belongsTo(Article::class, 'article_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

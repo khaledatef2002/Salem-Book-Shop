@@ -37,5 +37,5 @@ function truncatePostAndRemoveImages($text, $limit = 100) {
     $textWithoutFigures = preg_replace('/<figure class="image">.*?<\/figure>/is', '', $text);
     $textWithoutImages = preg_replace('/<img[^>]*>/i', '', $textWithoutFigures);
 
-    return $textWithoutImages;
+    return truncatePost($textWithoutImages, $limit);
 }

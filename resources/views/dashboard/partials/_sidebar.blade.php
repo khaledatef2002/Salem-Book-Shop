@@ -66,7 +66,7 @@
                                         <a href="{{ route('dashboard.articles-category.index') }}" class="nav-link">@lang('dashboard.articles.categories')</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="ui-badges.html" class="nav-link">@lang('dashboard.articles.all-articles')</a>
+                                        <a href="{{ route('dashboard.articles.index') }}" class="nav-link">@lang('dashboard.articles.all-articles')</a>
                                     </li>
                                 </ul>
                             </div>

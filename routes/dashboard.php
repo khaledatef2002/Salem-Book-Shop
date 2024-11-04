@@ -2,6 +2,9 @@
 
 use App\helper\select2;
 use App\Http\Controllers\dashboard\ArticlesCategories;
+use App\Http\Controllers\dashboard\ArticlesCommentsController;
+use App\Http\Controllers\dashboard\ArticlesController;
+use App\Http\Controllers\dashboard\ArticlesLikesController;
 use App\Http\Controllers\dashboard\BookController;
 use App\Http\Controllers\dashboard\BooksCategoriesController;
 use App\Http\Controllers\dashboard\BooksReviewsController;
@@ -37,4 +40,10 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
 
     Route::get('/select2/authors', [select2::class, 'authors'])->name('select2.authors');
     Route::get('/select2/book_category', [select2::class, 'book_category'])->name('select2.book_category');
+
+    Route::resource('articles', ArticlesController::class);
+    Route::get('article-comments', [ArticlesCommentsController::class, 'index'])->name('article-comments.index');
+    Route::delete('article-comments/delete/{comment}', [ArticlesCommentsController::class, 'destroy']);
+    Route::get('article-likes', [ArticlesLikesController::class, 'index'])->name('article-likes.index');
+    Route::delete('article-likes/delete/{like}', [ArticlesLikesController::class, 'destroy']);
 });
