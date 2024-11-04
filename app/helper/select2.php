@@ -2,6 +2,7 @@
 
 namespace App\helper;
 
+use App\Models\ArticleCategory;
 use App\Models\Author;
 use App\Models\BooksCategory;
 use App\PeopleType;
@@ -29,6 +30,16 @@ class select2
         $search = $request->get('q'); // For searching functionality
 
         $categories = BooksCategory::where('name', 'LIKE', "%{$search}%")
+        ->get();
+
+        return response()->json($categories);
+    }
+
+    public function article_category(Request $request)
+    {
+        $search = $request->get('q'); // For searching functionality
+
+        $categories = ArticleCategory::where('name', 'LIKE', "%{$search}%")
         ->get();
 
         return response()->json($categories);

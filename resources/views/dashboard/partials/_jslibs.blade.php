@@ -42,6 +42,9 @@
 {{-- Select 2 --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+<!-- ckeditor -->
+<script src="{{ asset('back/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+
 @yield('additional-js-libs')
 
 <!-- App js -->

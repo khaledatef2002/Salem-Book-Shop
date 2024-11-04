@@ -23,7 +23,7 @@
                     <div class="col-lg-9 col-12 card border-0 rounded-3 p-3">
                         <h1 class="text-center">{{ $article->title }}</h1>
                         <div class="content">
-                            {{ $article->content }}
+                            {!! $article->content !!}
                         </div>
                         <div class="article-meta d-flex flex-wrap justify-content-between mt-3 gap-2">
                             <div class="d-flex gap-3">

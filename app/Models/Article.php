@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Article extends Model
 {
 
     use HasFactory;
+
+    protected $guarded = [];
 
     public function category()
     {
@@ -31,6 +34,10 @@ class Article extends Model
     }
     public function authLikes()
     {
-        return $this->hasMany(ArticleLike::class)->where('user_id', auth()->user()->id);
+        return $this->hasMany(ArticleLike::class)->where('user_id', Auth::user()->id);
+    }
+    public function images()
+    {
+        return $this->hasMany(ArticleImage::class);
     }
 }

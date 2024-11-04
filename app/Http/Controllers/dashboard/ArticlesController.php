@@ -4,9 +4,14 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\ArticleImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use Intervention\Image\Encoders\AutoEncoder;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class ArticlesController extends Controller
 {
@@ -73,15 +78,109 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.articles.create');
     }
 
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'upload' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $image = $request->file('upload');
+        $manager = new ImageManager(new GdDriver());
+        $optimizedImage = $manager->read($image)
+            ->resize(250, 250, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })
+            ->encode(new AutoEncoder(quality: 75));
+            
+        $imagePath = 'temp/' . uniqid() . '.' . $image->getClientOriginalExtension();
+        Storage::disk('public')->put($imagePath, (string) $optimizedImage);
+        $url = Storage::url($imagePath);
+
+        return response()->json(['url' => $url]);
+    }
+
+    public function removeImage(Request $request)
+    {
+        $request->validate(['url' => 'required|string']);
+
+        // Get the file path from the URL
+        $url = $request->input('url');
+        $path = parse_url($url, PHP_URL_PATH); // Extract file path from URL
+        $path = str_replace('/storage/', '', $path); // Adjust if using 'storage' in the URL
+
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'File not found'], 404);
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => ['required', 'min:2', 'max:40'],
+            'content' => ['required', 'min:2', 'max:800'],
+            'category_id' => ['required', 'exists:article_categories,id'],
+            'keywords' => ['required'],
+            'cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']
+        ]);
+
+        $content = $data['content'];
+
+        $uploadedImages = $request->images ?? [];
+
+        $article_images = [];
+
+        foreach ($uploadedImages as $tempPath) {
+            // Generate the new permanent path
+            $permanentPath = str_replace('/storage/temp', 'articles/images', $tempPath);
+
+            $currentPublicPath = str_replace('/storage/', '', $tempPath);
+            
+            // Move the image to the permanent directory
+            Storage::disk('public')->move($currentPublicPath, $permanentPath);
+    
+            // Replace temp URLs with the new URLs in the content
+            $tempUrl = Storage::url($tempPath);
+            $permanentUrl = Storage::url($permanentPath);
+            $article_images[] = $permanentUrl;
+            $content = str_replace($tempPath, $permanentUrl, $content);
+        }
+
+        $data['content'] = $content;
+        $data['user_id'] = Auth::id();
+
+        $cover = $request->file('cover');
+        $manager = new ImageManager(new GdDriver());
+        $optimizedCover = $manager->read($cover)
+            ->resize(250, 250, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })
+            ->encode(new AutoEncoder(quality: 75));
+            
+        $coverPath = 'articles/' . uniqid() . '.' . $cover->getClientOriginalExtension();
+        Storage::disk('public')->put($coverPath, (string) $optimizedCover);
+        $data['cover'] = $coverPath;
+ 
+        $article = Article::create($data);
+
+        foreach($article_images as $image)
+        {
+            ArticleImage::create([
+                'article_id' => $article->id,
+                'url' => $image
+            ]);
+        }
+
+        return response()->json(['redirectUrl' => route('dashboard.articles.edit', $article)]);
     }
 
     /**
@@ -113,9 +212,21 @@ class ArticlesController extends Controller
      */
     public function destroy(Article $article)
     {
+        foreach($article->images as $image)
+        {
+            if(Storage::exists($image->url))
+            {
+                Storage::delete($image->url);
+            }
+
+            $image->delete();
+        }
+
         if(Storage::disk('public')->exists($article->cover))
         {
             Storage::disk('public')->delete($article->cover);
         }
+
+        $article->delete();
     }
 }

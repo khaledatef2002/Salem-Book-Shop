@@ -31,3 +31,38 @@ function remove(form) {
         }
     });
 }
+
+$("#create-article-form").submit(function(e){
+    e.preventDefault()
+
+    $(this).find('textarea[name="content"]').val(ckEditor.getData())
+
+    var formData = new FormData(this)
+
+    images.forEach((item, index) => {
+        formData.append(`images[${index}]`, item);
+    });
+
+    var submit_button = $(this).find("button[type='submit']")
+    submit_button.prop("disabled", true)
+
+    $.ajax({
+        url: "/dashboard/articles",  // Laravel route to handle name change
+        method: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            window.location = response.redirectUrl
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var firstKey = Object.keys(errors)[0];
+            Swal.fire({
+                text: errors[firstKey][0],
+                icon: "error"
+            });
+            submit_button.prop("disabled", false)
+        }
+    });
+})

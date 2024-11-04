@@ -41,7 +41,7 @@
 
     <!-- dropzone css -->
     <link rel="stylesheet" href="{{ asset('back/libs/dropzone/dropzone.css') }}" type="text/css" />
-
+    
     {{-- Sweet Alert2 --}}
     <link href="{{ asset('back/libs/sweetalert2/sweetalert2.all.min.js') }}" rel="stylesheet" type="text-/css" />
     <!-- Icons Css -->
