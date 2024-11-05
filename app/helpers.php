@@ -1,6 +1,6 @@
 <?php
 
-function truncatePost($text, $limit = 100) {
+function truncatePost(string $text, int $limit = 100) : string {
     // Strip out the HTML tags temporarily
     $plainText = strip_tags($text);
 
@@ -22,7 +22,7 @@ function truncatePost($text, $limit = 100) {
     return $truncatedText . '...';
 }
 
-function isTrunctable($text, $limit = 100)
+function isTrunctable(string $text, int $limit = 100) : bool
 {
     // Strip out the HTML tags temporarily
     $plainText = strip_tags($text);
@@ -33,9 +33,18 @@ function isTrunctable($text, $limit = 100)
 
     return true;
 }
-function truncatePostAndRemoveImages($text, $limit = 100) {
+function truncatePostAndRemoveImages(string $text, int $limit = 100) : string {
     $textWithoutFigures = preg_replace('/<figure class="image">.*?<\/figure>/is', '', $text);
     $textWithoutImages = preg_replace('/<img[^>]*>/i', '', $textWithoutFigures);
 
     return truncatePost($textWithoutImages, $limit);
+}
+function extractImagesSrc(string $content) : array
+{
+    $pattern = '/<img[^>]+src="([^">]+)"/i';
+
+    preg_match_all($pattern, $content, $matches);
+    $imageUrls = $matches[1];
+
+    return $imageUrls;
 }

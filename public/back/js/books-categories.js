@@ -79,6 +79,7 @@ function openEditCategory(id)
             $("#editBookCategoryModal form input[name='name']").val(response.name)
             $("#editBookCategoryModal form").attr("data-id", response.id)
             editModal.show()
+            submit_button.prop("disabled", false)
         },
         error: function(xhr) {
             var errors = xhr.responseJSON.errors;

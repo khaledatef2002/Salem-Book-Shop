@@ -56,7 +56,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.articles-category.index' ? 'active' : ''}}" href="#articlesMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
-                        <i class="ri-book-2-line"></i> <span>@lang('dasboard.articles')</span>
+                        <i class="ri-file-list-3-line"></i> <span>@lang('dasboard.articles')</span>
                     </a>
                     <div class="collapse menu-dropdown mega-dropdown-menu" id="articlesMenu">
                         <div class="row">
@@ -74,11 +74,21 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.blogs.index' ? 'active' : ''}}" href="{{ route('dashboard.blogs.index') }}" role="button">
+                        <i class="ri-bold"></i> <span>@lang('dashboard.blog')</span>
+                    </a>
+                </li> <!-- End Quotes Menu -->
+                <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.quote.index' ? 'active' : ''}}" href="{{ route('dashboard.quote.index') }}" role="button">
                         <i class="ri-double-quotes-l"></i> <span>@lang('dashboard.quote')</span>
                     </a>
                 </li> <!-- End Quotes Menu -->
                 <li class="menu-title"><span>@lang('dashboard.general')</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.contacts.index' ? 'active' : ''}}" href="{{ route('dashboard.contacts.index') }}" role="button">
+                        <i class="ri-contacts-line"></i> <span>@lang('dashboard.contact')</span>
+                    </a>
+                </li> <!-- End People Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.people.index' ? 'active' : ''}}" href="{{ route('dashboard.people.index') }}" role="button">
                         <i class="ri-team-fill"></i> <span>@lang('dashboard.people')</span>

@@ -5,9 +5,14 @@ use App\Http\Controllers\dashboard\ArticlesCategories;
 use App\Http\Controllers\dashboard\ArticlesCommentsController;
 use App\Http\Controllers\dashboard\ArticlesController;
 use App\Http\Controllers\dashboard\ArticlesLikesController;
+use App\Http\Controllers\dashboard\BlogsComents;
+use App\Http\Controllers\dashboard\BlogsComentsController;
+use App\Http\Controllers\dashboard\BlogsController;
+use App\Http\Controllers\dashboard\BlogsLikesController;
 use App\Http\Controllers\dashboard\BookController;
 use App\Http\Controllers\dashboard\BooksCategoriesController;
 use App\Http\Controllers\dashboard\BooksReviewsController;
+use App\Http\Controllers\dashboard\ContactsController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\PeopleController;
 use App\Http\Controllers\dashboard\QuotesController;
@@ -50,4 +55,11 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::post('ckEditorUploadImage', [ArticlesController::class, 'uploadImage']);
     Route::post('ckEditorRemoveImage', [ArticlesController::class, 'removeImage']);
 
+    Route::resource('blogs', BlogsController::class);
+    Route::get('blog-comments', [BlogsComentsController::class, 'index'])->name('blog-comments.index');
+    Route::delete('blog-comments/delete/{comment}', [BlogsComentsController::class, 'destroy']);
+    Route::get('blog-likes', [BlogsLikesController::class, 'index'])->name('blog-likes.index');
+    Route::delete('blog-likes/delete/{like}', [BlogsLikesController::class, 'destroy']);
+
+    Route::resource('contacts', ContactsController::class);
 });

@@ -33,7 +33,7 @@ class ArticlesController extends Controller
                     <a href='" . route('dashboard.article-comments.index', $row['id']) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>
                     <a href='" . route('dashboard.article-likes.index', $row['id']) . "'><i class='ri-thumb-up-line fs-4' type='submit'></i></a>
                     <a href='" . route('front.article.show', $row['id']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>
-                    <a href='" . route('dashboard.books.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>    
+                    <a href='" . route('dashboard.articles.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>    
                 "
                 .
 
@@ -148,7 +148,6 @@ class ArticlesController extends Controller
             Storage::disk('public')->move($currentPublicPath, $permanentPath);
     
             // Replace temp URLs with the new URLs in the content
-            $tempUrl = Storage::url($tempPath);
             $permanentUrl = Storage::url($permanentPath);
             $article_images[] = $permanentUrl;
             $content = str_replace($tempPath, $permanentUrl, $content);
@@ -194,17 +193,115 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
-        //
+        return view('dashboard.articles.edit', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $cover_validation = [];
+
+        if($request->file('cover'))
+        {
+            $cover_validation = ['cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']];
+        }
+        $data = $request->validate([
+            'title' => ['required', 'min:2', 'max:40'],
+            'content' => ['required', 'min:2', 'max:800'],
+            'category_id' => ['required', 'exists:article_categories,id'],
+            'keywords' => ['required'],
+            $cover_validation
+        ]);
+
+        $content = $data['content'];
+
+        // Getiing all images urls
+        $urls = extractImagesSrc($content);
+
+        // Filter urls to get the already uploaded
+        $oldURLS = [];
+        foreach ($urls as $url)
+        {
+            if(!str_starts_with($url, '/storage/temp'))
+            {
+                $oldURLS[] = $url;
+            }
+        }
+
+        // Check if the user removed any image and delete it
+        $oldImages = $article->images;
+        foreach($oldImages as $image)
+        {
+            if(!in_array($image->url, $oldURLS))
+            {
+                if(Storage::exists($image->url))
+                {
+                    Storage::delete($image->url);
+                }
+
+                $image->delete();
+            }
+        }
+
+        // Upload the new images
+        $uploadedImages = $request->images ?? [];
+
+        $article_images = [];
+
+        foreach ($uploadedImages as $tempPath) {
+            // Generate the new permanent path
+            $permanentPath = str_replace('/storage/temp', 'articles/images', $tempPath);
+
+            $currentPublicPath = str_replace('/storage/', '', $tempPath);
+            
+            // Move the image to the permanent directory
+            Storage::disk('public')->move($currentPublicPath, $permanentPath);
+    
+            // Replace temp URLs with the new URLs in the content
+            $permanentUrl = Storage::url($permanentPath);
+            $article_images[] = $permanentUrl;
+            $content = str_replace($tempPath, $permanentUrl, $content);
+        }
+
+        $data['content'] = $content;
+        $data['user_id'] = Auth::id();
+
+        // upload the new cover if exists
+        if($request->file('cover'))
+        {
+            // Delete the old one if exists
+            if(Storage::disk('public')->exists($article->cover))
+            {
+                Storage::disk('public')->delete($article->cover);
+            }
+
+            $cover = $request->file('cover');
+            $manager = new ImageManager(new GdDriver());
+            $optimizedCover = $manager->read($cover)
+                ->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->encode(new AutoEncoder(quality: 75));
+                
+            $coverPath = 'articles/' . uniqid() . '.' . $cover->getClientOriginalExtension();
+            Storage::disk('public')->put($coverPath, (string) $optimizedCover);
+            $data['cover'] = $coverPath;
+        }
+ 
+        $article->update($data);
+
+        foreach($article_images as $image)
+        {
+            ArticleImage::create([
+                'article_id' => $article->id,
+                'url' => $image
+            ]);
+        }
     }
 
     /**
