@@ -83,6 +83,11 @@
                         <i class="ri-double-quotes-l"></i> <span>@lang('dashboard.quote')</span>
                     </a>
                 </li> <!-- End Quotes Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.events.index' ? 'active' : ''}}" href="{{ route('dashboard.events.index') }}" role="button">
+                        <i class="ri-calendar-event-line"></i> <span>@lang('dashboard.events')</span>
+                    </a>
+                </li> <!-- End Quotes Menu -->
                 <li class="menu-title"><span>@lang('dashboard.general')</span></li>
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.contacts.index' ? 'active' : ''}}" href="{{ route('dashboard.contacts.index') }}" role="button">

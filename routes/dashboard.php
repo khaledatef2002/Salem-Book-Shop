@@ -5,7 +5,6 @@ use App\Http\Controllers\dashboard\ArticlesCategories;
 use App\Http\Controllers\dashboard\ArticlesCommentsController;
 use App\Http\Controllers\dashboard\ArticlesController;
 use App\Http\Controllers\dashboard\ArticlesLikesController;
-use App\Http\Controllers\dashboard\BlogsComents;
 use App\Http\Controllers\dashboard\BlogsComentsController;
 use App\Http\Controllers\dashboard\BlogsController;
 use App\Http\Controllers\dashboard\BlogsLikesController;
@@ -13,6 +12,8 @@ use App\Http\Controllers\dashboard\BookController;
 use App\Http\Controllers\dashboard\BooksCategoriesController;
 use App\Http\Controllers\dashboard\BooksReviewsController;
 use App\Http\Controllers\dashboard\ContactsController;
+use App\Http\Controllers\dashboard\EventController;
+use App\Http\Controllers\dashboard\EventReviewsController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\PeopleController;
 use App\Http\Controllers\dashboard\QuotesController;
@@ -43,9 +44,12 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::post('book/upload', [BookController::class, 'upload_images'])->name('book.upload');
 
 
-    Route::get('/select2/authors', [select2::class, 'authors'])->name('select2.authors');
-    Route::get('/select2/book_category', [select2::class, 'book_category'])->name('select2.book_category');
-    Route::get('/select2/article_category', [select2::class, 'article_category'])->name('select2.article_category');
+    Route::prefix('/select2')->controller(select2::class)->name('select2.')->group(function(){
+        Route::get('/authors', 'authors')->name('authors');
+        Route::get('/book_category', 'book_category')->name('book_category');
+        Route::get('/article_category', 'article_category')->name('article_category');
+        Route::get('/instructors', 'instructors')->name('instructors');
+    });
 
     Route::resource('articles', ArticlesController::class);
     Route::get('article-comments', [ArticlesCommentsController::class, 'index'])->name('article-comments.index');
@@ -62,4 +66,9 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::delete('blog-likes/delete/{like}', [BlogsLikesController::class, 'destroy']);
 
     Route::resource('contacts', ContactsController::class);
+
+    Route::resource('events', EventController::class);
+    Route::get('event/{event}/review', [EventReviewsController::class, 'index'])->name('event.review.index');
+    Route::delete('event/review/{review}', [EventReviewsController::class, 'destroy'])->name('event.review.delete');
+    Route::post('event/upload', [EventController::class, 'upload_images'])->name('event.upload');
 });

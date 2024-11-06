@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Seminar extends Model
 {
 
     use HasFactory;
+
+    protected $guarded = [];
 
     protected $casts = [
         'date' => 'datetime', // or 'date' if you only need the date portion
@@ -27,7 +30,7 @@ class Seminar extends Model
     public function authAttendants()
     {
         return $this->belongsToMany(User::class, 'attendants', 'seminar_id', 'user_id')
-                    ->where('user_id', auth()->id());
+                    ->where('user_id', Auth::id());
     }
 
     public function media()
@@ -42,7 +45,7 @@ class Seminar extends Model
 
     public function authReview()
     {
-        return $this->hasMany(SeminarReview::class)->where('user_id', auth()->user()->id);
+        return $this->hasMany(SeminarReview::class)->where('user_id', Auth::id());
     }
 
     public function getAvgReviewAttribute()

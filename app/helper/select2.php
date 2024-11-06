@@ -44,4 +44,16 @@ class select2
 
         return response()->json($categories);
     }
+
+    public function instructors(Request $request)
+    {
+        $search = $request->get('q'); // For searching functionality
+
+        $instructors = Author::where('type', PeopleType::Instructor->value)->when($search, function($query) use ($search) {
+                return $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        return response()->json($instructors);
+    }
 }

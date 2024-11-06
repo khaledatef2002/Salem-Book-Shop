@@ -11,6 +11,8 @@ class SeminarInstructor extends Model
     use HasFactory;
     protected $table = 'seminar_instructors';
 
+    protected $guarded = [];
+
     public function seminar()
     {
         return $this->belongsTo(Seminar::class, 'seminar_id');

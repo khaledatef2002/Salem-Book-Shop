@@ -225,6 +225,11 @@ class BookController extends Controller
         {
             $image = $book->images()->findOrFail($image_id);
 
+            if(Storage::disk('public')->exists($image->source))
+            {
+                Storage::disk('public')->delete($image->source);
+            }
+
             $image->delete();
         }
 
