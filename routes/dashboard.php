@@ -17,6 +17,7 @@ use App\Http\Controllers\dashboard\EventReviewsController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\PeopleController;
 use App\Http\Controllers\dashboard\QuotesController;
+use App\Http\Controllers\dashboard\UsersController;
 use App\Http\Controllers\dashboard\WebsiteSettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,4 +72,6 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::get('event/{event}/review', [EventReviewsController::class, 'index'])->name('event.review.index');
     Route::delete('event/review/{review}', [EventReviewsController::class, 'destroy'])->name('event.review.delete');
     Route::post('event/upload', [EventController::class, 'upload_images'])->name('event.upload');
+
+    Route::resource('users', UsersController::class);
 });

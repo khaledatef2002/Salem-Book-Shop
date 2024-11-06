@@ -104,6 +104,11 @@
                         <i class="ri-tools-fill"></i> <span>@lang('dashboard.website-settings')</span>
                     </a>
                 </li> <!-- End Website Settings Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.users.index' ? 'active' : ''}}" href="{{ route('dashboard.users.index') }}" role="button">
+                        <i class="ri-user-fill"></i> <span>@lang('dashboard.users')</span>
+                    </a>
+                </li> <!-- End Website Settings Menu -->
             </ul>
         </div>
         <!-- Sidebar -->
