@@ -18,3 +18,9 @@ File: Custom Css File
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     color: #ffffff;
 }
+
+#country-code-input .country-flag svg
+{
+    width: 20px;
+    height: 20px;
+}

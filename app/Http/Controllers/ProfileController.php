@@ -12,7 +12,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
-use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\ImageManager;
 

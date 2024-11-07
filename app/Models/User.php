@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -24,6 +25,9 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
+        'image',
+        'country_code',
+        'is_admin'
     ];
 
     /**
@@ -74,6 +78,11 @@ class User extends Authenticatable
     public function book_reviews()
     {
         return $this->hasMany(BookReview::class, 'user_id');
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'article_id');
     }
 
     public function getFullNameAttribute()
