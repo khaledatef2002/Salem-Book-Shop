@@ -245,7 +245,8 @@ class BooksController extends Controller
         }
 
         // Convert the specific page to an image
-        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/' . $book->source));
+        $path = Storage::disk('public')->path($book->source);
+        $pdf = new \Spatie\PdfToImage\Pdf($path);
         $outputPath = $outputDirectory . "page-$page.jpg";
         $pdf->selectPage($page)->save($outputPath);
 
@@ -255,7 +256,8 @@ class BooksController extends Controller
 
     private function getPagesCount(Book $book)
     {
-        $pdf = new \Spatie\PdfToImage\Pdf(storage_path('app/public/' . $book->source));
+        $path = Storage::disk('public')->path($book->source);
+        $pdf = new \Spatie\PdfToImage\Pdf($path);
 
         return $pdf->pageCount();
     }

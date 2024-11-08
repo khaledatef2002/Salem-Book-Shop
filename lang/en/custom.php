@@ -7,7 +7,7 @@ return [
     'quotes' => 'Quotes',
     'events' => 'Events',
     'blogs' => 'Blogs',
-    'news' => 'News',
+    'news' => 'Articles',
     'profile' => 'Profile',
     'logout' => 'Logout',
     'login' => 'Log in',
@@ -79,7 +79,7 @@ return [
 
     'home.top-authors' => 'Top Authors',
 
-    'home.latest-news' => 'Latest News',
+    'home.latest-news' => 'Latest Articles',
 
     'home.latest-blogs' => 'Latest Blogs',
 

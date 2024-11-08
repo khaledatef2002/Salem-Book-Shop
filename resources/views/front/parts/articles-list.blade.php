@@ -33,7 +33,7 @@
                             {{ $article->title }}
                         </h3>
                         <p class="article-contnet mb-0">
-                            {{ $article->content }}
+                            {!! $article->content !!}
                         </p>
                     </div>
                     <a href="{{ route('front.article.show', $article) }}" class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">

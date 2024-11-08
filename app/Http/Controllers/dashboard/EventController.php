@@ -83,8 +83,8 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'min:2', 'max:20'],
-            'description' => ['required', 'min:2', 'max:400'],
+            'title' => ['required', 'min:2'],
+            'description' => ['required', 'min:2'],
             'cover' => ['required', 'image', 'mimes:png,jpg,gif,jpeg', 'max:2048'],
             'date' => ['required', 'date'],
             'instructor_id' => ['required', 'array'],
@@ -183,8 +183,8 @@ class EventController extends Controller
         }
 
         $request->validate([
-            'title' => ['required', 'min:2', 'max:20'],
-            'description' => ['required', 'min:2', 'max:400'],
+            'title' => ['required', 'min:2'],
+            'description' => ['required', 'min:2'],
             'date' => ['required', 'date'],
             'instructor_id' => ['required', 'array'],
             'instructor_id.*' => ['required', 'numeric', Rule::exists('people', 'id')->where('type', PeopleType::Instructor->value)],

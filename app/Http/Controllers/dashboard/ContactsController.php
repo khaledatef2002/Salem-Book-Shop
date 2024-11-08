@@ -24,6 +24,9 @@ class ContactsController extends Controller
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
                 "
+                    <a href='tel:+".$row['country_code']. $row['phone'] ."'><i class='ri-phone-line fs-4'></i></a>
+                    <a href='https::/wa.me/+".$row['country_code']. $row['phone'] ."'><i class='ri-whatsapp-line fs-4'></i></a>
+                    <a href='mailto:".$row['email']."'><i class='ri-mail-line fs-4'></i></a>
                     <button class='remove_button' onclick='openMessage({$row['id']})'><i class='ri-eye-line fs-4' type='submit'></i></button>
                 "
                 .
@@ -46,8 +49,14 @@ class ContactsController extends Controller
                     </div>
                 ";
             })
+            ->addColumn('email', function(Contact $contact){
+                return $contact->user->email;
+            })
             ->editColumn('message', function(Contact $contact){
                 return truncatePostAndRemoveImages($contact->message, 150);
+            })
+            ->editColumn('phone', function(Contact $contact){
+                return "+" . $contact->user->country_code . $contact->user->phone;
             })
             ->rawColumns(['message', 'user', 'action'])
             ->make(true);

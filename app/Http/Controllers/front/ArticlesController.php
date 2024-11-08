@@ -33,6 +33,12 @@ class ArticlesController extends Controller implements HasMiddleware
         {
             $articles = Article::orderByDesc('created_at')->paginate(self::page_limit);
         }
+
+        foreach($articles as $article)
+        {
+            $article->content = strip_tags(truncatePostAndRemoveImages($article->content));
+        }
+
         $categories = ArticleCategory::get();
         return view('front.news.view-all', compact('articles', 'categories'));
     }

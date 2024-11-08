@@ -39,9 +39,12 @@ class HomeController extends Controller
         $top_authors = $this->getTopAuthors();
 
         $articles = Article::with(['category', 'user'])->orderByDesc('created_at')->take(10)->get(['id', 'title', 'content', 'category_id', 'created_at', 'cover']);
-        
+        foreach($articles as $article)
+        {
+            $article->content = strip_tags(truncatePostAndRemoveImages($article->content));
+        }
+
         $blogs = Blog::with('user')->orderByDesc('created_at')->take(10)->get(['id', 'user_id', 'content', 'created_at']);
-        
         foreach ($blogs as $blog)
         {
             $blog->isTruncated = isTrunctable($blog->content, 50);

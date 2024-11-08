@@ -11,6 +11,8 @@
                 <tr class="table-dark">
                     <th>@lang('dashboard.id')</th>
                     <th>@lang('dashboard.user')</th>
+                    <th>@lang('dashboard.email')</th>
+                    <th>@lang('dashboard.phone')</th>
                     <th>@lang('dashboard.message')</th>
                     <th>@lang('dashboard.action')</th>
                 </tr>
@@ -53,6 +55,8 @@
                 columns: [
                             { data: 'id', name: 'id' },
                             { data: 'user', name: 'user' },
+                            { data: 'email', name: 'email' },
+                            { data: 'phone', name: 'phone' },
                             { data: 'message', name: 'message' },
                             { data: 'action', name: 'action'}
                         ]

@@ -7,7 +7,7 @@ return [
     'quotes' => 'الاقتباسات',
     'events' => 'الندوات',
     'blogs' => 'المدونة',
-    'news' => 'الأخبار',
+    'news' => 'المقالات',
     'profile' => 'الملف الشخصي',
     'logout' => 'تسجيل الخروج',
     'login' => 'تسجيل الدخول',
@@ -79,7 +79,7 @@ return [
 
     'home.top-authors' => 'أهم المؤلفين',
 
-    'home.latest-news' => 'آخر الأخبار',
+    'home.latest-news' => 'آخر المقالات',
 
     'home.latest-blogs' => 'اخر المنشورات',
 

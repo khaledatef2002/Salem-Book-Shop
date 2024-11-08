@@ -158,7 +158,7 @@
                 <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.latest-news')</h2>
             </div>
             <div class="row">
-                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button">
+                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button" href="{{ route('front.article.index') }}">
                     <span>@lang('custom.viewall') </span>
                     <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
                 </a>
@@ -168,7 +168,7 @@
                             <div class="item-container rounded-3">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <a href="{{ route('front.article.show', $article) }}" class="w-100 h-100">
-                                        <img src="{{ asset('front') }}/{{ $article->cover }}">
+                                        <img src="{{ asset('storage/') }}/{{ $article->cover }}">
                                     </a>
                                 </div>
                                 <div class="article-meta d-flex justify-content-between mt-1">
@@ -198,7 +198,7 @@
                                         {{ $article->title }}
                                     </h3>
                                     <p class="article-contnet mb-0">
-                                        {{ $article->content }}
+                                        {!! $article->content !!}
                                     </p>
                                 </div>
                                 <a href="{{ route('front.article.show', $article) }}" class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">

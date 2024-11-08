@@ -362,7 +362,6 @@ section#video-and-top-authors .author-info p
     -webkit-box-orient: vertical;
     overflow: hidden;           /* Hide the overflow content */
     text-overflow: ellipsis;    /* Display '...' */
-    height: calc(1.5em * 3);    /* Optional: Set height based on line height */
 }
 
 /* Latest Blogs */

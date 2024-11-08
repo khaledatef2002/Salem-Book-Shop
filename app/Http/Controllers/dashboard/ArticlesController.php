@@ -125,8 +125,8 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['required', 'min:2', 'max:40'],
-            'content' => ['required', 'min:2', 'max:800'],
+            'title' => ['required', 'min:2'],
+            'content' => ['required', 'min:2'],
             'category_id' => ['required', 'exists:article_categories,id'],
             'keywords' => ['required'],
             'cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']
@@ -210,8 +210,8 @@ class ArticlesController extends Controller
             $cover_validation = ['cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']];
         }
         $data = $request->validate([
-            'title' => ['required', 'min:2', 'max:40'],
-            'content' => ['required', 'min:2', 'max:800'],
+            'title' => ['required', 'min:2'],
+            'content' => ['required', 'min:2'],
             'category_id' => ['required', 'exists:article_categories,id'],
             'keywords' => ['required'],
             $cover_validation
