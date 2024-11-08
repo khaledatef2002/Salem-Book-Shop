@@ -27,10 +27,12 @@
                             <option></option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="title">@lang('dashboard.quote')</label>
-                        <textarea class="form-control" id="title" name="title"></textarea>
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.title">@lang('dashboard.'. $locale['locale'] .'.quote')</label>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.title" name="title[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.title')"></textarea>
+                        </div>
+                    @endforeach
                     <div class="text-end mb-1">
                         <button type="submit" class="btn btn-success w-sm">@lang('dashboard.create')</button>
                     </div>

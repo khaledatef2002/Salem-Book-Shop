@@ -4,7 +4,10 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\ArticleCategory;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\DataTables\Facades\DataTables;
 
 class ArticlesCategories extends Controller
@@ -38,6 +41,9 @@ class ArticlesCategories extends Controller
                 .
                 "</div>";
             })
+            ->editColumn('name', function(ArticleCategory $category){
+                return $category->name;
+            })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -57,13 +63,12 @@ class ArticlesCategories extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'unique:article_categories,name', 'min:2', 'max:20']
+        $data = $request->validate([
+            'name' => ['required', 'array'],
+            'name.*' => ['required', UniqueTranslationRule::for('article_categories'), 'min:2']
         ]);
 
-        ArticleCategory::create([
-            'name' => $request->name
-        ]);
+        ArticleCategory::create($data);
     }
 
     /**
@@ -88,13 +93,12 @@ class ArticlesCategories extends Controller
      */
     public function update(Request $request, ArticleCategory $articles_category)
     {
-        $request->validate([
-            'name' => ['required','unique:article_categories,name,' . $articles_category->id, 'min:2', 'max:20']
+        $data = $request->validate([
+            'name' => ['required', 'array'],
+            'name.*' => ['required', UniqueTranslationRule::for('article_categories')->ignore($articles_category->id), 'min:2']
         ]);
 
-        $articles_category->update([
-            'name' => $request->name
-        ]);
+        $articles_category->update($data);
     }
 
     /**

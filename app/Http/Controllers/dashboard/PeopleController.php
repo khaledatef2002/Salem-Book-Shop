@@ -5,6 +5,7 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Person;
 use App\PeopleType;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -50,6 +51,9 @@ class PeopleController extends Controller
                     </div>
                 ";
             })
+            ->editColumn('about', function(Person $person){
+                return $person->about;
+            })
             ->rawColumns(['name', 'action'])
             ->make(true);
         }
@@ -73,10 +77,12 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'regex:/^[\p{Arabic}a-zA-Z\s]+$/u', 'min:2', 'max:30'],
+        $data = $request->validate([
+            'name' => ['required', 'array'],
+            'name.*' => ['required', 'regex:/^[\p{Arabic}a-zA-Z\s]+$/u', UniqueTranslationRule::for('people'), 'min:2'],
             'type' => ['required', 'in:'. PeopleType::Author->value .',' . PeopleType::Instructor->value],
-            'about' => ['required', 'min:2', 'max:400'],
+            'about' => ['required', 'array'],
+            'about.*' => ['required', UniqueTranslationRule::for('people'), 'min:2'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg|max:10240']
         ]);
 
@@ -94,12 +100,8 @@ class PeopleController extends Controller
 
         Storage::disk('public')->put($imagePath, (string) $optimizedImage);
 
-        $person = Person::create([
-            'name' => $request->name,
-            'type' => $request->type,
-            'about' => $request->about,
-            'image' => 'storage/' . $imagePath
-        ]);
+        $data['image'] = 'storage/' . $imagePath;
+        $person = Person::create($data);
 
         return response()->json(['redirectUrl' => route('dashboard.people.edit', $person)]);
     }
@@ -129,10 +131,12 @@ class PeopleController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        $request->validate([
-            'name' => ['required', 'regex:/^[\p{Arabic}a-zA-Z\s]+$/u', 'min:2', 'max:30'],
+        $data = $request->validate([
+            'name' => ['required', 'array'],
+            'name.*' => ['required', 'regex:/^[\p{Arabic}a-zA-Z\s]+$/u', UniqueTranslationRule::for('people')->ignore($person->id), 'min:2'],
             'type' => ['required', 'in:'. PeopleType::Author->value .',' . PeopleType::Instructor->value],
-            'about' => ['required', 'min:2', 'max:400'],
+            'about' => ['required', 'array'],
+            'about.*' => ['required', UniqueTranslationRule::for('people')->ignore($person->id), 'min:2'],
         ]);
 
         if($request->file('image'))
@@ -165,11 +169,7 @@ class PeopleController extends Controller
             ]);
         }
 
-        $person->update([
-            'name' => $request->name,
-            'type' => $request->type,
-            'about' => $request->about,
-        ]);
+        $person->update($data);
         
     }
 

@@ -69,10 +69,10 @@ return [
     'footer.description' => 'Leo elementum iaculis quam massa vitae odio sed. Morbi tincidunt senectus.',
     'footer.pages' => 'الصفحات',
     'footer.services' => 'الخدمات',
-    'footer.social-media' => 'وسائل التواصل',
+    'footer.social-media' => 'تابعونا على وسائل التواصل الإجتماعي',
     'footer.copyright' => 'حقوق النشر',
 
-    'home.events.comming' => 'قريباً!',
+    'home.events.comming' => 'قريباً: ندوة مميزة! سجل حضورك الآن !',
     'home.events.reserve' => 'احجز الآن',
 
     'home.books.title' => 'مختارات خاصة لك',
@@ -132,4 +132,6 @@ return [
     'blogs.form-add-title' => 'اضافة تدوينة',
     'blogs.save' => 'حفظ',
     'blogs.add' => 'اضافة',
+
+    'general-contact' => 'بيانات التواصل',
 ];

@@ -39,10 +39,12 @@
         <form id="add-article-category-form">
             @csrf
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label" for="name">@lang('dashboard.name')</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="@lang('dashboard.enter') @lang('dashboard.name')">
-                </div>
+                @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ $locale['locale'] }}.name">@lang('dashboard.'. $locale['locale'] .'.name')</label>
+                        <input type="text" class="form-control" id="{{ $locale['locale'] }}.name" name="name[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.name')">
+                    </div>
+                @endforeach
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">@lang('custom.close')</button>
@@ -64,10 +66,12 @@
             @csrf
             @method('PUT')
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label" for="name">@lang('dashboard.name')</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="@lang('dashboard.enter') @lang('dashboard.name')">
-                </div>
+                @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ $locale['locale'] }}.name">@lang('dashboard.'. $locale['locale'] .'.name')</label>
+                        <input type="text" class="form-control" id="{{ $locale['locale'] }}.name" name="name[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.name')">
+                    </div>
+                @endforeach
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">@lang('custom.close')</button>

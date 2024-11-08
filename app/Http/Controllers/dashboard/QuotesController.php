@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Quote;
 use App\PeopleType;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
@@ -49,6 +50,9 @@ class QuotesController extends Controller
                     </div>
                 ";
             })
+            ->editColumn('title', function(Quote $quote){
+                return $quote->title;
+            })
             ->rawColumns(['author', 'action'])
             ->make(true);
         }
@@ -68,15 +72,13 @@ class QuotesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'min:2', 'max:400'],
+        $data = $request->validate([
+            'title' => ['required', 'array'],
+            'title.*' => ['required', UniqueTranslationRule::for('quotes'), 'min:2'],
             'author_id' => ['required', Rule::exists('people', 'id')->where('type', PeopleType::Author->value)]
         ]);
 
-        $quote = Quote::create([
-            'title' => $request->title,
-            'author_id' => $request->author_id,
-        ]);
+        $quote = Quote::create($data);
 
         return response()->json(['redirectUrl' => route('dashboard.quote.edit', $quote)]);
     }
@@ -102,15 +104,13 @@ class QuotesController extends Controller
      */
     public function update(Request $request, Quote $quote)
     {
-        $request->validate([
-            'title' => ['required', 'min:2', 'max:400'],
+        $data = $request->validate([
+            'title' => ['required', 'array'],
+            'title.*' => ['required', UniqueTranslationRule::for('quotes')->ignore($quote->id), 'min:2'],
             'author_id' => ['required', Rule::exists('people', 'id')->where('type', PeopleType::Author->value)]
         ]);
 
-        $quote->update([
-            'title' => $request->title,
-            'author_id' => $request->author_id
-        ]);
+        $quote->update($data);
     }
 
     /**

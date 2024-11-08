@@ -4,7 +4,10 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\BooksCategory;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\DataTables\Facades\DataTables;
 
 class BooksCategoriesController extends Controller
@@ -38,6 +41,9 @@ class BooksCategoriesController extends Controller
                 .
                 "</div>";
             })
+            ->editColumn('name', function(BooksCategory $category){
+                return $category->name;
+            })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -57,13 +63,12 @@ class BooksCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'unique:books_categories,name', 'min:2', 'max:20']
+        $data = $request->validate([
+            'name' => ['required', 'array'],
+            'name.*' => ['required', UniqueTranslationRule::for('books_categories'), 'min:2']
         ]);
 
-        BooksCategory::create([
-            'name' => $request->name
-        ]);
+        BooksCategory::create($data);
     }
 
     /**
@@ -87,13 +92,12 @@ class BooksCategoriesController extends Controller
      */
     public function update(Request $request, BooksCategory $books_category)
     {
-        $request->validate([
-            'name' => ['required','unique:books_categories,name,' . $books_category->id, 'min:2', 'max:20']
+        $data = $request->validate([
+            'name' => ['required', 'array'],
+            'name.*' => ['required', UniqueTranslationRule::for('books_categories')->ignore($books_category->id), 'min:2']
         ]);
 
-        $books_category->update([
-            'name' => $request->name
-        ]);
+        $books_category->update($data);
     }
 
     /**

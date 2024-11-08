@@ -21,10 +21,12 @@
         <div class="col-lg-10">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label" for="name">Person Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter product title">
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.name">@lang('dashboard.'. $locale['locale'] .'.person.name')</label>
+                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.name" name="name[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.name')">
+                        </div>
+                    @endforeach
                     <div class="mb-3">
                         <label class="form-label" for="type">Person Type:</label>
                         <select class="form-control" id="type" name="type">
@@ -34,10 +36,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="about">About:</label>
-                        <textarea class="form-control" id="about" name="about"></textarea>
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.about">@lang('dashboard.'. $locale['locale'] .'.people.about')</label>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.about" name="about[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.about')"></textarea>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <!-- end card -->

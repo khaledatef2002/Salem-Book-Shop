@@ -22,10 +22,12 @@
         <div class="col-lg-10">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label" for="name">@lang('dashboard.person.name')</label>
-                        <input type="text" class="form-control" id="name" value="{{ $person->name }}" name="name" placeholder="@lang('dashboard.enter') @lang('dasboard.person.name')">
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.name">@lang('dashboard.'. $locale['locale'] .'.person.name')</label>
+                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.name" name="name[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.name')" value="{{ $person->getTranslation('name', $locale['locale']) }}">
+                        </div>
+                    @endforeach
                     <div class="mb-3">
                         <label class="form-label" for="type">@lang('dashboard.person.type')</label>
                         <select class="form-control" id="type" name="type">
@@ -34,10 +36,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="about">@lang('dashboard.people.about')</label>
-                        <textarea class="form-control" id="about" name="about">{{ $person->about }}</textarea>
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.about">@lang('dashboard.'. $locale['locale'] .'.people.about')</label>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.about" name="about[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.about')">{{ $person->getTranslation('about', $locale['locale']) }}</textarea>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <!-- end card -->

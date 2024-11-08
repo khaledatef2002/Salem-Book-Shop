@@ -76,7 +76,10 @@ function openEditCategory(id)
         url: "/dashboard/articles-category/" + id + "/edit",
         method: 'GET',
         success: function(response) {
-            $("#editArticleCategoryModal form input[name='name']").val(response.name)
+            for(const [key, name] of Object.entries(response.name))
+            {
+                $(`#editArticleCategoryModal form input[name='name[${key}]']`).val(name)
+            }
             $("#editArticleCategoryModal form").attr("data-id", response.id)
             editModal.show()
             submit_button.prop("disabled", false)

@@ -69,10 +69,10 @@ return [
     'footer.description' => 'Leo elementum iaculis quam massa vitae odio sed. Morbi tincidunt senectus.',
     'footer.pages' => 'Pages',
     'footer.services' => 'Services',
-    'footer.social-media' => 'Social Media',
+    'footer.social-media' => 'Follow Us On Social Media',
     'footer.copyright' => 'Copyright',
 
-    'home.events.comming' => 'Comming Soon!',
+    'home.events.comming' => 'Coming soon: A special seminar! Register now!',
     'home.events.reserve' => 'Reserve Now!',
 
     'home.books.title' => 'Special Picks For You',
@@ -130,4 +130,6 @@ return [
     'blogs.form-add-title' => 'Add Blog',
     'blogs.save' => 'Save',
     'blogs.add' => 'Add',
+
+    'general-contact' => 'General Contact Info'
 ];
