@@ -133,18 +133,18 @@ class BookController extends Controller
             return response()->json(['errors' => ['invalid' => [__('custom-errors.books.create.min-one-image')]]], 422);
         }
 
+        $path = "";
         if($request->source)
         {
             $path = 'pdf/' . uniqid() . '.' . $request->source->getClientOriginalExtension();
             $request->file('source')->storeAs('pdf', basename($path), 'public');
-            $request->merge(['source' => $path]);
         }
 
         $book = Book::create([
             'title' => $request->title,
             'description' => $request->description,
             'downloadable' => $request->downloadable ?? 0,
-            'source' => $request->source,
+            'source' => $path,
             'author_id' => $request->author_id,
             'keywords' => $request->keywords,
             'category_id' => $request->category_id,
