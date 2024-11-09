@@ -13,7 +13,7 @@
         "mcamara/laravel-localization": "^2.0",
         "spatie/laravel-permission": "^6.10",
         "spatie/laravel-translatable": "^6.8",
-        "spatie/pdf-to-image": "^1.2",
+        "spatie/pdf-to-image": "^3.1",
         "yajra/laravel-datatables": "11.0"
     },
     "require-dev": {
