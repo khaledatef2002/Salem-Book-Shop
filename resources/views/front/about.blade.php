@@ -8,7 +8,7 @@
 
 <div id="page-header" class="py-5 about-header">
     <div class="container d-flex flex-column align-items-center">
-        <a href="https://suhail.ae"><img src="{{ asset('front/imgs/sohail-logo.png') }}" class="mb-4"></a>
+        <a href="https://suhail.ae"><img src="{{ asset('front/imgs/sohail-logo.png') }}" class="mb-4" alt="@lang('custom.sohail')" title="@lang('custom.sohail')"></a>
         <h1 class="fw-bold fs-1 mb-4 text-center">@lang('custom.about.title')</h1>
     </div>
 </div>
@@ -16,7 +16,7 @@
 <section id="about-us-page-1" class="py-5 about-section">
     <div class="container d-flex justify-content-center flex-wrap align-items-center">
         <div class="col-md-3 image-container">
-            <img src="{{ asset('storage/' . $website_settings->logo) }}" alt="">
+            <img src="{{ asset('storage/' . $website_settings->logo) }}" alt="{{ $website_settings->site_title }}" title="{{ $website_settings->site_title }}">
         </div>
         <div class="col-md-9 border-0 p-4 rounded-4">
             <p class="fs-5">@lang('custom.about.p1')</p>
@@ -30,7 +30,7 @@
             <p class="fs-5">@lang('custom.about.p2')</p>
         </div>
         <div class="col-md-3 image-container">
-            <img src="{{ asset('front/imgs/group-of-books.png') }}" alt="">
+            <img src="{{ asset('front/imgs/group-of-books.png') }}" alt="@lang('custom.group-of-books')" title="@lang('custom.group-of-books')">
         </div>
     </div>
 </section>

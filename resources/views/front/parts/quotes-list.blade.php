@@ -7,7 +7,7 @@
                         <div class="d-flex flex-column p-2 gap-3">
                             <div class="author d-flex flex-column align-items-center justify-content-center">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset($quote->author->image) }}" class="rounded-3">
+                                    <img src="{{ asset($quote->author->image) }}" class="rounded-3" alt="{{ $quote->author->name }}" title="{{ $quote->author->name }}">
                                 </div>
                                 <span>{{ $quote->author->name }}</span>
                             </div>

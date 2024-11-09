@@ -2,7 +2,7 @@
     <div>
         <div class="user-info d-flex align-items-center gap-3 mb-1">
             <div class="user_image d-flex justify-content-center align-items-center">
-                <img src="{{ Auth::user()->display_image }}" alt="">
+                <img src="{{ Auth::user()->display_image }}" alt="{{ Auth::user()->full_name }} @lang('dashboard.person.image')" title="@lang('custom.you')">
             </div>
             <p class="mb-0 fw-bold">{{ Auth::user()->full_name }} (@lang('custom.you'))</p>
             <div class="actions ms-auto d-flex gap-3">

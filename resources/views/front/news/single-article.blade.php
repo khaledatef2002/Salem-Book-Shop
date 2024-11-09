@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="col-lg-9 col-12 article-image-holder d-flex justify-content-center align-items-center rounded-3">
-                    <img src="{{ asset('storage/' . $article->cover) }}" class="rounded-3">
+                    <img src="{{ asset('storage/' . $article->cover) }}" class="rounded-3" alt="{{ $article->title }}" title="{{ $article->title }}">
                 </div>
                 <div class="col-12 d-flex flex-wrap gap-4 mt-3">
                     <div class="col-lg-9 col-12 card border-0 rounded-3 p-3">
@@ -86,7 +86,7 @@
                                     <p class="fw-bold fs-4 mb-0">@lang('custom.article.add-comment')</p>
                                     <div class="d-flex flex-md-row flex-column gap-2">
                                         <div class="auth-image-holder d-flex align-items-center justify-content-center">
-                                            <img src="{{ asset(auth()->user()->display_image) }}">
+                                            <img src="{{ asset(auth()->user()->display_image) }}" alt="{{ Auth::user()->full_name }} @lang('dashboard.person.image')" title="@lang('custom.you')">
                                         </div>
                                         <textarea name="comment" class="form-control" placeholder="Leave comment..." rows="4"></textarea>
                                     </div>

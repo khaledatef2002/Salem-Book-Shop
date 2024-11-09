@@ -30,7 +30,7 @@
                                     <p class="fw-bold fs-4 mb-0">@lang('custom.blog.add-comment')</p>
                                     <div class="d-flex flex-md-row flex-column gap-2">
                                         <div class="auth-image-holder d-flex align-items-center justify-content-center">
-                                            <img src="{{ asset(auth()->user()->display_image) }}">
+                                            <img src="{{ asset(auth()->user()->display_image) }}" alt="{{ Auth::user()->full_name }} @lang('dashboard.person.image')" title="@lang('custom.you')">
                                         </div>
                                         <textarea name="comment" class="form-control" placeholder="Leave comment..." rows="4"></textarea>
                                     </div>

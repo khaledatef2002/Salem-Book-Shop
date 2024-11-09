@@ -2,7 +2,7 @@
     <div class="item-container card border-0 d-flex flex-column justify-content-between p-2 rounded-3 h-100">
         <div class="header d-flex align-items-enter gap-2">
             <div class="d-flex image-holder justify-content-center align-items-center">
-                <img src="{{ asset($blog->user->display_image) }}">
+                <img src="{{ asset($blog->user->display_image) }}" alt="{{ $blog->user->full_name }} @lang('dashboard.person.image')" title="{{ $blog->user->full_name }} @lang('dashboard.person.image')">
             </div>
             <div class="d-flex justify-content-between align-items-center w-100">
                 <div class="d-flex flex-column justify-content-center">

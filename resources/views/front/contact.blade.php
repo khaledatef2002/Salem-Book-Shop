@@ -9,7 +9,7 @@
 <div id="page-header" class="py-5">
     <div class="container d-flex">
         <div>
-            <img src="{{ asset('front/imgs/contact.png') }}" height="120">
+            <img src="{{ asset('front/imgs/contact.png') }}" height="120" alt="@lang('custom.telephone')" title="@lang('custom.contact-us')">
         </div>
         <div class="d-flex flex-column align-items-start justify-content-evenly ps-5">
             <span class="badge text-dark fw-bold">{{ $website_settings->site_title }}</span>
@@ -26,7 +26,7 @@
                     @csrf
                     <div class="user-info mx-auto d-block">
                         <div class="d-flex justify-content-center">
-                            <img src="{{ asset(Auth::user()->display_image) }}" width="70px" class="rounded-5">
+                            <img src="{{ asset(Auth::user()->display_image) }}" width="70px" class="rounded-5" alt="{{ Auth::user()->full_name }} @lang('dashboard.person.image')" title="@lang('custom.you')">
                         </div>
                         <p class="fw-bold">{{ Auth::user()->full_name }}</p>
                     </div>

@@ -51,7 +51,7 @@
                         <div>
                             <div class="user-info d-flex align-items-center gap-3 mb-1">
                                 <div class="user_image d-flex justify-content-center align-items-center">
-                                    <img src="{{ $review->user->display_image }}" alt="">
+                                    <img src="{{ $review->user->display_image }}" alt="{{ $review->user->full_name }}" title="{{ $review->user->full_name }}">
                                 </div>
                                 <p class="mb-0 fw-bold">{{ $review->user->full_name }}</p>
                             </div>

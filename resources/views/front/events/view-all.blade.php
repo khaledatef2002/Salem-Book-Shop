@@ -9,7 +9,7 @@
 <div id="page-header" class="py-5">
     <div class="container d-flex">
         <div>
-            <img src="{{ asset('front/imgs/events.png') }}" height="120">
+            <img src="{{ asset('front/imgs/events.png') }}" height="120" alt="@lang('custom.events')" title="@lang('custom.events')">
         </div>
         <div class="d-flex flex-column align-items-start justify-content-evenly ps-md-5 ps-2">
             <span class="badge text-dark fw-bold">{{ $website_settings->site_title }}</span>

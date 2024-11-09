@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-5 col-12">
                 <div class="event-image-holder d-flex justify-content-center align-items-center rounded-3">
-                    <img src="{{ asset('storage/' . $event->cover) }}">
+                    <img src="{{ asset('storage/' . $event->cover) }}" alt="{{ $event->title }}" title="{{ $event->title }}">
                 </div>
             </div>
             <div class="col-md-7 col-12 ps-2 mt-md-0 mt-3">
@@ -47,6 +47,9 @@
                     @endif
                     <p>
                         <i class="fa-solid fa-calendar-days"></i> <bdi>{{ $event->date->format('Y, M d h:ia') }}</bdi>
+                    </p>
+                    <p>
+                        {{ $event->description }}
                     </p>
                 </div>
             </div>

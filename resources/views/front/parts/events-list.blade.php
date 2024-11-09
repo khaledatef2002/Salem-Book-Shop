@@ -5,7 +5,7 @@
                     <div class="card border-0">
                         <div class="card-body d-flex flex-lg-row flex-column gap-lg-3">
                             <div class="event-image rounded-3 d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('storage/' . $event->cover) }}" alt="">
+                                <img src="{{ asset('storage/' . $event->cover) }}" alt="{{ $event->title }}" title="{{ $event->title }}">
                             </div>
                             <div class="event-content flex-fill py-2 d-flex flex-column justify-content-between">
                                 <div>

@@ -30,7 +30,7 @@
             <hr>
             <div class="user-info d-flex align-items-center gap-3 mb-1">
                 <div class="user_image d-flex justify-content-center align-items-center">
-                    <img src="{{ $user->display_image }}">
+                    <img src="{{ $user->display_image }}" alt="{{ $user->full_name }} @lang('dashboard.person.image')" title="{{ $user->full_name }} @lang('dashboard.person.image')">
                 </div>
                 <div>
                     <p class="mb-0 fw-bold">{{ $user->full_name }}</p>

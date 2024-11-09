@@ -4,7 +4,7 @@
             <div class="items col-lg-4 col-12">
                 <div class="item-container">
                     <div class="d-flex justify-content-center align-items-center rounded-3">
-                        <img src="{{ asset('storage') }}/{{ $article->cover }}">
+                        <img src="{{ asset('storage') }}/{{ $article->cover }}" alt="{{ $article->title }}" title="{{ $article->title }}">
                     </div>
                     <div class="article-meta d-flex justify-content-between mt-1">
                         <div class="d-flex gap-3">

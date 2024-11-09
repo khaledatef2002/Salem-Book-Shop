@@ -9,7 +9,7 @@
 <div id="page-header" class="py-5">
     <div class="container d-flex">
         <div>
-            <img src="{{ asset('front/imgs/blogs.png') }}" height="120">
+            <img src="{{ asset('front/imgs/blogs.png') }}" height="120" alt="@lang('custom.blogs')" title="@lang('custom.blogs')">
         </div>
         <div class="d-flex flex-column align-items-start justify-content-evenly ps-md-5 ps-2">
             <span class="badge text-dark fw-bold">{{ $website_settings->site_title }}</span>
@@ -49,7 +49,7 @@
                     <div class="row px-3 mb-3" data-bs-toggle="modal" data-bs-target="#addBlog">
                         <div class="open-create-post bg-white rounded-2 py-2 d-flex align-items-center gap-2">
                             <div class="image-holder d-flex justify-content-center align-items-center">
-                                <img src="{{ Auth::user()->display_image }}" alt="">
+                                <img src="{{ Auth::user()->display_image }}" alt="{{ Authh:user()->full_name }} @lang('dashboard.person.image')" title="@lang('custom.you')">
                             </div>
                             <span class="rounded-3 w-100 h-100 px-2 d-flex align-items-center" role="button">@lang('custom.blogs.what-do-you-think')</span>
                         </div>

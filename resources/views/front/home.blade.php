@@ -69,7 +69,7 @@
                         <div class="items h-100">
                             <div class="item-container h-100 px-1 py-4 rounded-4 d-flex flex-column justify-content-between">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('storage/' . $book->images->first()->url) }}" class="mx-2">
+                                    <img src="{{ asset('storage/' . $book->images->first()->url) }}" class="mx-2" alt="{{ $book->title }}" title="{{ $book->title }}">
                                 </div>
                                 <div class="content d-flex flex-column justify-content-evenly align-items-center mt-3">
                                     <h3 class="mb-3 fs-4 text-center fw-bold">{{ $book->title }}</h3>
@@ -104,7 +104,7 @@
                                     <i class="fa-solid fa-quote-right fs-1"></i>
                                     <p class="my-3">{{ $quote->title }}</p>
                                     <div class="author-image-container mx-auto mb-3 mt-3">
-                                        <img src="{{ asset('') }}/{{ $quote->author->image }}">
+                                        <img src="{{ asset('') }}/{{ $quote->author->image }}" alt="{{ $quote->author->name }}" title="{{ $quote->author->name }}">
                                     </div>
                                     <p>{{ $quote->author->name }}</p>
                                 </div>
@@ -137,7 +137,7 @@
                     @foreach ($top_authors as $author)
                         <div class="author d-flex rounded-4 gap-2 justify-content-start p-2">
                             <div class="author-image rounded-4">
-                                <img src="{{ asset('') }}/{{ $author->image }}" alt="">
+                                <img src="{{ asset('') }}/{{ $author->image }}" alt="{{ $author->name }}" title="{{ $author->name }}">
                             </div>
                             <div class="author-info d-flex flex-column justify-content-evenly">
                                 <h3>{{ $author->name }}</h3>
@@ -168,7 +168,7 @@
                             <div class="item-container rounded-3">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <a href="{{ route('front.article.show', $article) }}" class="w-100 h-100">
-                                        <img src="{{ asset('storage/') }}/{{ $article->cover }}">
+                                        <img src="{{ asset('storage/') }}/{{ $article->cover }}" alt="{{ $article->title }}" title="{{ $article->title }}">
                                     </a>
                                 </div>
                                 <div class="article-meta d-flex justify-content-between mt-1">

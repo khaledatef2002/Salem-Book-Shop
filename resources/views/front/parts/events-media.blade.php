@@ -5,7 +5,7 @@
                 <div class="zoom-over">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <img src="{{ asset('storage/' . $media->source) }}" alt="">
+                <img src="{{ asset('storage/' . $media->source) }}" alt="{{ $event->title }} @lang('custom.events.media')"  title="{{ $event->title }} @lang('custom.events.media')">
             </div>
         </div>
     @endforeach
