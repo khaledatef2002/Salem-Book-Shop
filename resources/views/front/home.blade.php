@@ -195,7 +195,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column mt-3">
-                                    <h3 class="text-dark fs-3 fw-bold mb-2">
+                                    <h3 class="text-dark fs-4 fw-bold mb-2">
                                         {{ $article->title }}
                                     </h3>
                                     <p class="article-contnet mb-0">

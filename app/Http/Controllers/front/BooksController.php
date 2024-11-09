@@ -259,7 +259,7 @@ class BooksController extends Controller
         $path = Storage::disk('public')->path($book->source);
         $pdf = new \Spatie\PdfToImage\Pdf($path);
 
-        return $pdf->pageCount();
+        return $pdf->getNumberOfPages();
     }
 
     /**

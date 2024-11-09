@@ -125,7 +125,7 @@ class EventController extends Controller
             ]);
         }
 
-        return response()->json(['redirectURL' => route('front.event.show', $event)]);
+        return response()->json(['redirectUrl' => route('front.event.show', $event)]);
     }
 
     /**

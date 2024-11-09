@@ -69,7 +69,7 @@ return [
     'header.title' => 'Exploring Books',
     'header.sub-title' => 'Through a Modern Lens!',
     'header.text' => 'An all-in-one platform to start, manage and grow as a learner and spread enthusiasm.',
-    'footer.description' => 'Salem Library, its responsibility is a social responsibility, Suhail Establishment for Zakat Solutions.',
+    'footer.description' => 'o	Salem Library, a social responsibility initiative sponsored by Sohail Smart Solutions.',
     'footer.pages' => 'Pages',
     'footer.services' => 'Services',
     'footer.social-media' => 'Follow Us On Social Media',
@@ -134,5 +134,6 @@ return [
     'blogs.save' => 'Save',
     'blogs.add' => 'Add',
 
-    'general-contact' => 'General Contact Info'
+    'general-contact' => 'General Contact Info',
+    'location' => 'Ras Al Khaimah - Al Nahda Street - Dafan Khor',
 ];

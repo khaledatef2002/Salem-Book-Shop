@@ -30,7 +30,7 @@
             <hr class="d-md-none d-block">
             <div class="col-md-3 col-12 d-flex flex-column align-items-md-start align-items-center px-3">
                 <p class="fw-bold mb-3 d-flex">@lang('custom.footer.social-media')</p>
-                <ul class="list-style-none ps-0 d-flex flex-wrap gap-2 justify-content-between">
+                <ul class="list-style-none ps-0 d-flex flex-wrap gap-2 justify-content-start">
                     <a href="https://www.facebook.com/share/55bLCo35RVzNmnVD/?mibextid=qi2Omg" class="text-decoration-none">
                         <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
                             <i class="fa-brands fa-facebook-f text-dark fs-5"></i>

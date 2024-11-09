@@ -55,7 +55,7 @@
                     <h3 class="mb-3">@lang('custom.general-contact')</h3>
                     <li class="py-2 mx-3 ps-1">
                         <i class="fa-solid fa-at"></i>
-                        <a href="mailto:info@suhail.ae" class="fw-bold text-decoration-none">info@suhail.ae</a>
+                        <a href="mailto:salembookshop@suhail.ae" class="fw-bold text-decoration-none">salembookshop@suhail.ae</a>
                     </li>
                     <li class="py-2 mx-3 ps-1">
                         <i class="fa-solid fa-location-dot"></i>
@@ -63,7 +63,7 @@
                     </li>
                     <li class="py-2 mx-3 ps-1">
                         <i class="fa-solid fa-phone"></i>
-                        <a href="tel:97156975526" class="fw-bold text-decoration-none">+971569755226</a>
+                        <a href="tel:971569755226" class="fw-bold text-decoration-none">+971569755226</a>
                     </li>
                 </ul>
             </div>
