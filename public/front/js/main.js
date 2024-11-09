@@ -168,7 +168,6 @@ $("form#general_info_form").submit(function(e){
         },
         error: function(xhr) {
             var errors = xhr.responseJSON.errors;
-            console.log(errors)
             var firstKey = Object.keys(errors)[0];
             Swal.fire({
                 text: errors[firstKey][0],
@@ -378,7 +377,6 @@ $("button.like-quote").click(function(e){
         method: 'POST',
         data: {id, _token},
         success: function(response) {
-            console.log(response)
             var data = JSON.parse(response)
             if(data.state.toLowerCase() == "liked")
             {
@@ -409,7 +407,6 @@ $("button.like-quote").click(function(e){
 $(".review-form i").mouseover(function(){
     var index = parseInt($(this).attr("data-id"))
     $(this).parent().find("i").each((i, star) => {
-        console.log(i)
         if (i < index) {
             $(star).addClass('text-warning');
         } else {
@@ -421,7 +418,6 @@ $(".review-form i").mouseover(function(){
     })
 })
 $(".review-form i").mouseout(function(){
-    console.log("yes")
     $(".review-form i.text-warning:not(.fa-solid)").removeClass('text-warning');
 })
 
@@ -439,7 +435,6 @@ $(".review-form i").click(function(){
         $(this).parent().find("i").removeAttr("data-select")
         $(this).attr("data-select", index)
         $(this).parent().find("i").each((i, star) => {
-            console.log(i)
             if (i < index) {
                 $(star).removeClass('fa-regular');
                 $(star).addClass('fa-solid');
@@ -583,7 +578,6 @@ $("button.like-article").click(function(e){
         method: 'POST',
         data: {id, _token},
         success: function(response) {
-            console.log(response)
             var data = JSON.parse(response)
             if(data.state.toLowerCase() == "liked")
             {

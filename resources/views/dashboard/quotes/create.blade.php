@@ -66,14 +66,14 @@ $(document).ready(function() {
                     results: data.map(function(author) {
                         return {
                             id: author.id,
-                            text: author.name
+                            text: author.name.{{ LaravelLocalization::getCurrentLocale() }}
                         };
                     })
                 };
             },
             cache: true
         },
-        minimumInputLength: 1 // Require at least 1 character to start searching
+        minimumInputLength: 0 // Require at least 1 character to start searching
     });
 });
 </script>

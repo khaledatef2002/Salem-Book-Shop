@@ -3,7 +3,7 @@
         <div class="row text-white">
             <div class="col-md-3 col-12 d-flex flex-column px-3">
                 <div class="website d-flex gap-2 mb-3">
-                    <img src="{{ asset('front') }}/imgs/logo-white.png" alt="" width="40">
+                    <img src="{{ asset('front') }}/imgs/logo-white.png" alt="whatsapp" width="40">
                     <p class="mb-0">{{ $website_settings->site_title }}</p>
                 </div>
                 <p class="mb-4">@lang('custom.footer.description')</p>

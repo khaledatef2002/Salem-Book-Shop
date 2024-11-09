@@ -247,7 +247,6 @@ function load_page(page)
 }
 
 $('.modal-body').on('scroll', function() {
-    console.log('scrolled')
 
     var scroll = $("#book-read .modal-body").scrollTop()
     $('#book-read .modal-body .page').each(function() {

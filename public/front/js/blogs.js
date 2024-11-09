@@ -10,7 +10,6 @@ function like_action(button){
         method: 'POST',
         data: {id, _token},
         success: function(response) {
-            console.log(response)
             var data = JSON.parse(response)
             if(data.state.toLowerCase() == "liked")
             {

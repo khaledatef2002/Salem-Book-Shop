@@ -126,7 +126,8 @@
                 title="مكتبة سالم - قلب المعرفة في رأس الخيمة | ندوات مجانية، صناعة كتب، وكنوز معرفية" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+                loading="lazy"></iframe>
         </div>
         @if($top_authors->count() > 0)
             <div class="top-authors col-lg-6 d-flex flex-column px-2 gap-2">

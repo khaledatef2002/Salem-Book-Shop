@@ -3,7 +3,7 @@
         <div class="d-flex flex-lg-grow-0 flex-fill">
             <div class="d-flex flex-fill justify-content-between">
                 <a class="navbar-brand d-flex align-items-center" href="{{ route('front.index') }}">
-                    <img src="{{ asset('front') }}/imgs/logo.png" width="60px">
+                    <img src="{{ asset('front') }}/imgs/logo.png" width="60px" alt="{{ $website_settings->site_title }}">
                 </a>
                 <button class="navbar-toggler border-0 ms-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa-solid fa-bars"></i>
