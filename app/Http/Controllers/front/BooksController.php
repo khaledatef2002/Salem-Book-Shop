@@ -248,7 +248,7 @@ class BooksController extends Controller
         $path = Storage::disk('public')->path($book->source);
         $pdf = new \Spatie\PdfToImage\Pdf($path);
         $outputPath = $outputDirectory . "page-$page.jpg";
-        $pdf->selectPage($page)->save($outputPath);
+        $pdf->setPage($page)->save($outputPath);
 
         $imageData = base64_encode(file_get_contents($pageFile));
         return response()->json(['image' => $imageData]);
