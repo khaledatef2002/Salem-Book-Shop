@@ -22,14 +22,18 @@
         <div class="col-lg-9">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label" for="title">Title:</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{ $book->title }}" placeholder="Enter product title">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description">{{ $book->description }}</textarea>
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.title">@lang('dashboard.'. $locale['locale'] .'.book.title')</label>
+                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.title" name="title[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.title')" value="{{ $book->getTranslation('title', $locale['locale']) }}">
+                        </div>
+                    @endforeach
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.description">@lang('dashboard.'. $locale['locale'] .'.book.description')</label>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.description" name="description[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.description')">{{ $book->getTranslation('description', $locale['locale']) }}</textarea>
+                        </div>
+                    @endforeach
                     <div class="form-check form-switch form-switch-md mb-3" dir="ltr">
                         <input type="checkbox" class="form-check-input" id="downloadable" name="downloadable" {{ $book->downloadable ? 'checked' : '' }}>
                         <label class="form-check-label" for="downloadable">Downloadable</label>
@@ -88,7 +92,7 @@
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="source" class="form-label">If you want to change the current</label>
+                        <label for="source" class="form-label">If you want to change the current <a target="_blank" href="{{ asset('storage/' . $book->source) }}">current</a></label>
                         <input class="form-control" type="file" id="source" name="source" accept=".pdf">
                     </div>
                 </div>
@@ -139,7 +143,7 @@
     </div>
     <div class="row">
         <div class="text-end mb-3">
-            <button type="submit" class="btn btn-success w-sm">@lang('dashboard.create')</button>
+            <button type="submit" class="btn btn-success w-sm">@lang('dashboard.save')</button>
         </div>
     </div>
 </form>
@@ -209,14 +213,14 @@
                             results: data.map(function(author) {
                                 return {
                                     id: author.id,
-                                    text: author.name
+                                    text: author.name.{{ LaravelLocalization::getCurrentLocale() }}
                                 };
                             })
                         };
                     },
                     cache: true
                 },
-                minimumInputLength: 1 // Require at least 1 character to start searching
+                minimumInputLength: 0 // Require at least 1 character to start searching
             });
             $('select[name="category_id"]').select2({
                 placeholder: "@lang('dashboard.select.choose-option')",
@@ -234,14 +238,14 @@
                             results: data.map(function(category) {
                                 return {
                                     id: category.id,
-                                    text: category.name
+                                    text: category.name.{{ LaravelLocalization::getCurrentLocale() }}
                                 };
                             })
                         };
                     },
                     cache: true
                 },
-                minimumInputLength: 1 // Require at least 1 character to start searching
+                minimumInputLength: 0 // Require at least 1 character to start searching
             });
             var option = new Option("{{ $book->author->name }}", {{ $book->author_id }}, true, true);
             $('select[name="author_id"]').append(option).trigger('change');

@@ -21,14 +21,18 @@
         <div class="col-lg-9">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label" for="title">Title:</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter product title">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="content">Content:</label>
-                        <textarea class="form-control" id="content" name="content"></textarea>
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.title">@lang('dashboard.'. $locale['locale'] .'.article.title')</label>
+                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.title" name="title[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.title')">
+                        </div>
+                    @endforeach
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.content">@lang('dashboard.'. $locale['locale'] .'.article.content')</label>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.content" name="content[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.content')"></textarea>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <!-- end card -->
@@ -92,8 +96,9 @@
     <script src="{{ asset('back/js/articles.js') }}"></script>
     <script>
         let images = [];
-        let ckEditor;
-
+        @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+            let images{{ $locale['locale'] }} = [];
+        @endforeach
         $(document).ready(function() {
             $('select[name="category_id"]').select2({
                 placeholder: "@lang('dashboard.select.choose-option')",
@@ -111,81 +116,92 @@
                             results: data.map(function(category) {
                                 return {
                                     id: category.id,
-                                    text: category.name
+                                    text: category.name.{{ LaravelLocalization::getCurrentLocale() }}
                                 };
                             })
                         };
                     },
                     cache: true
                 },
-                minimumInputLength: 1 // Require at least 1 character to start searching
+                minimumInputLength: 0 // Require at least 1 character to start searching
             });
 
-            ClassicEditor.create(document.querySelector('textarea[name="content"]'), {
-                ckfinder: {
-                    uploadUrl: '/dashboard/ckEditorUploadImage?command=QuickUpload&type=Images&responseType=json'
-                }
-            }).then(editor => {
-                ckEditor = editor;
-                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-                    return {
-                        upload: () => {
-                            return loader.file
-                                .then(file => new Promise((resolve, reject) => {
-                                    const formData = new FormData();
-                                    formData.append('upload', file);
+            @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                let ckEditor{{ $locale['locale'] }};
 
-                                    fetch('/dashboard/ckEditorUploadImage', {
-                                        method: 'POST',
-                                        headers: {
-                                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                                        },
-                                        body: formData
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        images.push(data.url)
-                                        resolve({ default: data.url })
-                                    })
-                                    .catch(error => reject(error));
-                                }));
-                        }
+                ClassicEditor.create(document.querySelector('textarea[name="content[{{ $locale['locale'] }}]"]'), {
+                    ckfinder: {
+                        uploadUrl: '/dashboard/ckEditorUploadImage?command=QuickUpload&type=Images&responseType=json'
+                    }
+                }).then(editor => {
+                    ckEditor{{ $locale['locale'] }} = editor;
+                    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                        return {
+                            upload: () => {
+                                return loader.file
+                                    .then(file => new Promise((resolve, reject) => {
+                                        const formData = new FormData();
+                                        formData.append('upload', file);
+
+                                        fetch('/dashboard/ckEditorUploadImage', {
+                                            method: 'POST',
+                                            headers: {
+                                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                            },
+                                            body: formData
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            images{{ $locale['locale'] }}.push(data.url)
+                                            resolve({ default: data.url })
+                                        })
+                                        .catch(error => reject(error));
+                                    }));
+                            }
+                        };
                     };
-                };
-                editor.model.document.on('change:data', () => {
-                    // Get current editor data (HTML content)
-                    const editorData = editor.getData();
-                    
-                    // Check each URL in the images array to see if it still exists in the editor content
-                    images = images.filter(imageUrl => {
-                        if (!editorData.includes(imageUrl)) {
-                            // If imageUrl is not found in the editor, send delete request to Laravel
-                            fetch('/dashboard/ckEditorRemoveImage', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                                },
-                                body: JSON.stringify({ url: imageUrl })
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    console.log(`Image ${imageUrl} deleted from server`);
-                                }
-                            })
-                            .catch(error => console.error('Error deleting image:', error));
-                            
-                            // Remove from images array
-                            return false;
-                        }
-                        return true;
+                    editor.model.document.on('change:data', () => {
+                        // Get current editor data (HTML content)
+                        const editorData = editor.getData();
+                        
+                        $("textarea[name='content[{{ $locale['locale'] }}]']").val(editor.getData())
+
+                        // Check each URL in the images array to see if it still exists in the editor content
+                        images{{ $locale['locale'] }} = images{{ $locale['locale'] }}.filter(imageUrl => {
+                            if (!editorData.includes(imageUrl)) {
+                                // If imageUrl is not found in the editor, send delete request to Laravel
+                                fetch('/dashboard/ckEditorRemoveImage', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                    },
+                                    body: JSON.stringify({ url: imageUrl })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        console.log(`Image ${imageUrl} deleted from server`);
+                                    }
+                                })
+                                .catch(error => console.error('Error deleting image:', error));
+                                
+                                // Remove from images array
+                                return false;
+                            }
+                            return true;
+                        });
+                        images = [
+                            @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                                ...images{{ $locale['locale'] }},
+                            @endforeach
+                        ]
                     });
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-            })
-            .catch(error => {
-                console.error(error);
-            });
+            @endforeach
         });
         </script>
 @endsection

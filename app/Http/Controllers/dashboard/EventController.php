@@ -57,6 +57,7 @@ class EventController extends Controller
             ->editColumn('description', function(Seminar $event){
                 return truncatePostAndRemoveImages($event->description ?? '');
             })
+            ->editColumn('title', fn (Seminar $event) => $event->title)
             ->editColumn('cover', function(Seminar $event){
                 return "<img src='". asset('storage/' . $event->cover) ."' width='70'>";
             })
@@ -83,8 +84,12 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'min:2'],
-            'description' => ['required', 'min:2'],
+            'title' => ['required', 'array'],
+            'title.*' => ['required', 'min:2'],
+
+            'description' => ['required', 'array'],
+            'description.*' => ['required', 'min:2'],
+
             'cover' => ['required', 'image', 'mimes:png,jpg,gif,jpeg', 'max:2048'],
             'date' => ['required', 'date'],
             'instructor_id' => ['required', 'array'],
@@ -119,6 +124,8 @@ class EventController extends Controller
                 'seminar_id' => $event->id
             ]);
         }
+
+        return response()->json(['redirectURL' => route('front.event.show', $event)]);
     }
 
     /**
@@ -183,8 +190,12 @@ class EventController extends Controller
         }
 
         $request->validate([
-            'title' => ['required', 'min:2'],
-            'description' => ['required', 'min:2'],
+            'title' => ['required', 'array'],
+            'title.*' => ['required', 'min:2'],
+
+            'description' => ['required', 'array'],
+            'description.*' => ['required', 'min:2'],
+            
             'date' => ['required', 'date'],
             'instructor_id' => ['required', 'array'],
             'instructor_id.*' => ['required', 'numeric', Rule::exists('people', 'id')->where('type', PeopleType::Instructor->value)],

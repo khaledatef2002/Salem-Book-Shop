@@ -25,14 +25,18 @@
         <div class="col-lg-9">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label" for="title">Title:</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{ $event->title }}" placeholder="Enter product title">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description">{{ $event->description }}</textarea>
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.title">@lang('dashboard.'. $locale['locale'] .'.event.title')</label>
+                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.title" name="title[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.title')" value="{{ $event->getTranslation('title', $locale['locale']) }}">
+                        </div>
+                    @endforeach
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.description">@lang('dashboard.'. $locale['locale'] .'.event.description')</label>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.description" name="description[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.description')">{{ $event->getTranslation('description', $locale['locale']) }}</textarea>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <!-- end card -->
@@ -139,13 +143,13 @@
 @section('custom-js')
     <script src="{{ asset('back/js/events.js') }}"></script>
     <script>       
+        let deletedImages = [];
+        let uploaded_temp = []
         @if ($event->date <= now())
             var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
             dropzonePreviewNode.id = "";
             var previewTemplate = dropzonePreviewNode.parentNode.innerHTML;
             dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
-            let deletedImages = [];
-            let uploaded_temp = []
             var dropzone = new Dropzone(".dropzone", {
                 url: '{{ route("dashboard.event.upload") }}',
                 method: "post",

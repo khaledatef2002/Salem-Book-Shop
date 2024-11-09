@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Translatable\HasTranslations;
 
 class Seminar extends Model
 {
 
-    use HasFactory;
+    use HasFactory, HasTranslations;
+
+    public $translatable = ['title', 'description'];
 
     protected $guarded = [];
 

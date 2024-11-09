@@ -21,14 +21,18 @@
         <div class="col-lg-9">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label" for="title">Title:</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter product title">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description"></textarea>
-                    </div>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.title">@lang('dashboard.'. $locale['locale'] .'.event.title')</label>
+                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.title" name="title[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.title')">
+                        </div>
+                    @endforeach
+                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ $locale['locale'] }}.description">@lang('dashboard.'. $locale['locale'] .'.event.description')</label>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.description" name="description[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.description')"></textarea>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <!-- end card -->
@@ -108,14 +112,14 @@
                             results: data.map(function(author) {
                                 return {
                                     id: author.id,
-                                    text: author.name
+                                    text: author.name.{{ LaravelLocalization::getCurrentLocale() }}
                                 };
                             })
                         };
                     },
                     cache: true
                 },
-                minimumInputLength: 1 // Require at least 1 character to start searching
+                minimumInputLength: 0 // Require at least 1 character to start searching
             });
         });
         </script>

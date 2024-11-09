@@ -61,6 +61,7 @@ class BookController extends Controller
             ->addColumn('category', function(Book $book){
                 return $book->category->name;
             })
+            ->editColumn('title', fn(Book $book) => $book->title)
             ->editColumn('source', function(Book $book){
                 return "<a href='". asset('storage/' . $book->source) ."' target='_blank'>Link</a>";
             })
@@ -117,8 +118,12 @@ class BookController extends Controller
     {
         $request['downloadable'] = $request['downloadable'] == 'on' ? true : false;
         $request->validate([
-            'title' => ['required', 'min:2', 'unique:books,title'],
-            'description' => ['required', 'min:2'],
+            'title' => ['required', 'array'],
+            'title.*' => ['required', 'min:2'],
+
+            'description' => ['required', 'array'],
+            'description.*' => ['required', 'min:2'],
+
             'downloadable' => ['boolean'],
             'keywords' => ['required'],
             'source' => ['required', 'mimes:pdf', 'max:20000'],
@@ -182,8 +187,12 @@ class BookController extends Controller
     {
         $request['downloadable'] = $request['downloadable'] == 'on' ? true : false;
         $request->validate([
-            'title' => ['required', 'min:2', 'unique:books,title,' . $book->id],
-            'description' => ['required', 'min:2'],
+            'title' => ['required', 'array'],
+            'title.*' => ['required', 'min:2'],
+
+            'description' => ['required', 'array'],
+            'description.*' => ['required', 'min:2'],
+
             'downloadable' => ['boolean'],
             'author_id' => ['required', Rule::exists('people', 'id')->where('type', PeopleType::Author->value)],
             'category_id' => ['required', 'exists:books_categories,id'],

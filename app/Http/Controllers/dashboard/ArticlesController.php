@@ -12,6 +12,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ArticlesController extends Controller
 {
@@ -66,6 +67,9 @@ class ArticlesController extends Controller
             })
             ->editColumn('cover', function(Article $article){
                 return "<a href='" . asset('storage/' . $article->cover) . "' target='_blank'><img src='" . asset('storage/' . $article->cover) ."' width='80' class='rounded-2'></a>";
+            })
+            ->editColumn('title', function(Article $article){
+                return $article->title;
             })
             ->rawColumns(['cover', 'content', 'user', 'action'])
             ->make(true);
@@ -125,35 +129,45 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['required', 'min:2'],
-            'content' => ['required', 'min:2'],
+            'title' => ['required', 'array'],
+            'title.*' => ['required', 'min:2'],
+
+            'content' => ['required', 'array'],
+            'content.*' => ['required', 'min:2'],
+
             'category_id' => ['required', 'exists:article_categories,id'],
             'keywords' => ['required'],
             'cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']
         ]);
 
-        $content = $data['content'];
-
-        $uploadedImages = $request->images ?? [];
-
         $article_images = [];
+        foreach (LaravelLocalization::getSupportedLocales() as $locale)
+        {
+            $content = $data['content'][$locale['locale']];
 
-        foreach ($uploadedImages as $tempPath) {
-            // Generate the new permanent path
-            $permanentPath = str_replace('/storage/temp', 'articles/images', $tempPath);
+            $uploadedImages = $request->images ?? [];
 
-            $currentPublicPath = str_replace('/storage/', '', $tempPath);
-            
-            // Move the image to the permanent directory
-            Storage::disk('public')->move($currentPublicPath, $permanentPath);
-    
-            // Replace temp URLs with the new URLs in the content
-            $permanentUrl = Storage::url($permanentPath);
-            $article_images[] = $permanentUrl;
-            $content = str_replace($tempPath, $permanentUrl, $content);
+            foreach ($uploadedImages as $tempPath) {
+                // Generate the new permanent path
+                $permanentPath = str_replace('/storage/temp', 'articles/images', $tempPath);
+
+                
+                $permanentUrl = Storage::url($permanentPath);
+                $content = str_replace($tempPath, $permanentUrl, $content);
+
+                $currentPublicPath = str_replace('/storage/', '', $tempPath);
+
+                
+                // Move the image to the permanent directory
+                Storage::disk('public')->move($currentPublicPath, $permanentPath);
+        
+                // Replace temp URLs with the new URLs in the content
+                $article_images[] = $permanentUrl;
+            }
+
+            $data['content'][$locale['locale']] = $content;
         }
 
-        $data['content'] = $content;
         $data['user_id'] = Auth::id();
 
         $cover = $request->file('cover');
@@ -204,70 +218,78 @@ class ArticlesController extends Controller
     public function update(Request $request, Article $article)
     {
         $cover_validation = [];
+        $article_images = [];
 
         if($request->file('cover'))
         {
             $cover_validation = ['cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']];
         }
         $data = $request->validate([
-            'title' => ['required', 'min:2'],
-            'content' => ['required', 'min:2'],
+            'title' => ['required', 'array'],
+            'title.*' => ['required', 'min:2'],
+
+            'content' => ['required', 'array'],
+            'content.*' => ['required', 'min:2'],
+
             'category_id' => ['required', 'exists:article_categories,id'],
             'keywords' => ['required'],
             $cover_validation
         ]);
 
-        $content = $data['content'];
 
-        // Getiing all images urls
-        $urls = extractImagesSrc($content);
-
-        // Filter urls to get the already uploaded
-        $oldURLS = [];
-        foreach ($urls as $url)
+        foreach (LaravelLocalization::getSupportedLocales() as $locale)
         {
-            if(!str_starts_with($url, '/storage/temp'))
-            {
-                $oldURLS[] = $url;
-            }
-        }
+            $content = $data['content'][$locale['locale']];
 
-        // Check if the user removed any image and delete it
-        $oldImages = $article->images;
-        foreach($oldImages as $image)
-        {
-            if(!in_array($image->url, $oldURLS))
+            // Getiing all images urls
+            $urls = extractImagesSrc($content);
+
+            // Filter urls to get the already uploaded
+            $oldURLS = [];
+            foreach ($urls as $url)
             {
-                if(Storage::exists($image->url))
+                if(!str_starts_with($url, '/storage/temp'))
                 {
-                    Storage::delete($image->url);
+                    $oldURLS[] = $url;
                 }
-
-                $image->delete();
             }
+
+            // Check if the user removed any image and delete it
+            $oldImages = $article->images;
+            foreach($oldImages as $image)
+            {
+                if(!in_array($image->url, $oldURLS))
+                {
+                    if(Storage::exists($image->url))
+                    {
+                        Storage::delete($image->url);
+                    }
+
+                    $image->delete();
+                }
+            }
+
+            // Upload the new images
+            $uploadedImages = $request->images ?? [];
+
+            foreach ($uploadedImages as $tempPath) {
+                // Generate the new permanent path
+                $permanentPath = str_replace('/storage/temp', 'articles/images', $tempPath);
+
+                $currentPublicPath = str_replace('/storage/', '', $tempPath);
+                
+                // Move the image to the permanent directory
+                Storage::disk('public')->move($currentPublicPath, $permanentPath);
+        
+                // Replace temp URLs with the new URLs in the content
+                $permanentUrl = Storage::url($permanentPath);
+                $article_images[] = $permanentUrl;
+                $content = str_replace($tempPath, $permanentUrl, $content);
+            }
+
+            $data['content'][$locale['locale']] = $content;
         }
 
-        // Upload the new images
-        $uploadedImages = $request->images ?? [];
-
-        $article_images = [];
-
-        foreach ($uploadedImages as $tempPath) {
-            // Generate the new permanent path
-            $permanentPath = str_replace('/storage/temp', 'articles/images', $tempPath);
-
-            $currentPublicPath = str_replace('/storage/', '', $tempPath);
-            
-            // Move the image to the permanent directory
-            Storage::disk('public')->move($currentPublicPath, $permanentPath);
-    
-            // Replace temp URLs with the new URLs in the content
-            $permanentUrl = Storage::url($permanentPath);
-            $article_images[] = $permanentUrl;
-            $content = str_replace($tempPath, $permanentUrl, $content);
-        }
-
-        $data['content'] = $content;
         $data['user_id'] = Auth::id();
 
         // upload the new cover if exists

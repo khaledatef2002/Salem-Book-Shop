@@ -133,10 +133,10 @@ class PeopleController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'array'],
-            'name.*' => ['required', 'regex:/^[\p{Arabic}a-zA-Z\s]+$/u', UniqueTranslationRule::for('people')->ignore($person->id), 'min:2'],
+            'name.*' => ['required', 'regex:/^[\p{Arabic}a-zA-Z\s]+$/u', UniqueTranslationRule::for('people')->ignore($person->id)->where('type', $person->type), 'min:2'],
             'type' => ['required', 'in:'. PeopleType::Author->value .',' . PeopleType::Instructor->value],
             'about' => ['required', 'array'],
-            'about.*' => ['required', UniqueTranslationRule::for('people')->ignore($person->id), 'min:2'],
+            'about.*' => ['required', 'min:2'],
         ]);
 
         if($request->file('image'))

@@ -35,8 +35,6 @@ function remove(form) {
 $("#create-article-form").submit(function(e){
     e.preventDefault()
 
-    $(this).find('textarea[name="content"]').val(ckEditor.getData())
-
     var formData = new FormData(this)
 
     images.forEach((item, index) => {
@@ -71,8 +69,6 @@ $("#create-article-form").submit(function(e){
 
 $("#edit-article-form").submit(function(e){
     e.preventDefault()
-
-    $(this).find('textarea[name="content"]').val(ckEditor.getData())
 
     var formData = new FormData(this)
 
