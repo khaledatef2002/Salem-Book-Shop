@@ -247,7 +247,7 @@ class BooksController extends Controller
         // Convert the specific page to an image
         $path = Storage::disk('public')->path($book->source);
         $pdf = new \Spatie\PdfToImage\Pdf($path);
-        dd($page);
+        echo $page;
         $pdf->setPage($page);
         $outputPath = $outputDirectory . "page-$page.jpg";
         $pdf->saveImage($outputPath);
