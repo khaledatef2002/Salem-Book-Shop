@@ -67,7 +67,7 @@
                         <select class="form-control" id="role" name="role">
                             <option>@lang('dashboard.select.choose-option')</option>
                             @foreach ($roles as $role)
-                                <option value="{{ $role->id }}" {{ $user->roles->first()->id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                                <option value="{{ $role->id }}" {{ $user->roles?->first()?->id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                             @endforeach
                         </select>
                     </div>
