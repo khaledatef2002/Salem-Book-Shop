@@ -70,6 +70,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">Choose Cover</h5>
+                    <p class="text-muted mb-0">Scale Ratio: (1: 0.45) (W:H)</p>
                 </div>
                 <div class="card-body">
                     <div class="auto-image-show">

@@ -92,6 +92,7 @@ $("#edit-book-form").submit(function(e){
                 text: "Your edits has been saved successfully!",
                 icon: "success"
             });
+            submit_button.prop("disabled", false)
         },
         error: function(xhr) {
             var errors = xhr.responseJSON.errors;

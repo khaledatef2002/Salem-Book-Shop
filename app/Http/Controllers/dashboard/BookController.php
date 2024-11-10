@@ -96,10 +96,7 @@ class BookController extends Controller
     
             $manager = new ImageManager(new GdDriver());
             $optimizedImage = $manager->read($image)
-                ->resize(250, 250, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
+                ->scale(width:250)
                 ->encode(new AutoEncoder(quality: 75));
     
             Storage::disk('public')->put($imagePath, (string) $optimizedImage);
@@ -234,9 +231,9 @@ class BookController extends Controller
         {
             $image = $book->images()->findOrFail($image_id);
 
-            if(Storage::disk('public')->exists($image->source))
+            if(Storage::disk('public')->exists($image->url))
             {
-                Storage::disk('public')->delete($image->source);
+                Storage::disk('public')->delete($image->url);
             }
 
             $image->delete();

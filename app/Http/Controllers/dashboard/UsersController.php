@@ -111,10 +111,7 @@ class UsersController extends Controller
     
             $manager = new ImageManager(new GdDriver());
             $optimizedImage = $manager->read($image)
-                ->resize(250, 250, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
+                ->cover(250, 250)
                 ->encode(new AutoEncoder(quality: 75));
 
             Storage::disk('public')->put($imagePath, (string) $optimizedImage);
@@ -193,10 +190,7 @@ class UsersController extends Controller
     
             $manager = new ImageManager(new GdDriver());
             $optimizedImage = $manager->read($image)
-                ->resize(250, 250, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
+                ->cover(250, 250)
                 ->encode(new AutoEncoder(quality: 75));
 
             Storage::disk('public')->put($imagePath, (string) $optimizedImage);

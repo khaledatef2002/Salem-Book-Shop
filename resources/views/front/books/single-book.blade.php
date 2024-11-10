@@ -53,7 +53,7 @@
                 @endif
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="container">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -69,7 +69,7 @@
                                         @csrf
                                         <input type="hidden" name="book_id" value="{{ $book->id }}">
                                         <p class="fw-bold fs-4 mb-0">@lang('custom.review.tell-others')</p>
-                                        <p class="mb-0">@lang('custom.book.review.tell-others')</p>
+                                        <p class="mb-0">@lang('custom.review.tell-others')</p>
                                         <div class="stars my-2">
                                             <i class="fa-regular fa-star fs-4" data-id="1" role="button"></i>
                                             <i class="fa-regular fa-star fs-4" data-id="2" role="button"></i>

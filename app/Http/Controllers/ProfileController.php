@@ -49,10 +49,7 @@ class ProfileController extends Controller
             $extension = strtolower($image->getClientOriginalExtension());
             $manager = new ImageManager(new GdDriver());
             $optimizedImage = $manager->read($image)
-                ->resize(250, 250, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
+                ->cover(250, 250, 'center')
                 ->encode(new AutoEncoder(quality: 75));
 
             Storage::disk('public')->put($imagePath, (string) $optimizedImage);

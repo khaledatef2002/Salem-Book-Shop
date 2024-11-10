@@ -94,10 +94,7 @@ class ArticlesController extends Controller
         $image = $request->file('upload');
         $manager = new ImageManager(new GdDriver());
         $optimizedImage = $manager->read($image)
-            ->resize(250, 250, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })
+            ->scale(width: 250)
             ->encode(new AutoEncoder(quality: 75));
             
         $imagePath = 'temp/' . uniqid() . '.' . $image->getClientOriginalExtension();
@@ -173,10 +170,7 @@ class ArticlesController extends Controller
         $cover = $request->file('cover');
         $manager = new ImageManager(new GdDriver());
         $optimizedCover = $manager->read($cover)
-            ->resize(250, 250, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })
+            ->scale(height:250)
             ->encode(new AutoEncoder(quality: 75));
             
         $coverPath = 'articles/' . uniqid() . '.' . $cover->getClientOriginalExtension();
@@ -304,10 +298,7 @@ class ArticlesController extends Controller
             $cover = $request->file('cover');
             $manager = new ImageManager(new GdDriver());
             $optimizedCover = $manager->read($cover)
-                ->resize(250, 250, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
+                ->scale(height: 250)
                 ->encode(new AutoEncoder(quality: 75));
                 
             $coverPath = 'articles/' . uniqid() . '.' . $cover->getClientOriginalExtension();

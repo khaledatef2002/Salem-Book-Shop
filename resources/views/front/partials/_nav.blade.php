@@ -48,42 +48,44 @@
                 </li>
             </ul>
         </div>
-        <div class="collapse navbar-collapse navbarSupportedContent text-center d-lg-flex justify-content-end">
-            @if (Auth::check())
-                <div class="auth-list mb-2 nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
-                    <div class="dropdown-menu border-0 px-2">
-                        <div class="user-info d-flex flex-column align-items-center">
-                            <div class="user-image">
-                                <img src="{{ Auth::user()->display_image }}">
+        <div class="collapse navbar-collapse navbarSupportedContent text-center d-lg-flex justify-content-lg-end align-items-center">
+            <ul class="d-flex flex-lg-row flex-column gap-lg-0 gap-3 justify-content-lg-end justify-content-center align-items-center ps-0 mb-0">
+                @if (Auth::check())
+                    <div class="auth-list nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu border-0 px-2">
+                            <div class="user-info d-flex flex-column align-items-center">
+                                <div class="user-image">
+                                    <img src="{{ Auth::user()->display_image }}">
+                                </div>
+                                <p class="mb-0 fw-bold">{{ ucfirst(Auth::user()->full_name) }}</p>
+                                <span>{{ Auth::user()->email }}</span>
                             </div>
-                            <p class="mb-0 fw-bold">{{ ucfirst(Auth::user()->full_name) }}</p>
-                            <span>{{ Auth::user()->email }}</span>
+                            <hr class="my-2">
+                            @if (Auth::user()->is_admin)
+                                <a class="dropdown-item" href="{{ route('dashboard.index') }}"><i class="fa-solid fa-gauge"></i> @lang('custom.dashboard')</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('front.profile') }}"><i class="fa-solid fa-user"></i> @lang('custom.profile')</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> @lang('custom.logout')</button>
+                            </form>
                         </div>
-                        <hr class="my-2">
-                        @if (Auth::user()->is_admin)
-                            <a class="dropdown-item" href="{{ route('dashboard.index') }}"><i class="fa-solid fa-gauge"></i> @lang('custom.dashboard')</a>
-                        @endif
-                        <a class="dropdown-item" href="{{ route('front.profile') }}"><i class="fa-solid fa-user"></i> @lang('custom.profile')</a>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> @lang('custom.logout')</button>
-                        </form>
                     </div>
-                </div>
-            @else
-                <div class="mb-lg-0 mb-2 d-flex align-items-center justify-content-center">
-                    <a href="{{ route('login') }}" class="text-decoration-none me-2 fs-5 ms-lg-0 ms-4" id="log-in-button">@lang('custom.login')</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary rounded-5 px-4 py-2 fw-bold ms-2" id="sign-up-button">@lang('custom.signup')</a>
-                </div>
-            @endif
-            @if (LaravelLocalization::getCurrentLocale() == 'ar')
-                <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"><img src="{{ asset('front') }}/imgs/en.svg" height="25" class="ms-md-3 rounded-2" role="button"></a>
-            @else
-                <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="ms-md-3 rounded-2" role="button"></a>
-            @endif
+                @else
+                    <div class="mb-lg-0 mb-2 d-flex align-items-center justify-content-center">
+                        <a href="{{ route('login') }}" class="text-decoration-none me-2 fs-5 ms-lg-0 ms-4" id="log-in-button">@lang('custom.login')</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary rounded-5 px-4 py-2 fw-bold ms-2" id="sign-up-button">@lang('custom.signup')</a>
+                    </div>
+                @endif
+                @if (LaravelLocalization::getCurrentLocale() == 'ar')
+                    <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"><img src="{{ asset('front') }}/imgs/en.svg" height="25" class="ms-md-3 rounded-2" role="button"></a>
+                @else
+                    <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="ms-md-3 rounded-2" role="button"></a>
+                @endif
+            </ul>
         </div>
     </div>
 </nav>

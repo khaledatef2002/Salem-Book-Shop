@@ -53,6 +53,7 @@
                             </div>
 
                             <h4>Drop files here or click to upload.</h4>
+                            <p class="text-muted fs-4">Prefered scale: 0.76 : 1 (W:h)</p>
                         </div>
                     </div>
 

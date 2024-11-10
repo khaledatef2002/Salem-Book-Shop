@@ -120,10 +120,7 @@ class BlogsController extends Controller implements HasMiddleware
         $image = $request->file('upload');
         $manager = new ImageManager(new GdDriver());
         $optimizedImage = $manager->read($image)
-            ->resize(250, 250, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })
+            ->scale(height: 150)
             ->encode(new AutoEncoder(quality: 75));
             
         $imagePath = 'blogs/images/' . uniqid() . '.' . $image->getClientOriginalExtension();
