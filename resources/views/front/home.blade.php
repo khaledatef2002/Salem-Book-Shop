@@ -33,7 +33,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex flex-column align-items-center">
+                    <div class="d-flex flex-wrap gap-2 align-items-center justify-contetn-center">
                         @if (Auth::check())
                             <form id="unattend-form" style="display: {{ $comming_events->authAttendants->count() ? 'block' : 'none' }}" onsubmit="main_unattend_event(event, this, {{ $comming_events->id }})">
                                 @csrf
@@ -44,7 +44,7 @@
                                 <button class="btn btn-primary border-0 rounded-4 text-white py-2 px-5 fs-5" type="submit">@lang('custom.events.attend')</button>
                             </form> 
                         @endif
-                        <a href="{{ route('front.event.show', $comming_events) }}" class="read-more d-block mt-1 text-white">@lang('custom.readmore')</a>
+                        <a href="{{ route('front.event.show', $comming_events) }}" class="read-more btn text-dark rounded-4 py-2 px-5 fs-5">@lang('custom.readmore')</a>
                     </div>
                 </div>
             </div>
@@ -59,10 +59,6 @@
                 <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.books.title')</h2>
             </div>
             <div class="row">
-                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none" href="{{ route('front.book.index') }}">
-                    <span>@lang('custom.viewall') </span>
-                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
-                </a>
                 <div class="owl-carousel activity-carousel pe-0">
                     @foreach ($books as $book)
                     <a href="{{ route('front.book.show', $book) }}" class="text-decoration-none text-dark">
@@ -88,6 +84,11 @@
                     @endforeach
                 </div>
             </div>
+            <div class="row d-flex justify-content-center">
+                <a class="view-all-link btn btn-primary text-decoration-none px-5 py-2" href="{{ route('front.book.index') }}" style="width: fit-content">
+                    <span>@lang('custom.viewall') </span>
+                </a>
+            </div>
         </div>
     </section>
 @endif
@@ -95,7 +96,7 @@
 @if ($quotes->count() > 0)
     <section id="quotes">
         <div class="container-fluid px-0">
-            <div class="quote-back">
+            <div class="quote-back d-flex align-items-center">
                 <div class="container-lg container-md text-center d-flex align-items-center justify-content-center">
                     <div class="owl-carousel quotes-carousel pe-0">
                         @foreach ($quotes as $quote)
@@ -202,9 +203,8 @@
                                         {!! $article->content !!}
                                     </p>
                                 </div>
-                                <a href="{{ route('front.article.show', $article) }}" class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
+                                <a href="{{ route('front.article.show', $article) }}" class="read-more-link btn btn-primary d-flex align-items-center justify-content-center text-decoration-none mt-2 py-2 fs-6" role="button">
                                     <span>@lang('custom.readmore')</span>
-                                    <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}}"></i>
                                 </a>
                             </div>
                         </div>

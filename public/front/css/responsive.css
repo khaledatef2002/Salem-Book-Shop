@@ -3,6 +3,10 @@
     {
         height: 140px;
     }
+    section#quotes .quote-back
+    {
+        padding-bottom: 140px;
+    }
 }
 @media screen and (max-width: 1100px) {
     header
@@ -21,8 +25,9 @@
         height: 100px;
         bottom: -1px;
     }
-    section#quotes .quote-back > div {
-        height: calc(100% - 90px);
+    section#quotes .quote-back
+    {
+        padding-bottom: 100px;
     }
 }
 @media screen and (max-width: 992px) {
@@ -48,6 +53,10 @@
     {
         border-radius: 0% 0% 40% 40% / 25% 25% 10% 10%;
     }
+    section#quotes .quote-back
+    {
+        padding-bottom: 70px;
+    }
 }
 @media screen and (max-width: 549px) {
     section#special-picks-for-you .activity-carousel .items
@@ -58,6 +67,10 @@
 @media screen and (max-width: 490px) {
     section#quotes .quote-back::after {
         height: 50px;
+    }
+    section#quotes .quote-back
+    {
+        padding-bottom: 50px;
     }
 }
 @media screen and (max-width: 400px) {

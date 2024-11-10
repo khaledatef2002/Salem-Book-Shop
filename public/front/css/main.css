@@ -219,7 +219,10 @@ header div.hero {
     color: #808488;
     font-weight: bold;
 }
-
+#comming-event .event .read-more 
+{
+    background-color: #abc3dc;
+}
 /* Sepcial picks */
 section#special-picks-for-you .activity-carousel .item-container div:has(> img) {
     overflow: hidden;
@@ -238,10 +241,7 @@ section#quotes .quote-back
     width: 100%;
     background-attachment: fixed;
     position: relative;
-}
-section#quotes .quote-back > div
-{
-    height: calc(100% - 100px);
+    padding-bottom: 170px;
 }
 section#quotes .quote-back::after
 {

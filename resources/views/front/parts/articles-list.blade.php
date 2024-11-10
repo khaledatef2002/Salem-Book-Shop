@@ -36,9 +36,8 @@
                             {!! $article->content !!}
                         </p>
                     </div>
-                    <a href="{{ route('front.article.show', $article) }}" class="read-more-link d-flex align-items-center justify-content-end text-decoration-none" role="button">
+                    <a href="{{ route('front.article.show', $article) }}" class="read-more-link btn btn-primary d-flex align-items-center justify-content-center text-decoration-none mt-2 py-2 fs-6" role="button">
                         <span>@lang('custom.readmore')</span>
-                        <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}}"></i>
                     </a>
                 </div>
             </div>

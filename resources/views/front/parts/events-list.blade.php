@@ -10,7 +10,7 @@
                             <div class="event-content flex-fill py-2 d-flex flex-column justify-content-between">
                                 <div>
                                     <div class="event-content-header d-flex justify-content-between align-items-center">
-                                        <h2 class="fs-4 text-center text-dark fw-bold">{{ $event->title }}</h2>
+                                        <h2 class="fs-4 mb-0 text-center text-dark fw-bold">{{ $event->title }}</h2>
                                         <span class="time fw-bold">
                                             <bdi>{{ $event->date->format("Y, M d h:ia") }}</bdi>
                                             @if ($event->date < now())
@@ -20,12 +20,12 @@
                                             @endif
                                         </span>
                                     </div>
-                                    <div class="event-description">
+                                    <div class="event-description mt-1">
                                         {{ $event->description }}
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="tags d-flex flex-wrap align-items-end column-gap-3">
+                                    <div class="tags d-flex flex-wrap align-items-center column-gap-3">
                                         <div class="instructors">
                                             <i class="fa-solid fa-person-chalkboard me-1"></i>
                                             {{ implode(',', $event->instructors()->pluck('name')->toArray()) }}
@@ -42,7 +42,7 @@
                                             {{ $event->reviews->count() }}
                                         </div>
                                         <div class="d-flex flex-fill justify-content-end align-items-center">
-                                            <a href="{{ route('front.event.show', $event) }}" class="text-decoration-none">Details <i class="fa-solid fa-angles-right"></i></a>
+                                            <a href="{{ route('front.event.show', $event) }}" class="text-decoration-none btn btn-primary px-3">Details</a>
                                         </div>
                                     </div>
                                 </div>
