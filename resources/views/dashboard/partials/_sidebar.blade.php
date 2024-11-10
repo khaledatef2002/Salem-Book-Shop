@@ -37,7 +37,7 @@
                 </li> <!-- End Home Menu-->
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.books-category.index' ? 'active' : ''}}" href="#booksMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
-                        <i class="ri-book-2-line"></i> <span>@lang('dasboard.books')</span>
+                        <i class="ri-book-2-line"></i> <span>@lang('dashboard.books')</span>
                     </a>
                     <div class="collapse menu-dropdown mega-dropdown-menu" id="booksMenu">
                         <div class="row">
@@ -56,7 +56,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.articles-category.index' ? 'active' : ''}}" href="#articlesMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
-                        <i class="ri-file-list-3-line"></i> <span>@lang('dasboard.articles')</span>
+                        <i class="ri-file-list-3-line"></i> <span>@lang('dashboard.articles')</span>
                     </a>
                     <div class="collapse menu-dropdown mega-dropdown-menu" id="articlesMenu">
                         <div class="row">

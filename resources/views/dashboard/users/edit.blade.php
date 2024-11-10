@@ -37,7 +37,7 @@
                         <input type="text" class="form-control" value="{{ $user->email }}" id="email" name="email" placeholder="@lang('custom.email')">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="password">@lang('custom.new-password')</label>
+                        <label class="form-label" for="password">@lang('dashboard.users.new-password')</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="@lang('custom.password')">
                     </div>
                     <div class="mb-3">
