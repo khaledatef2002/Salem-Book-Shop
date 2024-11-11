@@ -611,7 +611,7 @@ ul.nav-tabs li
 }
 #quotes-page-body .quotes-container .card .author span
 {
-    width: max-content;
+    width: fit-content;
 }
 
 #quotes-page-body .quotes-container .card h3 div button
