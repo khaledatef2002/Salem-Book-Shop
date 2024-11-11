@@ -142,7 +142,7 @@
                                 <img src="{{ asset('') }}/{{ $author->image }}" alt="{{ $author->name }}" title="{{ $author->name }}">
                             </div>
                             <div class="author-info d-flex flex-column justify-content-evenly">
-                                <h4>{{ $author->name }}</h4>
+                                <h5>{{ $author->name }}</h4>
                                 <p class="mb-0">{{ $author->about }}</p>
                             </div>
                         </div>
