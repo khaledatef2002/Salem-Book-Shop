@@ -9,7 +9,7 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <img src="{{ asset($quote->author->image) }}" class="rounded-3" alt="{{ $quote->author->name }}" title="{{ $quote->author->name }}">
                                 </div>
-                                <span>{{ $quote->author->name }}</span>
+                                <span class="fw-bold">{{ $quote->author->name }}</span>
                             </div>
                             <div class="content d-flex flex-column ms-3 flex-fill">
                                 <h3 class="fs-6 fw-bold flex-fill d-flex gap-3 flex-column justify-content-center align-items-center">

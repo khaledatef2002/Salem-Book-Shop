@@ -622,6 +622,10 @@ ul.nav-tabs li
 {
     align-self: flex-end;
 }
+#quotes-page-body .quotes-container .card h3 > div:first-of-type
+{
+    line-height: 1.5;
+}
 
 
 /* Book Info Page */
