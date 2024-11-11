@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front;
 
+use App\ApproavedStatusType;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleComment;
@@ -24,7 +25,7 @@ class BlogsController extends Controller implements HasMiddleware
 
     public function index()
     {
-        $blogs = Blog::where('approaved', true)->orderByDesc('created_at')->paginate(self::page_limit);
+        $blogs = Blog::where('approaved', ApproavedStatusType::approaved->value)->orderByDesc('created_at')->paginate(self::page_limit);
 
         foreach ($blogs as $blog)
         {
@@ -78,7 +79,7 @@ class BlogsController extends Controller implements HasMiddleware
         $limit = $request->query('limit', self::page_limit);
         $search = $request->query('search', '');
         
-        $blogs = Blog::where('approaved', true)->withCount('likes');
+        $blogs = Blog::where('approaved', ApproavedStatusType::approaved->value)->withCount('likes');
         if($search)
         {
             $blogs->whereHas('user', function($q) use ($search){
