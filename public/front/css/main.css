@@ -634,6 +634,13 @@ ul.nav-tabs li
 }
 
 
+
+.articles-carousel div:has(> a > img)
+{
+    aspect-ratio: 1/0.45;
+    overflow: hidden;
+}
+
 /* Book Info Page */
 #book-info .book-image-holder
 {

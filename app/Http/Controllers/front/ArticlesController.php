@@ -103,8 +103,10 @@ class ArticlesController extends Controller implements HasMiddleware
         return json_encode(['state' => $state, 'likes_count' => $likes]);
     }
 
-    public function show(Article $article)
+    public function show($slug)
     {
+        $article = Article::where('slug->en', $slug)->orWhere('slug->ar', $slug)->firstOrFail();
+
         $categories = ArticleCategory::get();
         $comments = $article->comments()->paginate(5);
         return view('front.news.single-article', compact('article', 'categories', 'comments'));

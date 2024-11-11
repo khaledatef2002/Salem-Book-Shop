@@ -13,6 +13,7 @@ use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Support\Str;
 
 class ArticlesController extends Controller
 {
@@ -136,6 +137,17 @@ class ArticlesController extends Controller
             'keywords' => ['required'],
             'cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']
         ]);
+
+
+        $date = now()->format('Y-m-d H:i');
+        
+        $data['slug'] = [];
+
+        foreach (LaravelLocalization::getSupportedLocales() as $locale)
+        {
+            $data['slug'][$locale['locale']] = Str::of($data['title'][$locale['locale']] . '-' . $date)->trim()->lower()->replace(' ', '-');
+        }
+
 
         $article_images = [];
         foreach (LaravelLocalization::getSupportedLocales() as $locale)

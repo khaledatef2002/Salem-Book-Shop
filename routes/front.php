@@ -44,7 +44,8 @@ Route::name('front.')->group(function(){
         Route::post('event/editReview', [EventsController::class, 'updateReview']);
     });
 
-    Route::resource('article', ArticlesController::class);
+    Route::resource('article', ArticlesController::class)->only('index');
+    Route::get('/article/{slug}', [ArticlesController::class, 'show'])->name('article.show');
     Route::get('/getAllArticlesAjax', [ArticlesController::class, 'getAllArticlesAjax']);
     Route::post('article/like', [ArticlesController::class, 'likeAction']);
     Route::post('article/comment/add', [ArticlesController::class, 'addComment']);
