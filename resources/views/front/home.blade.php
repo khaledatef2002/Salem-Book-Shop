@@ -118,7 +118,7 @@
     </section>
 @endif
 
-<section id="video-and-top-authors" class="pb-5 section-back">
+<section id="video-and-top-authors" class="py-5 section-back">
     <div class="container-lg container-md d-flex flex-wrap flex-lg-row flex-md-column align-items-center">
         <div class="col-lg-6 col-12 d-flex flex-fill align-items-center justify-content-center px-2 mb-lg-0 mb-4">
             <iframe 
