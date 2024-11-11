@@ -69,7 +69,7 @@ return [
     'header.title' => 'Exploring Books',
     'header.sub-title' => 'Through a Modern Lens!',
     'header.text' => 'An all-in-one platform to start, manage and grow as a learner and spread enthusiasm.',
-    'footer.description' => 'o	Salem Library, a social responsibility initiative sponsored by Sohail Smart Solutions.',
+    'footer.description' => 'Salem Book Shop, a social responsibility initiative sponsored by Sohail Smart Solutions.',
     'footer.pages' => 'Pages',
     'footer.services' => 'Services',
     'footer.social-media' => 'Follow Us On Social Media',

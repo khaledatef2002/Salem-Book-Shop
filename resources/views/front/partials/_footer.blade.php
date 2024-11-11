@@ -30,35 +30,35 @@
             <hr class="d-md-none d-block">
             <div class="col-md-3 col-12 d-flex flex-column align-items-md-start align-items-center px-3">
                 <p class="fw-bold mb-3 d-flex">@lang('custom.footer.social-media')</p>
-                <ul class="list-style-none ps-0 d-flex flex-wrap gap-2 justify-content-start">
+                <ul class="list-style-none ps-0 d-flex flex-wrap gap-2 justify-content-start social">
                     <a href="https://www.facebook.com/share/55bLCo35RVzNmnVD/?mibextid=qi2Omg" class="text-decoration-none">
-                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-brands fa-facebook-f text-dark fs-5"></i>
+                        <li class="bg-white rounded-3 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-facebook-f text-dark"></i>
                         </li>
                     </a>
                     <a href="https://youtube.com/@salembookshop?si=VLAGLp_xqL0ed1wC" class="text-decoration-none">
-                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-brands fa-youtube text-dark fs-5"></i>
+                        <li class="bg-white rounded-3 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-youtube text-dark"></i>
                         </li>
                     </a>
                     <a href="https://www.tiktok.com/@salem.bookshop?_t=8opwsYlDs1Z&_r=1" class="text-decoration-none">
-                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-brands fa-tiktok text-dark fs-5"></i>
+                        <li class="bg-white rounded-3 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-tiktok text-dark"></i>
                         </li>
                     </a>
                     <a href="https://www.instagram.com/salembookshop?igsh=cGdzcHZzcWozdnN2" class="text-decoration-none">
-                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-brands fa-instagram text-dark fs-5"></i>
+                        <li class="bg-white rounded-3 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-instagram text-dark"></i>
                         </li>
                     </a>
                     <a href="https://x.com/SalemBookshop?t=7pXv6eEzfPM66d62TV0JBw&s=09" class="text-decoration-none">
-                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-brands fa-x text-dark fs-5"></i>
+                        <li class="bg-white rounded-3 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-x text-dark"></i>
                         </li>
                     </a>
                     <a href="https://www.linkedin.com/in/salem-library-3289a7335?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-decoration-none">
-                        <li class="bg-white rounded-3 px-3 py-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-brands fa-linkedin text-dark fs-5"></i>
+                        <li class="bg-white rounded-3 d-flex align-items-center justify-content-center">
+                            <i class="fa-brands fa-linkedin text-dark"></i>
                         </li>
                     </a>
                 </ul>

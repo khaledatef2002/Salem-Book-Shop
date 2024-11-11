@@ -389,6 +389,12 @@ footer {
 footer hr {
     border-color: white;
 }
+footer ul.social li
+{
+    font-size: 1.3rem;
+    width: 55px;
+    height: 40px;
+}
 
 
 /* Auth Design */
