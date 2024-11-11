@@ -105,7 +105,6 @@ $("#website-settings-change-form").submit(function(e){
             });
 
             submit_button.prop("disabled", false)
-            form.find("textarea").val("")
         },
         error: function(xhr) {
             var errors = xhr.responseJSON.errors;
