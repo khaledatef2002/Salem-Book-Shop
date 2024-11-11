@@ -38,7 +38,9 @@ return [
     'role' => 'الدور',
     'admin' => 'ادمن',
     'not-admin' => 'ليس ادمن',
-    
+    'pending' => 'في الانتظار',
+    'approaved' => 'مقبول',
+        
     'website-settings' => 'إعدادات الموقع',
     'website-settings.logo' => 'شعار الموقع',
     'website-settings.site-title' => 'اسم الموقع',
@@ -80,6 +82,7 @@ return [
     'articles.categories.add' => 'إضافة تصنيف',
     'articles.categories.edit' => 'تعديل تصنيف',
 
+    'blogs' => 'المدونات',
     'blog' => 'المدونات',
     'return.all-blogs' => 'العودة إلى جميع المدونات',
 

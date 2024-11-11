@@ -24,7 +24,7 @@ class BlogsController extends Controller implements HasMiddleware
 
     public function index()
     {
-        $blogs = Blog::orderByDesc('created_at')->paginate(self::page_limit);
+        $blogs = Blog::where('approaved', true)->orderByDesc('created_at')->paginate(self::page_limit);
 
         foreach ($blogs as $blog)
         {
@@ -47,6 +47,10 @@ class BlogsController extends Controller implements HasMiddleware
         $request->validate([
             'id' => 'exists:blogs'
         ]);
+
+        $blog = Blog::find('id');
+
+        if(!$blog->approaved) abort(404);
 
         $like = BlogLike::where('blog_id', $request->id)->where('user_id', Auth::user()->id);
 
@@ -74,7 +78,7 @@ class BlogsController extends Controller implements HasMiddleware
         $limit = $request->query('limit', self::page_limit);
         $search = $request->query('search', '');
         
-        $blogs = Blog::withCount('likes');
+        $blogs = Blog::where('approaved', true)->withCount('likes');
         if($search)
         {
             $blogs->whereHas('user', function($q) use ($search){
@@ -151,7 +155,7 @@ class BlogsController extends Controller implements HasMiddleware
             'content' => $request->content,
         ]);
 
-        return view('front.parts.blogs-list-item', compact('blog'));
+        return response(__('custom.adding-blog-waiting-for-approave'));
     }
 
     /**
@@ -159,6 +163,8 @@ class BlogsController extends Controller implements HasMiddleware
      */
     public function show(Blog $blog)
     {
+        if(!$blog->approaved) abort(404);
+
         $comments = $blog->comments()->orderByDesc('created_at')->paginate(13);
         return view('front.blogs.single-blog', compact('blog', 'comments'));
     }
@@ -168,6 +174,8 @@ class BlogsController extends Controller implements HasMiddleware
      */
     public function edit(Blog $blog)
     {
+        if(!$blog->approaved) abort(404);
+
         if ($blog->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -180,6 +188,8 @@ class BlogsController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Blog $blog)
     {
+        if(!$blog->approaved) abort(404);
+
         if ($blog->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -198,6 +208,8 @@ class BlogsController extends Controller implements HasMiddleware
      */
     public function destroy(Request $request, Blog $blog)
     {
+        if(!$blog->approaved) abort(404);
+
         if ($blog->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -215,6 +227,10 @@ class BlogsController extends Controller implements HasMiddleware
             'comment' => ['required', 'min:1', 'max:400']
         ]);
         
+        $blog = Blog::find($request->blog_id)->first();
+
+        if(!$blog->approaved) abort(404);
+
         $user_id = Auth::user()->id;
 
         BlogComment::create([
@@ -223,7 +239,6 @@ class BlogsController extends Controller implements HasMiddleware
             'comment' => $request->comment
         ]);
 
-        $blog = Blog::find($request->blog_id)->first();
 
         return view('front.parts.single-blog-comments', compact('blog'));
     }

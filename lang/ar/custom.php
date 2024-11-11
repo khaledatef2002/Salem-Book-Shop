@@ -135,7 +135,10 @@ return [
     'blogs.form-add-title' => 'اضافة تدوينة',
     'blogs.save' => 'حفظ',
     'blogs.add' => 'اضافة',
+    'blog.add-comment' => 'إضافة تعليق',
 
     'general-contact' => 'بيانات التواصل',
     'location' => 'رأس الخيمة – شارع الاتحاد – دفن خور ',
+
+    'adding-blog-waiting-for-approave' => 'تم اضافة التدوينه بنجاح، في إنتظار احد المشرفين للقبول',
 ];

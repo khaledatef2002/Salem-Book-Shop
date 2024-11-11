@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\dashboard;
 
+use App\ApproavedStatusType;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
@@ -29,6 +30,16 @@ class BlogsController extends Controller
                     <a href='" . route('front.blog.show', $row['id']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>
                 "
                 .
+                (
+
+                    match ($row['approaved'])
+                    {
+                        ApproavedStatusType::pending->value => "<button class='remove_button' title='approave' onclick='approave_blog({$row['id']})'><i class='ri-check-double-line fs-4 text-success'></i></button>",
+                        default => ''
+                    }
+
+                )
+                .
 
                 "
                     <form id='remove_blog' data-id='".$row['id']."' onsubmit='remove_blog(event, this)'>
@@ -48,13 +59,23 @@ class BlogsController extends Controller
                     </div>
                 ";
             })
+            ->addColumn('status', function(Blog $blog){
+                return ($blog->approaved == ApproavedStatusType::pending->value) ? "<span class='badge bg-warning'>". __('dashboard.pending') ."</span>" : "<span class='badge bg-success'>". __('dashboard.approaved') ."</span>";
+            })
             ->editColumn('content', function(Blog $blog){
                 return truncatePostAndRemoveImages($blog->content, 150);
             })
-            ->rawColumns(['content', 'user', 'action'])
+            ->rawColumns(['content','status', 'user', 'action'])
             ->make(true);
         }
         return view('dashboard.blogs.index');
+    }
+
+    public function appoave(Request $request, Blog $blog)
+    {
+        $blog->update([
+            'approaved' => ApproavedStatusType::approaved->value
+        ]);
     }
 
     /**

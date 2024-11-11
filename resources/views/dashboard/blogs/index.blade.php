@@ -23,6 +23,7 @@
                     <th>@lang('dashboard.id')</th>
                     <th>@lang('dashboard.user')</th>
                     <th>@lang('dashboard.content')</th>
+                    <th>@lang('dashboard.status')</th>
                     <th>@lang('dashboard.action')</th>
                 </tr>
             </thead>
@@ -44,6 +45,7 @@
                             { data: 'id', name: 'id' },
                             { data: 'user', name: 'user' },
                             { data: 'content', name: 'content' },
+                            { data: 'status', name: 'status' },
                             { data: 'action', name: 'action'}
                         ]
             });

@@ -171,12 +171,11 @@ $("#add-blog-form").submit(function(e){
         processData: false,
         success: function(response) {
             Swal.fire({
-                text: "Your blog has been sent successfully!",
+                text: response,
                 icon: "success"
             });
             submit_button.prop("disabled", false)
             AddEditor.setData('');
-            $(".blogs-container").prepend(response)
             addModal.hide()
         },
         error: function(xhr) {

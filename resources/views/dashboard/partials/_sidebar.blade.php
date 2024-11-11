@@ -1,3 +1,6 @@
+@php
+    $unaproavedBlogs = App\Models\Blog::where('approaved', App\ApproavedStatusType::pending->value)->count();
+@endphp
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
     <div class="navbar-brand-box py-2">
@@ -75,7 +78,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.blogs.index' ? 'active' : ''}}" href="{{ route('dashboard.blogs.index') }}" role="button">
-                        <i class="ri-bold"></i> <span>@lang('dashboard.blog')</span>
+                        <i class="ri-bold"></i> <span>@lang('dashboard.blog')</span> <span class="badge bg-warning">{{ $unaproavedBlogs }}</span>
                     </a>
                 </li> <!-- End Quotes Menu -->
                 <li class="nav-item">

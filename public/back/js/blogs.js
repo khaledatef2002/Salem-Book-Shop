@@ -31,3 +31,26 @@ function remove(form) {
         }
     });
 }
+
+function approave_blog(id)
+{   
+    $.ajax({
+        url: "/dashboard/blog/" + id + "/approave",  // Laravel route to handle name change
+        method: 'GET',
+        success: function(response) {
+            Swal.fire({
+                text: "This blog has been approaved successfully!",
+                icon: "success"
+            });
+            table.ajax.reload(null, false)
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var firstKey = Object.keys(errors)[0];
+            Swal.fire({
+                text: errors[firstKey][0],
+                icon: "error"
+            });
+        }
+    });
+}

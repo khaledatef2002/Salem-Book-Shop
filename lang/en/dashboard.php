@@ -38,7 +38,9 @@ return [
     'role' => 'Role',
     'admin' => 'Admin',
     'not-admin' => 'Not Admin',
-
+    'pending' => 'Pending',
+    'approaved' => 'Approaved',
+    
     'website-settings' => 'Website Settings',
     'website-settings.logo' => 'Website Logo',
     'website-settings.site-title' => 'Website Title',
@@ -80,6 +82,7 @@ return [
     'articles.categories.add' => 'Add Category',
     'articles.categories.edit' => 'Edit Category',
 
+    'blogs' => 'Blogs',
     'blog' => 'Blogs',
     'return.all-blogs' => 'Return to all blogs',
 

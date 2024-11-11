@@ -133,7 +133,10 @@ return [
     'blogs.form-add-title' => 'Add Blog',
     'blogs.save' => 'Save',
     'blogs.add' => 'Add',
+    'blog.add-comment' => 'Add Comment',
 
     'general-contact' => 'General Contact Info',
     'location' => 'Ras Al Khaimah - Al Nahda Street - Dafan Khor',
+
+    'adding-blog-waiting-for-approave' => 'Your blog has been submited successfully, waiting for admin approaval',
 ];

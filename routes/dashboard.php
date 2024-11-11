@@ -65,6 +65,7 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::delete('blog-comments/delete/{comment}', [BlogsComentsController::class, 'destroy']);
     Route::get('blog-likes', [BlogsLikesController::class, 'index'])->name('blog-likes.index');
     Route::delete('blog-likes/delete/{like}', [BlogsLikesController::class, 'destroy']);
+    Route::get('blog/{blog}/approave', [BlogsController::class, 'appoave']);
 
     Route::resource('contacts', ContactsController::class);
 
