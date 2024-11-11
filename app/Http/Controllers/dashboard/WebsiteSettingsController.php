@@ -81,19 +81,16 @@ class WebsiteSettingsController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
-            'site_title' => ['required', 'min:2', 'max:15'],
+        $data = $request->validate([
+            'site_title' => ['required', 'array'],
+            'site_title.*' => ['required', 'min:2'],
             'author' => ['required', 'string', 'min:2', 'max:15'],
             'keywords' => ['required'],
+            'description' => ['required', 'array'],
             'description' => ['required']
         ]);
 
         $setting = WebsiteSetting::find(1);
-        $setting->update([
-            'site_title' => $request->site_title,
-            'author' => $request->author,
-            'keywords' => $request->keywords,
-            'description' => $request->description,
-        ]);
+        $setting->update($data);
     }
 }

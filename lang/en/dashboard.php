@@ -119,6 +119,10 @@ return [
         ],
         'people' => [
             'about' => 'Person About in English',
+        ],
+        'website-settings' => [
+            'site-title' => 'Website title in english', 
+            'description' => 'Website description in english' 
         ]
     ],
 
@@ -142,6 +146,10 @@ return [
         ],
         'people' => [
             'about' => 'Person About in Arabic',
+        ],
+        'website-settings' => [
+            'site-title' => 'Website title in arabic', 
+            'description' => 'Website description in arabic' 
         ]
     ]
 ];

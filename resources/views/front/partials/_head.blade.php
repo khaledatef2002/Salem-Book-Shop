@@ -14,6 +14,12 @@
 <meta name="twitter:title" content="{{ View::hasSection('full-title') ? View::getSection('full-title') : $website_settings->site_title . " - " . View::getSection('title') }}">
 <meta name="twitter:description" content="{{ View::hasSection('description') ? View::getSection('description') : $website_settings->description }}">
 <meta name="twitter:image" content="{{ View::hasSection('og-image') ? View::getSection('og-image') : asset('storage/' . $website_settings->banner) }}">
+@foreach(LaravelLocalization::getSupportedLocales() as $locale)
+    <link rel="alternate" 
+        href="{{ url($locale['locale'] . '/' . request()->path()) }}" 
+        hreflang="{{ $locale['locale'] }}" />
+@endforeach
+<link rel="alternate" href="{{ url('/') }}" hreflang="x-default" />
 
 <link rel="icon" href="{{ asset('storage/' . $website_settings->logo) }}" type="image/x-icon">
 

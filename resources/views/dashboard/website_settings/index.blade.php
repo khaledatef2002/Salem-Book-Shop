@@ -67,10 +67,12 @@
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label for="site_title" class="form-label">@lang('dashboard.website-settings.site-title')</label>
-                                        <input type="text" class="form-control" id="site_title" name="site_title" placeholder="@lang('dashboard.enter') @lang('dashboard.website-settings.site-title')" value="{{ $website_settings->site_title }}">
-                                    </div>
+                                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                                        <div class="mb-3">
+                                            <label class="form-label" for="{{ $locale['locale'] }}.site_title">@lang('dashboard.'. $locale['locale'] .'.website-settings.site-title')</label>
+                                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.site_title" name="site_title[{{ $locale['locale'] }}]" value="{{ $website_settings->getTranslation('site_title', $locale['locale']) }}" placeholder="@lang('dashboard.enter') @lang('dashboard.website-settings.site-title')">
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-12">
@@ -88,10 +90,12 @@
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-12">
-                                    <div class="mb-3 pb-2">
-                                        <label for="description" class="form-label">@lang('dashboard.website-settings.description')</label>
-                                        <textarea class="form-control" name="description" id="description" placeholder="@lang('dashboard.enter') @lang('dashboard.website-settings.keywords')" rows="3">{{ $website_settings->description }}</textarea>
-                                    </div>
+                                    @foreach (LaravelLocalization::getSupportedLocales() as $locale)
+                                        <div class="mb-3">
+                                            <label class="form-label" for="{{ $locale['locale'] }}.description">@lang('dashboard.'. $locale['locale'] .'.website-settings.description')</label>
+                                            <textarea class="form-control" id="{{ $locale['locale'] }}.description" name="description[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.website-settings.description')">{{ $website_settings->getTranslation('description', $locale['locale']) }}</textarea>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-12">
