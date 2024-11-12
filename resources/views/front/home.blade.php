@@ -166,7 +166,7 @@
                 </a>
                 <div class="owl-carousel articles-carousel pe-0">
                     @foreach ($articles as $article)
-                        <div class="items">
+                        <div class="items card p-2 rounded-3">
                             <div class="item-container rounded-3">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <a href="{{ route('front.article.show', $article->slug) }}" class="w-100 h-100">
