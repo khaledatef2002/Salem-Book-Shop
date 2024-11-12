@@ -36,7 +36,7 @@
                             {!! $article->content !!}
                         </p>
                     </div>
-                    <a href="{{ route('front.article.show', $article) }}" class="read-more-link btn btn-primary d-flex align-items-center justify-content-center text-decoration-none mt-2 py-2 fs-6" role="button">
+                    <a href="{{ route('front.article.show', $article->slug) }}" class="read-more-link btn btn-primary d-flex align-items-center justify-content-center text-decoration-none mt-2 py-2 fs-6" role="button">
                         <span>@lang('custom.readmore')</span>
                     </a>
                 </div>
