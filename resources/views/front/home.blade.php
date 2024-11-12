@@ -166,8 +166,8 @@
                 </a>
                 <div class="owl-carousel articles-carousel pe-0">
                     @foreach ($articles as $article)
-                        <div class="items card p-2 rounded-3 h-100 d-flex flex-column justify-content-between">
-                            <div class="item-container rounded-3">
+                        <div class="items card p-2 rounded-3 h-100">
+                            <div class="item-container rounded-3 h-100 d-flex flex-column justify-content-between">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <a href="{{ route('front.article.show', $article->slug) }}" class="w-100 h-100">
                                         <img src="{{ asset('storage/') }}/{{ $article->cover }}" alt="{{ $article->title }}" title="{{ $article->title }}">
