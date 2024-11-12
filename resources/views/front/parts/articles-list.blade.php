@@ -1,7 +1,7 @@
 <div class="d-flex flex-wrap px-2">
     @if ($articles->count())
         @foreach ($articles as $article)
-            <div class="items col-lg-4 col-12">
+            <div class="items col-lg-4 col-12 px-1">
                 <div class="item-container">
                     <div class="d-flex justify-content-center align-items-center rounded-3">
                         <img src="{{ asset('storage') }}/{{ $article->cover }}" alt="{{ $article->title }}" title="{{ $article->title }}">
