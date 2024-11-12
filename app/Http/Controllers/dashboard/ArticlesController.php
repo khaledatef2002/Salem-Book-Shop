@@ -96,7 +96,7 @@ class ArticlesController extends Controller
         $manager = new ImageManager(new GdDriver());
         $optimizedImage = $manager->read($image)
             ->scale(width: 250)
-            ->encode(new AutoEncoder(quality: 75));
+            ->encode(new AutoEncoder(quality: 85));
             
         $imagePath = 'temp/' . uniqid() . '.' . $image->getClientOriginalExtension();
         Storage::disk('public')->put($imagePath, (string) $optimizedImage);
@@ -182,7 +182,7 @@ class ArticlesController extends Controller
         $cover = $request->file('cover');
         $manager = new ImageManager(new GdDriver());
         $optimizedCover = $manager->read($cover)
-            ->scale(height:250)
+            ->scale(height:450)
             ->encode(new AutoEncoder(quality: 75));
             
         $coverPath = 'articles/' . uniqid() . '.' . $cover->getClientOriginalExtension();
@@ -239,7 +239,7 @@ class ArticlesController extends Controller
 
             'category_id' => ['required', 'exists:article_categories,id'],
             'keywords' => ['required'],
-            $cover_validation
+            ...$cover_validation
         ]);
 
 
@@ -310,7 +310,7 @@ class ArticlesController extends Controller
             $cover = $request->file('cover');
             $manager = new ImageManager(new GdDriver());
             $optimizedCover = $manager->read($cover)
-                ->scale(height: 250)
+                ->scale(height: 450)
                 ->encode(new AutoEncoder(quality: 75));
                 
             $coverPath = 'articles/' . uniqid() . '.' . $cover->getClientOriginalExtension();
