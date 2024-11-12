@@ -169,7 +169,7 @@
                         <div class="items">
                             <div class="item-container rounded-3">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <a href="{{ route('front.article.show', $article) }}" class="w-100 h-100">
+                                    <a href="{{ route('front.article.show', $article->slug) }}" class="w-100 h-100">
                                         <img src="{{ asset('storage/') }}/{{ $article->cover }}" alt="{{ $article->title }}" title="{{ $article->title }}">
                                     </a>
                                 </div>
