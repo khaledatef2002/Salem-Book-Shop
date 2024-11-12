@@ -16,10 +16,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="col-lg-9 col-12 article-image-holder d-flex justify-content-center align-items-center rounded-3">
-                    <img src="{{ asset('storage/' . $article->cover) }}" class="rounded-3" alt="{{ $article->title }}" title="{{ $article->title }}">
-                </div>
                 <div class="col-12 d-flex flex-wrap gap-4 mt-3">
+                    <div class="col-lg-9 col-12 article-image-holder d-flex justify-content-center align-items-center rounded-3">
+                        <img src="{{ asset('storage/' . $article->cover) }}" class="rounded-3" alt="{{ $article->title }}" title="{{ $article->title }}">
+                    </div>
                     <div class="col-lg-9 col-12 card border-0 rounded-3 p-3">
                         <h1 class="text-center fs-2">{{ $article->title }}</h1>
                         <hr>
