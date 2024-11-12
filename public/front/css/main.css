@@ -956,6 +956,14 @@ section#contact-page ul li:not(:last-of-type)
     background-color: initial;
     border: initial;
 }
+#article-info .content .image 
+{
+    clear: both;
+    display: table;
+    margin: .9em auto;
+    min-width: 50px;
+    text-align: center;
+}
 #article-info .content .image img {
     display: block;
     margin: 0 auto;
