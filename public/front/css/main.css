@@ -956,7 +956,12 @@ section#contact-page ul li:not(:last-of-type)
     background-color: initial;
     border: initial;
 }
-
+#article-info .content .ck-content .image img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 100%;
+}
 /* Blogs Carousal */
 .blogs-carousel .image-container
 {

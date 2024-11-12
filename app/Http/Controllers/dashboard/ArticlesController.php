@@ -34,7 +34,7 @@ class ArticlesController extends Controller
                 "
                     <a href='" . route('dashboard.article-comments.index', $row['id']) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>
                     <a href='" . route('dashboard.article-likes.index', $row['id']) . "'><i class='ri-thumb-up-line fs-4' type='submit'></i></a>
-                    <a href='" . route('front.article.show', $row['id']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>
+                    <a href='" . route('front.article.show', $row['slug']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>
                     <a href='" . route('dashboard.articles.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>    
                 "
                 .
