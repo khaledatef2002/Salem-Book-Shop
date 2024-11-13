@@ -81,9 +81,9 @@
                     </div>
                 @endif
                 @if (LaravelLocalization::getCurrentLocale() == 'ar')
-                    <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"><img src="{{ asset('front') }}/imgs/en.svg" height="25" class="ms-md-3 rounded-2" role="button"></a>
+                    <a href="{{ LaravelLocalization::getLocalizedURL('en') }}"><img src="{{ asset('front') }}/imgs/en.svg" height="25" class="ms-md-3 rounded-2" role="button" alt="EN"></a>
                 @else
-                    <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="ms-md-3 rounded-2" role="button"></a>
+                    <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}"><img src="{{ asset('front') }}/imgs/ar.svg" height="25" class="ms-md-3 rounded-2" role="button" alt="AR"></a>
                 @endif
             </ul>
         </div>

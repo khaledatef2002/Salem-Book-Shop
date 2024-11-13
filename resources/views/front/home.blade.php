@@ -160,7 +160,7 @@
                 <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.latest-news')</h2>
             </div>
             <div class="row">
-                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button" href="{{ route('front.article.index') }}">
+                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button" href="{{ route('front.article.index') }}" title="{{ $article->title }}">
                     <span>@lang('custom.viewall') </span>
                     <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
                 </a>
@@ -169,7 +169,7 @@
                         <div class="items card p-2 rounded-3 h-100">
                             <div class="item-container rounded-3 h-100 d-flex flex-column justify-content-between">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <a href="{{ route('front.article.show', $article->slug) }}" class="w-100 h-100">
+                                    <a href="{{ route('front.article.show', $article->slug) }}" class="w-100 h-100" title="{{ $article->title }}">
                                         <img src="{{ asset('storage/') }}/{{ $article->cover }}" alt="{{ $article->title }}" title="{{ $article->title }}">
                                     </a>
                                 </div>
@@ -203,7 +203,7 @@
                                         {!! $article->content !!}
                                     </p>
                                 </div>
-                                <a href="{{ route('front.article.show', $article->slug) }}" class="read-more-link btn btn-primary d-flex align-items-center justify-content-center text-decoration-none mt-2 py-2 fs-6" role="button">
+                                <a href="{{ route('front.article.show', $article->slug) }}" title="{{ $article->title }}" class="read-more-link btn btn-primary d-flex align-items-center justify-content-center text-decoration-none mt-2 py-2 fs-6" role="button">
                                     <span>@lang('custom.readmore')</span>
                                 </a>
                             </div>
