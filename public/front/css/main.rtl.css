@@ -1,5 +1,3 @@
-@media screen and (max-width: 992px) {
-    .owl-nav {
-        transform: translate(2.7%, -50%) !important;
-    }
+.owl-nav {
+    transform: translate(2%, -50%) !important;
 }
