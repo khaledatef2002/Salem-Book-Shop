@@ -40,6 +40,19 @@ return [
     'not-admin' => 'Not Admin',
     'pending' => 'Pending',
     'approaved' => 'Approaved',
+    'page' => 'Page',
+    'roles' => 'Roles',
+    'show' => 'Show',
+    'delete' => 'Delete',
+
+    'events_reviews' => 'Events Reviews',
+    'blogs_likes' => 'Blogs Likes',
+    'blogs_comments' => 'Blogs Comments',
+    'articles_categories' => 'Articles Categories',
+    'articles_likes' => 'Articles Likes',
+    'articles_comments' => 'Articles Comments',
+    'books_categories' => 'Books Categories',
+    'books_reviews' => 'Books Reviews',
     
     'website-settings' => 'Website Settings',
     'website-settings.logo' => 'Website Logo',
@@ -98,6 +111,7 @@ return [
     'users.add' => 'Add Users',
     'users.new-password' => 'New Password',
 
+    'role.name' => 'Role Name',
 
     'en' => [
         'name' => 'Name in english',

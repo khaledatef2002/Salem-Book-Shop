@@ -112,6 +112,11 @@
                         <i class="ri-user-fill"></i> <span>@lang('dashboard.users')</span>
                     </a>
                 </li> <!-- End Website Settings Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::currentRouteName() ==  'dashboard.roles.index' ? 'active' : ''}}" href="{{ route('dashboard.roles.index') }}" role="button">
+                        <i class="ri-key-2-fill"></i> <span>@lang('dashboard.roles')</span>
+                    </a>
+                </li> <!-- End Website Settings Menu -->
             </ul>
         </div>
         <!-- Sidebar -->

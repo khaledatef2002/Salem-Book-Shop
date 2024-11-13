@@ -17,6 +17,7 @@ use App\Http\Controllers\dashboard\EventReviewsController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\PeopleController;
 use App\Http\Controllers\dashboard\QuotesController;
+use App\Http\Controllers\dashboard\RolesController;
 use App\Http\Controllers\dashboard\UsersController;
 use App\Http\Controllers\dashboard\WebsiteSettingsController;
 use Illuminate\Support\Facades\Route;
@@ -75,4 +76,6 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::post('event/upload', [EventController::class, 'upload_images'])->name('event.upload');
 
     Route::resource('users', UsersController::class);
+
+    Route::resource('roles', RolesController::class);
 });

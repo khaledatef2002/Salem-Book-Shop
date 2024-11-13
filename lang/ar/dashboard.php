@@ -40,7 +40,20 @@ return [
     'not-admin' => 'ليس ادمن',
     'pending' => 'في الانتظار',
     'approaved' => 'مقبول',
-        
+    'page' => 'الصفحة',
+    'roles' => 'الادوار',
+    'show' => 'عرض',
+    'delete' => 'إزالة',
+
+    'events_reviews' => 'مراجعات الاحداث',
+    'blogs_likes' => 'إعجابات المدونة',
+    'blogs_comments' => 'تعليقات المدونة',
+    'articles_categories' => 'تصنيفات المقالات',
+    'articles_likes' => 'إعجابات المقالات',
+    'articles_comments' => 'تعليقات المقالات',
+    'books_categories' => 'تصنيفات الكتب',
+    'books_reviews' => 'مراجعات الكتب',
+
     'website-settings' => 'إعدادات الموقع',
     'website-settings.logo' => 'شعار الموقع',
     'website-settings.site-title' => 'اسم الموقع',
@@ -98,6 +111,7 @@ return [
     'users.add' => 'إضافة مستخدم',
     'users.new-password' => 'كلمة مرور جديدة',
 
+    'role.name' => 'اسم الدور',
 
     'en' => [
         'name' => 'الاسم باللغة الانجليزي',
