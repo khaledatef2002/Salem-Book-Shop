@@ -1,7 +1,7 @@
 <div class="d-flex flex-wrap row-gap-5">
     @if ($books->count())
         @foreach ($books as $book)
-            <div class="items col-xl-3 col-lg-4 col-sm-6 col-xs-12 p-1">
+            <div class="items col-xl-3 col-lg-4 col-sm-6 col-12 p-1">
                 <a href="{{ route('front.book.show', $book) }}" class="text-decoration-none" class="d-block flex-wrap p-0 m-0">
                     <div class="item-container d-flex flex-column justify-content-between px-2 rounded-4 h-100">
                         <div>

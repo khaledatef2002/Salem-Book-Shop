@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap px-2">
+<div class="d-flex flex-wrap px-2 row-gap-4">
     @if ($articles->count())
         @foreach ($articles as $article)
             <div class="items col-lg-4 col-12 px-2">
