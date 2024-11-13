@@ -73,6 +73,12 @@ class ArticlesController extends Controller implements HasMiddleware
 
         $articles = $articles->paginate($limit);
 
+        foreach($articles as $article)
+        {
+            $article->content = strip_tags(truncatePostAndRemoveImages($article->content));
+        }
+
+
         return view('front.parts.articles-list', compact('articles'));
     }
 
