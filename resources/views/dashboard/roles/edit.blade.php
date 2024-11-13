@@ -287,7 +287,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input name="permission[]" class="form-check-input" type="checkbox" id="{{ \App\PermissionsType::articles_create->value }}" value="{{ \App\PermissionsType::articles_create->value }}" {{ $role->hasPermissionTo(\App\PermissionsType::articles_create->value) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="{{ \App\PermissionsType::articles_categories_create->value }}">
+                                        <label class="form-check-label" for="{{ \App\PermissionsType::articles_create->value }}">
                                             @lang('dashboard.create')
                                         </label>
                                     </div>
