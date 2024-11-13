@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="{{ asset('front') }}/libs/owlcarousel/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/owlcarousel/assets/owl.theme.default.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/sweetalert2/sweet.css">
-<link rel="stylesheet" href="{{ asset('front') }}/css/main.css?id=4">
+<link rel="stylesheet" href="{{ asset('front') }}/css/main.css?id=4" media="print" onload="this.media='all'">
 @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
     <link rel="stylesheet" href="{{ asset('front') }}/css/main.rtl.css">
 @endif
