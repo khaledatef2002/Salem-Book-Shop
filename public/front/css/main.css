@@ -74,6 +74,12 @@ textarea
     resize: none;
 }
 
+.dropdown-item.active, .dropdown-item:active
+{
+    background-color: #0d405c;
+    color: white;
+}
+
 /* Owl Customization */
 .owl-nav {
     position: absolute;
