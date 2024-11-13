@@ -4,6 +4,10 @@
 
 @section('og-image', asset($book->images->first()->url))
 
+@if ($book->description)
+    @section('description', $book->description)
+@endif
+
 @section('keywords', $book->keywords)
 
 @section('content')
@@ -53,6 +57,12 @@
                 @endif
             </div>
         </div>
+        @if ($book->description)
+            <div class="row">
+                <p class="fw-bold">@lang('dashboard.description'):</p>
+                <p>{{ $book->description }}</p>
+            </div>
+        @endif
         <div class="row mt-2">
             <div class="container">
                 <ul class="nav nav-tabs">
