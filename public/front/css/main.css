@@ -175,12 +175,8 @@ header div.hero h2 {
     color: #3ebac2;
 }
 header div.hero {
-    background-image: url(../imgs/blimp.png), url(../imgs/cloud.png), url(../imgs/blimp.png), url(../imgs/cloud.png), url(../imgs/hero-textures.png);
-    background-position: 15% 25%, 5% 5%, 85% 25%, 95% 5%, center;
-    animation-name: hero-assets;
-    animation-duration: 2.2s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    background-image: url(../imgs/hero-textures.png);
+    background-position: center;
 }
 
 /* Auth List */
@@ -327,7 +323,7 @@ section#video-and-top-authors .author
 section#video-and-top-authors .author-image
 {
     width: 100px;
-    min-width: 100px;
+    min-width: 120px;
     max-height: 120px;
     overflow: hidden;
     display: flex;
