@@ -160,7 +160,7 @@
                 <h2 class="text-center text-dark mb-4 fw-bold fs-1">@lang('custom.home.latest-news')</h2>
             </div>
             <div class="row">
-                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button" href="{{ route('front.article.index') }}" title="{{ $article->title }}">
+                <a class="view-all-link d-flex align-items-center justify-content-end text-decoration-none pe-0" role="button" href="{{ route('front.article.index') }}" title="@lang('custom.all-articles')">
                     <span>@lang('custom.viewall') </span>
                     <i class="fa-solid fa-angles-{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? 'left' : 'right'}} ms-1 fs-6"></i>
                 </a>
