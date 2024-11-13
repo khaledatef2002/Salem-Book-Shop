@@ -25,14 +25,14 @@
 
 <title>{{ View::hasSection('full-title') ? View::getSection('full-title') : $website_settings->site_title . " - " . View::getSection('title') }}</title>
 <link rel="shortcut icon" href="imgs/logo.png">
-<link rel="stylesheet" href="{{ asset('front') }}/libs/bootstrap/css/bootstrap{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? '.rtl' : '' }}.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ asset('front') }}/libs/bootstrap/css/bootstrap{{ LaravelLocalization::getCurrentLocaleDirection() == 'rtl' ? '.rtl' : '' }}.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/owlcarousel/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/owlcarousel/assets/owl.theme.default.min.css">
 <link rel="stylesheet" href="{{ asset('front') }}/libs/sweetalert2/sweet.css">
-<link rel="stylesheet" href="{{ asset('front') }}/css/main.css?id=4">
+<link rel="stylesheet" href="{{ asset('front') }}/css/main.min.css?id=4">
 @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
-    <link rel="stylesheet" href="{{ asset('front') }}/css/main.rtl.css">
+    <link rel="stylesheet" href="{{ asset('front') }}/css/main.rtl.min.css">
 @endif
-<link rel="stylesheet" href="{{ asset('front') }}/css/responsive.css">
+<link rel="stylesheet" href="{{ asset('front') }}/css/responsive.min.css">
 @yield('custom-css')
