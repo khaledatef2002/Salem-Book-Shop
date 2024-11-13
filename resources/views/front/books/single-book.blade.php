@@ -59,7 +59,7 @@
         </div>
         @if ($book->description)
             <div class="row">
-                <p class="fw-bold">@lang('dashboard.description'):</p>
+                <p class="fw-bold mb-0">@lang('dashboard.description'):</p>
                 <p>{{ $book->description }}</p>
             </div>
         @endif
