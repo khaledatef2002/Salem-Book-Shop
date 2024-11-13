@@ -40,7 +40,7 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="button">@lang('custom.news')</a>
                     <div class="dropdown-menu border-0">
                         @foreach ($news_categories as $category)
-                            <a class="dropdown-item" href="{{ route('front.article.index', ['article_id' => $category->id]) }}">{{ $category->name }}</a>
+                            <a class="dropdown-item" href="{{ route('front.article.index', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
                         @endforeach
                         <hr class="my-1">
                         <a class="dropdown-item" href="{{ route('front.article.index') }}">@lang('custom.all-articles')</a> 
