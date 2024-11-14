@@ -5,6 +5,8 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -17,8 +19,17 @@ use Intervention\Image\ImageManager;
 use Spatie\Permission\Models\Role;
 
 
-class UsersController extends Controller
+class UsersController extends Controller implements HasMiddleware
 {
+    public static function Middleware()
+    {
+        return [
+            new Middleware('can:users_show', only: ['index']),
+            new Middleware('can:users_create', only: ['create', 'store']),
+            new Middleware('can:users_edit', only: ['edit', 'update']),
+            new Middleware('can:users_delete', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -34,10 +45,14 @@ class UsersController extends Controller
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
                 (Auth::id() != $row['id'] ?
+                (Auth::user()->hasPermissionTo('users_edit') ?
                 "
                     <a href='" . route('dashboard.users.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>
                 "
+                :
+                "")
                 .
+                (Auth::user()->hasPermissionTo('users_delete') ?
 
                 "
                     <form id='remove_user' data-id='".$row['id']."' onsubmit='remove_user(event, this)'>
@@ -46,6 +61,7 @@ class UsersController extends Controller
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
                 "
+                : "")
                 : '')
                 .
                 "</div>";
@@ -126,14 +142,6 @@ class UsersController extends Controller
         $user->assignRole($role->name);
 
         return response()->json(['redirectUrl' => route('dashboard.users.edit', $user)]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**

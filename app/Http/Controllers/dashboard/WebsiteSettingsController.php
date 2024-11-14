@@ -5,13 +5,22 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\ImageManager;
 
-class WebsiteSettingsController extends Controller
+class WebsiteSettingsController extends Controller implements HasMiddleware
 {
+    public static function Middleware()
+    {
+        return [
+            new Middleware('can:website_settings_show', only: ['index']),
+            new Middleware('can:website_settings_edit', only: ['change_logo', 'change_banner', 'update']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

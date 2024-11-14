@@ -5,13 +5,24 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\PermissionsType;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Unique;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
-class RolesController extends Controller
+class RolesController extends Controller implements HasMiddleware
 {
+    public static function Middleware()
+    {
+        return [
+            new Middleware('can:roles_show', only: ['index']),
+            new Middleware('can:roles_create', only: ['create', 'store']),
+            new Middleware('can:roles_edit', only: ['edit', 'update']),
+            new Middleware('can:roles_delete', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,18 +37,20 @@ class RolesController extends Controller
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
+                (Auth::user()->hasPermissionTo('roles_edit') ?
                 "   
                     <a href='" . route('dashboard.roles.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>    
                 "
+                :"")
                 .
-
+                (Auth::user()->hasPermissionTo('roles_delete') ?
                 "
                     <form id='remove_role' data-id='".$row['id']."' onsubmit='remove_role(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                "
+                " : "")
                 .
                 "</div>";
             })

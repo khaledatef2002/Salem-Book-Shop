@@ -11,12 +11,14 @@
             <img src="{{ asset('storage/' . $website_settings->banner) }}" class="profile-wid-img" alt="">
             <div class="overlay-content">
                 <div class="text-end p-3">
-                    <div class="p-0 ms-auto rounded-circle profile-photo-edit">
-                        <input id="website-banner" name="banner" type="file" class="profile-foreground-img-file-input">
-                        <label for="website-banner" class="profile-photo-edit btn btn-light">
-                            <i class="ri-image-edit-line align-bottom me-1"></i> @lang('dashboard.website-settings.banner')
-                        </label>
-                    </div>
+                    @if (Auth::user()->hasPermissionTo('website_settings_edit'))
+                        <div class="p-0 ms-auto rounded-circle profile-photo-edit">
+                            <input id="website-banner" name="banner" type="file" class="profile-foreground-img-file-input">
+                            <label for="website-banner" class="profile-photo-edit btn btn-light">
+                                <i class="ri-image-edit-line align-bottom me-1"></i> @lang('dashboard.website-settings.banner')
+                            </label>
+                        </div>
+                    @endif
                 </div>
             </div>
         </form>
@@ -34,11 +36,13 @@
                             <img src="{{ asset('storage/' . $website_settings->logo) }}" class="rounded-circle avatar-xl img-thumbnail user-profile-image material-shadow" alt="user-profile-image">
                             <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
                                 <input id="profile-img-file-input" name="logo" type="file" class="profile-img-file-input">
-                                <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
-                                    <span class="avatar-title rounded-circle bg-light text-body material-shadow">
-                                        <i class="ri-camera-fill"></i>
-                                    </span>
-                                </label>
+                                @if (Auth::user()->hasPermissionTo('website_settings_edit'))
+                                    <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                        <span class="avatar-title rounded-circle bg-light text-body material-shadow">
+                                            <i class="ri-camera-fill"></i>
+                                        </span>
+                                    </label>
+                                @endif
                             </div>
                         </form>
                     </div>
@@ -98,12 +102,14 @@
                                     @endforeach
                                 </div>
                                 <!--end col-->
-                                <div class="col-lg-12">
-                                    <div class="hstack gap-2 justify-content-end">
-                                        <button type="submit" class="btn btn-primary">@lang('custom.save')</button>
+                                @if (Auth::user()->hasPermissionTo('website_settings_edit'))
+                                    <div class="col-lg-12">
+                                        <div class="hstack gap-2 justify-content-end">
+                                            <button type="submit" class="btn btn-primary">@lang('custom.save')</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--end col-->
+                                    <!--end col-->
+                                @endif
                             </div>
                             <!--end row-->
                         </form>

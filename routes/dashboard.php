@@ -75,7 +75,7 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::delete('event/review/{review}', [EventReviewsController::class, 'destroy'])->name('event.review.delete');
     Route::post('event/upload', [EventController::class, 'upload_images'])->name('event.upload');
 
-    Route::resource('users', UsersController::class);
+    Route::resource('users', UsersController::class)->except('show');
 
-    Route::resource('roles', RolesController::class);
+    Route::resource('roles', RolesController::class)->except('show');
 });

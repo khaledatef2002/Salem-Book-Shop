@@ -88,7 +88,7 @@ class ArticlesController extends Controller implements HasMiddleware
             'id' => 'exists:articles'
         ]);
 
-        $like = ArticleLike::where('article_id', $request->id)->where('user_id', auth()->user()->id);
+        $like = ArticleLike::where('article_id', $request->id)->where('user_id', Auth::user()->id);
 
         $state = __('custom.liked');
 
@@ -101,7 +101,7 @@ class ArticlesController extends Controller implements HasMiddleware
         {
             ArticleLike::create([
                 'article_id' => $request->id,
-                'user_id' => auth()->user()->id
+                'user_id' => Auth::user()->id
             ]);
         }
         $likes = ArticleLike::where('article_id', $request->id)->count();
@@ -125,7 +125,7 @@ class ArticlesController extends Controller implements HasMiddleware
             'comment' => ['required', 'min:1', 'max:400']
         ]);
         
-        $user_id = auth()->user()->id;
+        $user_id = Auth::user()->id;
 
         ArticleComment::create([
             'article_id' => $request->article_id,
