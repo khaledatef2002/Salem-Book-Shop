@@ -133,7 +133,7 @@ class ArticlesController extends Controller implements HasMiddleware
             'comment' => $request->comment
         ]);
 
-        $article = Article::find($request->article_id)->first();
+        $article = Article::find($request->article_id)->with('comments')->first();
 
         return view('front.parts.single-article-comments', compact('article'));
     }
