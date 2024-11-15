@@ -7,6 +7,9 @@ use App\Models\Book;
 use App\Models\BookImage;
 use App\PeopleType;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -15,8 +18,17 @@ use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Encoders\AutoEncoder;
 
-class BookController extends Controller
+class BookController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:books_show', only: ['index']),
+            new Middleware('can:books_edit', only: ['edit', 'store', 'upload_images']),
+            new Middleware('can:books_delete', only: ['destroy']),
+            new Middleware('can:books_create', only: ['store', 'create', 'upload_images']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -31,19 +43,23 @@ class BookController extends Controller
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
+                ( Auth::user()->hasPermissionTo('books_reviews_show') ?
                 "
                     <a href='" . route('dashboard.book-review.index', $row['id']) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>
-                    <a href='" . route('dashboard.books.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>
-                "
+                ":"")
                 .
-
+                ( Auth::user()->hasPermissionTo('books_edit') ?
+                "<a href='" . route('dashboard.books.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>
+                ":"")
+                .
+                ( Auth::user()->hasPermissionTo('books_delete') ?
                 "
                     <form id='remove_book' data-id='".$row['id']."' onsubmit='remove_book(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                "
+                ":"")
                 .
                 "</div>";
             })

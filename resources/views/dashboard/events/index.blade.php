@@ -4,17 +4,19 @@
 
 @section('content')
 
-<div class="card">
-    <div class="card-body">
-        <div class="row g-2">
-            <div class="col-sm-auto ms-auto">
-                <a href="{{ route('dashboard.events.create') }}"><button class="btn btn-success"><i class="ri-add-fill me-1 align-bottom"></i> @lang('dashboard.events.add')</button></a>
+@if (Auth::user()->hasPermissionTo('events_create'))
+    <div class="card">
+        <div class="card-body">
+            <div class="row g-2">
+                <div class="col-sm-auto ms-auto">
+                    <a href="{{ route('dashboard.events.create') }}"><button class="btn btn-success"><i class="ri-add-fill me-1 align-bottom"></i> @lang('dashboard.events.add')</button></a>
+                </div>
+                <!--end col-->
             </div>
-            <!--end col-->
+            <!--end row-->
         </div>
-        <!--end row-->
     </div>
-</div>
+@endif
 <div class="card">
     <div class="card-body">
         <table class="table table-bordered table-striped" id="dataTables">

@@ -6,10 +6,21 @@ use App\ApproavedStatusType;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
-class BlogsController extends Controller
+class BlogsController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:blogs_show', only: ['index']),
+            new Middleware('can:blogs_delete', only: ['destroy']),
+            new Middleware('can:blogs_approve', only: ['approve'])
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -24,12 +35,17 @@ class BlogsController extends Controller
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
-                "
-                    <a href='" . route('dashboard.blog-comments.index', $row['id']) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>
-                    <a href='" . route('dashboard.blog-likes.index', $row['id']) . "'><i class='ri-thumb-up-line fs-4' type='submit'></i></a>
-                    <a href='" . route('front.blog.show', $row['id']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>
-                "
+                ( Auth::user()->hasPermissionTo('blogs_comments_show') ?
+                "<a href='" . route('dashboard.blog-comments.index', $row['id']) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>"
+                :"")
+                . 
+                ( Auth::user()->hasPermissionTo('blogs_likes_show') ?
+                "<a href='" . route('dashboard.blog-likes.index', $row['id']) . "'><i class='ri-thumb-up-line fs-4' type='submit'></i></a>"
+                :"")
+                . 
+                "<a href='" . route('front.blog.show', $row['id']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>"
                 .
+                ( Auth::user()->hasPermissionTo('blogs_approve') ?
                 (
 
                     match ($row['approaved'])
@@ -38,16 +54,16 @@ class BlogsController extends Controller
                         default => ''
                     }
 
-                )
+                ):"")
                 .
-
+                ( Auth::user()->hasPermissionTo('blogs_delete') ?
                 "
                     <form id='remove_blog' data-id='".$row['id']."' onsubmit='remove_blog(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                "
+                ":"")
                 .
                 "</div>";
             })
@@ -121,8 +137,8 @@ class BlogsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
     }
 }

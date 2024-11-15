@@ -194,9 +194,9 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input name="permission[]" class="form-check-input" type="checkbox" id="{{ \App\PermissionsType::blogs_create->value }}" value="{{ \App\PermissionsType::blogs_create->value }}" {{ $role->hasPermissionTo(\App\PermissionsType::blogs_create->value) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="{{ \App\PermissionsType::blogs_create->value }}">
-                                            @lang('dashboard.create')
+                                        <input name="permission[]" class="form-check-input" type="checkbox" id="{{ \App\PermissionsType::blogs_approve->value }}" value="{{ \App\PermissionsType::blogs_approve->value }}" {{ $role->hasPermissionTo(\App\PermissionsType::blogs_approve->value) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="{{ \App\PermissionsType::blogs_approve->value }}">
+                                            @lang('dashboard.approve')
                                         </label>
                                     </div>
                                 </td>

@@ -8,6 +8,9 @@ use App\Models\SeminarInstructor;
 use App\Models\SeminarMedia;
 use App\PeopleType;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
@@ -15,8 +18,17 @@ use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Encoders\AutoEncoder;
 
-class EventController extends Controller
+class EventController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:events_show', only: ['index']),
+            new Middleware('can:events_edit', only: ['edit', 'update', 'upload_images']),
+            new Middleware('can:events_delete', only: ['destroy']),
+            new Middleware('can:events_create', only: ['create', 'store']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -31,20 +43,28 @@ class EventController extends Controller
                 $action = "<div class='d-flex align-items-center justify-content-center gap-2'>";
 
                 
-                if($event->date <= now())
+                if($event->date <= now() && Auth::user()->hasPermissionTo('quote_reviews_show'))
                 {
                     $action .= "<a href='" . route('dashboard.event.review.index', $event) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>";
                 }
-                
-                $action .= "<a href='" . route('dashboard.events.edit', $event) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>";
-                $action .=
-                "
-                    <form id='remove_event' data-id='".$event->id."' onsubmit='remove_event(event, this)'>
-                        <input type='hidden' name='_method' value='DELETE'>
-                        <input type='hidden' name='_token' value='" . csrf_token() . "'>
-                        <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
-                    </form>
-                </div>";
+                if(Auth::user()->hasPermissionTo('quote_edit'))
+                {
+                    $action .= "<a href='" . route('dashboard.events.edit', $event) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>";
+                }
+
+                if(Auth::user()->hasPermissionTo('quote_delete'))
+                {
+                    $action .=
+                    "
+                        <form id='remove_event' data-id='".$event->id."' onsubmit='remove_event(event, this)'>
+                            <input type='hidden' name='_method' value='DELETE'>
+                            <input type='hidden' name='_token' value='" . csrf_token() . "'>
+                            <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
+                        </form>
+                    ";
+                }
+
+                $action .= "</div>";
 
                 return $action;
             })

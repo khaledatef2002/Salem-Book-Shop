@@ -38,6 +38,7 @@ enum PermissionsType: string
     case blogs_show = 'blogs_show';
     case blogs_delete = 'blogs_delete';
     case blogs_create = 'blogs_create';
+    case blogs_approve = 'blogs_approve';
 
     // blogs likes
     case blogs_likes_show = 'blogs_likes_show';
@@ -58,7 +59,6 @@ enum PermissionsType: string
     case articles_edit = 'articles_edit';
     case articles_delete = 'articles_delete';
     case articles_create = 'articles_create';
-    case articles_approve = 'articles_approve';
 
     // articles likes
     case articles_likes_show = 'articles_likes_show';

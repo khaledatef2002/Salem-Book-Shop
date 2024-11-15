@@ -44,7 +44,8 @@ return [
     'roles' => 'الادوار',
     'show' => 'عرض',
     'delete' => 'إزالة',
-
+    'approve' => 'الموافقة',
+    
     'events_reviews' => 'مراجعات الاحداث',
     'blogs_likes' => 'إعجابات المدونة',
     'blogs_comments' => 'تعليقات المدونة',

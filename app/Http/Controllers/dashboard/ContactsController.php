@@ -5,10 +5,20 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
-class ContactsController extends Controller
+class ContactsController extends Controller implements HasMiddleware
 {
+    public static function Middleware()
+    {
+        return [
+            new Middleware('can:contacts_show', only: ['show', 'index']),
+            new Middleware('can:contacts_delete', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -30,14 +40,15 @@ class ContactsController extends Controller
                     <button class='remove_button' onclick='openMessage({$row['id']})'><i class='ri-eye-line fs-4' type='submit'></i></button>
                 "
                 .
-
+                ( Auth::user()->hasPermissionTo('contacts_delete') ?
                 "
                     <form id='remove_contact' data-id='".$row['id']."' onsubmit='remove_contact(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                "
+                ":""
+                )
                 .
                 "</div>";
             })

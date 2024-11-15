@@ -6,10 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Seminar;
 use App\Models\SeminarReview;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
-class EventReviewsController extends Controller
+class EventReviewsController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:events_reviews_show', only: ['index']),
+            new Middleware('can:events_reviews_delete', only: ['destroy']),
+        ];
+    }
     public function index(Request $request, int $event)
     {
         $event_title = Seminar::find($event)->get('title')->first()->title;
@@ -19,14 +29,14 @@ class EventReviewsController extends Controller
             return DataTables::of($quotes)
             ->rawColumns(['action'])
             ->addColumn('action', function($row){
-                return 
+                return Auth::user()->hasPermissionTo('events_reviews_delete') ?
                 "
                     <form id='remove_event_review' data-id='".$row['id']."' onsubmit='remove_event_review(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                ";
+                " : "";
             })
             ->editColumn('event', function(SeminarReview $review){
                 return $review->seminar->title;

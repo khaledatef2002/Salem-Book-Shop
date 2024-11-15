@@ -44,6 +44,7 @@ return [
     'roles' => 'Roles',
     'show' => 'Show',
     'delete' => 'Delete',
+    'approve' => 'Approval',
 
     'events_reviews' => 'Events Reviews',
     'blogs_likes' => 'Blogs Likes',

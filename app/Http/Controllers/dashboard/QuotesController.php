@@ -8,11 +8,23 @@ use App\Models\Quote;
 use App\PeopleType;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
-class QuotesController extends Controller
+class QuotesController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:quote_show', only: ['index']),
+            new Middleware('can:quote_edit', only: ['edit', 'update']),
+            new Middleware('can:quote_create', only: ['store', 'create']),
+            new Middleware('can:quote_delete', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,18 +39,21 @@ class QuotesController extends Controller
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
+                ( Auth::user()->hasPermissionTo('quote_edit') ?
                 "
                     <a href='" . route('dashboard.quote.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>
-                "
+                ":""
+                )
                 .
-
+                ( Auth::user()->hasPermissionTo('quote_delete') ?
                 "
                     <form id='remove_quote' data-id='".$row['id']."' onsubmit='remove_quote(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                "
+                ":""
+                )
                 .
                 "</div>";
             })

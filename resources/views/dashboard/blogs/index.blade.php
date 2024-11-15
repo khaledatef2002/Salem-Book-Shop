@@ -6,17 +6,6 @@
 
 <div class="card">
     <div class="card-body">
-        <div class="row g-2">
-            <div class="col-sm-auto ms-auto">
-                <a href="{{ route('dashboard.blogs.create') }}"><button class="btn btn-success"><i class="ri-add-fill me-1 align-bottom"></i> @lang('dashboard.blogs.add')</button></a>
-            </div>
-            <!--end col-->
-        </div>
-        <!--end row-->
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
         <table class="table table-bordered table-striped" id="dataTables">
             <thead>
                 <tr class="table-dark">

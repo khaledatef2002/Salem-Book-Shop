@@ -6,12 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\ArticleCategory;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\DataTables\Facades\DataTables;
 
-class ArticlesCategories extends Controller
+class ArticlesCategories extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:articles_show', only: ['index']),
+            new Middleware('can:articles_edit', only: ['edit', 'update']),
+            new Middleware('can:articles_delete', only: ['destroy']),
+            new Middleware('can:articles_create', only: ['store']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,18 +38,19 @@ class ArticlesCategories extends Controller
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
+                ( Auth::user()->hasPermissionTo('articles_categories_edit') ?
                 "
                     <button class='remove_button' onclick='openEditCategory({$row['id']})'><i class='ri-settings-5-line fs-4' type='submit'></i></button>
-                "
+                ":"")
                 .
-
+                ( Auth::user()->hasPermissionTo('articles_categories_delete') ?
                 "
                     <form id='remove_article_category' data-id='".$row['id']."' onsubmit='remove_article_category(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                "
+                ":"")
                 .
                 "</div>";
             })

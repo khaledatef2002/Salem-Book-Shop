@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleImage;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -15,8 +17,17 @@ use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Support\Str;
 
-class ArticlesController extends Controller
+class ArticlesController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:articles_show', only: ['index']),
+            new Middleware('can:articles_edit', only: ['edit', 'update', 'uploadImage', 'removeImage']),
+            new Middleware('can:articles_delete', only: ['destroy']),
+            new Middleware('can:articles_create', only: ['create', 'store', 'uploadImage', 'removeImage']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -31,21 +42,28 @@ class ArticlesController extends Controller
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
-                "
-                    <a href='" . route('dashboard.article-comments.index', $row['id']) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>
-                    <a href='" . route('dashboard.article-likes.index', $row['id']) . "'><i class='ri-thumb-up-line fs-4' type='submit'></i></a>
-                    <a href='" . route('front.article.show', $row['slug']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>
-                    <a href='" . route('dashboard.articles.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>    
-                "
+                ( Auth::user()->hasPermissionTo('articles_comments_show') ?
+                "<a href='" . route('dashboard.article-comments.index', $row['id']) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>"
+                :"")
                 .
-
+                ( Auth::user()->hasPermissionTo('articles_likes_show') ?
+                "<a href='" . route('dashboard.article-likes.index', $row['id']) . "'><i class='ri-thumb-up-line fs-4' type='submit'></i></a>"
+                :"")
+                .
+                "<a href='" . route('front.article.show', $row['slug']) . "' target='_blank'><i class='ri-eye-line fs-4' type='submit'></i></a>"
+                .  
+                ( Auth::user()->hasPermissionTo('articles_edit') ?
+                "<a href='" . route('dashboard.articles.edit', $row) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>    "
+                :"")
+                .
+                ( Auth::user()->hasPermissionTo('articles_delete') ?
                 "
                     <form id='remove_book' data-id='".$row['id']."' onsubmit='remove_book(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
                     </form>
-                "
+                ":"")
                 .
                 "</div>";
             })
