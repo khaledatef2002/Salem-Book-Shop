@@ -135,6 +135,25 @@
                 ClassicEditor.create(document.querySelector('textarea[name="content[{{ $locale['locale'] }}]"]'), {
                     ckfinder: {
                         uploadUrl: '/dashboard/ckEditorUploadImage?command=QuickUpload&type=Images&responseType=json'
+                    },
+                    mediaEmbed: {
+                        previewsInData: true,
+                        providers: [
+                            {
+                                name: 'youtube',
+                                url: [
+                                    /^youtube\.com\/watch\?v=([\w-]+)/,
+                                    /^youtu\.be\/([\w-]+)/
+                                ],
+                                html: match => (
+                                    `<div style="position: relative; padding-bottom: 56.25%; height: 0;">
+                                        <iframe src="https://www.youtube.com/embed/${match[1]}" alt="khaled"
+                                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                                                frameborder="0" allowfullscreen></iframe>
+                                    </div>`
+                                )
+                            }
+                        ]
                     }
                 }).then(editor => {
                     ckEditor{{ $locale['locale'] }} = editor;
