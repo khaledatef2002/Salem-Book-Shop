@@ -11,7 +11,7 @@
 @if ($comming_events?->count() > 0)
     <section id="comming-event" class="py-5">
         <div class="container-lg container-md px-lg-0">
-            <div class="event rounded-5">
+            <div class="event rounded-5 px-2">
                 <div class="backgound-overlay d-flex flex-column justify-content-evenly align-items-center h-100">
                     <h2 class="text-center fw-bold fs-1">@lang('custom.home.events.comming')</h2>
                     <div>
