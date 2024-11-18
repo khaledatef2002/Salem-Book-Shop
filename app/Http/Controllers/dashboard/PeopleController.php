@@ -192,6 +192,7 @@ class PeopleController extends Controller implements HasMiddleware
         {
             Storage::disk('public')->delete($person->image);
         }
+
         $person->delete();
     }
 }
