@@ -36,7 +36,7 @@
 @endsection
 
 @section('custom-js')
-    <script src="{{ asset('back/js/quotes.js') }}"></script>
+    <script src="{{ asset('back/js/people.js') }}"></script>
     <script>
         var table
         $(document).ready( function () {
