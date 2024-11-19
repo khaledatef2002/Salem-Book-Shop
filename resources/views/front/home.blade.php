@@ -11,8 +11,8 @@
 @if ($comming_events?->count() > 0)
     <section id="comming-event" class="py-5">
         <div class="container-lg container-md px-lg-0">
-            <div class="event rounded-5 px-2">
-                <div class="backgound-overlay d-flex flex-column justify-content-evenly align-items-center h-100">
+            <div class="event rounded-5">
+                <div class="backgound-overlay px-2 d-flex flex-column justify-content-evenly align-items-center h-100">
                     <h2 class="text-center fw-bold fs-2 mb-1">@lang('custom.home.events.comming')</h2>
                     <div>
                         <h3 class="text-center fs-2 mb-4">{{ $comming_events->title }}</h3>
@@ -33,7 +33,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex flex-wrap gap-2 align-items-center justify-contetn-center">
+                    <div class="d-flex flex-wrap gap-2 align-items-center justify-content-center">
                         @if (Auth::check())
                             <form id="unattend-form" style="display: {{ $comming_events->authAttendants->count() ? 'block' : 'none' }}" onsubmit="main_unattend_event(event, this, {{ $comming_events->id }})">
                                 @csrf
