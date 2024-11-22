@@ -235,6 +235,11 @@ class BookController extends Controller implements HasMiddleware
                 Storage::disk('public')->delete($book->source);
             }
 
+            if(Storage::disk('public')->exists('pdf-images/' . $book->id))
+            {
+                Storage::disk('public')->delete('pdf-images/' . $book->id);
+            }
+
             $path = 'pdf/' . uniqid() . '.' . $request->source->getClientOriginalExtension();
             $request->file('source')->storeAs('pdf', basename($path), 'public');
             
