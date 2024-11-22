@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\front\BooksController;
 use App\Models\Book;
 use App\Models\BookImage;
 use App\PeopleType;
@@ -177,6 +178,8 @@ class BookController extends Controller implements HasMiddleware
             ]);
         }
 
+        BooksController::getPagesCount($book);
+
         return response()->json(['redirectUrl' => route('dashboard.books.edit', $book)]);
     }
     /**
@@ -247,6 +250,8 @@ class BookController extends Controller implements HasMiddleware
                 'source' => $path,
                 'pagescount' => 0,
             ]);
+
+            BooksController::getPagesCount($book);
         }
 
         foreach($request->delete_images ?? [] as $image_id)
