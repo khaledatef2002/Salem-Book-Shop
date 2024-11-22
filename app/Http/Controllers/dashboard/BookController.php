@@ -244,7 +244,8 @@ class BookController extends Controller implements HasMiddleware
             $request->file('source')->storeAs('pdf', basename($path), 'public');
             
             $book->update([
-                'source' => $path
+                'source' => $path,
+                'pagescount' => 0,
             ]);
         }
 

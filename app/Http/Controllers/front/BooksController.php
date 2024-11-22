@@ -107,7 +107,7 @@ class BooksController extends Controller
     public function show(Book $book)
     {
         $reviews = $book->reviews()->paginate(5);
-        $pagesCount = $this->getPagesCount($book);
+        $pagesCount = self::getPagesCount($book);
         return view('front.books.single-book', compact('book', 'reviews', 'pagesCount'));
     }
 
@@ -241,7 +241,7 @@ class BooksController extends Controller
         return response()->json(['image' => $imageData]);
     }
 
-    private function getPagesCount(Book $book)
+    public static function getPagesCount(Book $book)
     {
         if($book->pagescount > 0)
         {
