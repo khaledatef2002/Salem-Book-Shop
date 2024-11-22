@@ -122,8 +122,8 @@ class EventController extends Controller implements HasMiddleware
 
         $manager = new ImageManager(new GdDriver());
         $optimizedImage = $manager->read($image)
-            ->scale(width: 250)
-            ->encode(new AutoEncoder(quality: 75));
+            ->scale(width: 526)
+            ->encode(new AutoEncoder(quality: 80));
 
         Storage::disk('public')->put($imagePath, (string) $optimizedImage);
 
@@ -231,8 +231,8 @@ class EventController extends Controller implements HasMiddleware
 
             $manager = new ImageManager(new GdDriver());
             $optimizedImage = $manager->read($image)
-                ->scale(width: 250)
-                ->encode(new AutoEncoder(quality: 75));
+                ->scale(width: 526)
+                ->encode(new AutoEncoder(quality: 80));
 
             Storage::disk('public')->put($imagePath, (string) $optimizedImage);
 
