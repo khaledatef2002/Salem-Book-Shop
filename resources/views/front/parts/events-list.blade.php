@@ -10,16 +10,16 @@
                             <div class="event-content flex-fill py-2 d-flex flex-column justify-content-between">
                                 <div>
                                     <div class="event-content-header d-flex justify-content-between align-items-center">
-                                        <h2 class="fs-4 mb-0 text-center text-dark fw-bold">{{ $event->title }}</h2>
-                                        <span class="time fw-bold">
-                                            <bdi>{{ $event->date->format("Y, M d h:ia") }}</bdi>
-                                            @if ($event->date < now())
-                                                (<i class="fa-solid fa-check-double text-success"></i>)
-                                            @else
-                                                <i class="fa-solid fa-hourglass-half text-warning"></i>
-                                            @endif
-                                        </span>
+                                        <h2 class="fs-5 mb-0 text-start text-dark fw-bold pe-1">{{ $event->title }}</h2>
                                     </div>
+                                    <span class="time fw-bold">
+                                        <bdi>{{ $event->date->format("Y, M d h:ia") }}</bdi>
+                                        @if ($event->date < now())
+                                            (<i class="fa-solid fa-check-double text-success"></i>)
+                                        @else
+                                            <i class="fa-solid fa-hourglass-half text-warning"></i>
+                                        @endif
+                                    </span>
                                     <div class="event-description mt-1">
                                         {{ $event->description }}
                                     </div>
