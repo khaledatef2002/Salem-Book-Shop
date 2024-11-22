@@ -1,1 +1,7 @@
 .owl-nav {transform: translate(2%, -50%) !important;}
+.book-carousel .owl-nav {
+    transform: translate(50%, -50%);
+    width: 113%;
+    right: 50%;
+    left: unset;
+}
