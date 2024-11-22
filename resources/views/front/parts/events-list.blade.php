@@ -13,12 +13,12 @@
                                         <h2 class="fs-5 mb-0 text-start text-dark fw-bold pe-1">{{ $event->title }}</h2>
                                     </div>
                                     <span class="time fw-bold">
-                                        <bdi>{{ $event->date->format("Y, M d h:ia") }}</bdi>
                                         @if ($event->date < now())
-                                            (<i class="fa-solid fa-check-double text-success"></i>)
+                                            (<i class="fa-solid fa-check-double"></i>)
                                         @else
-                                            <i class="fa-solid fa-hourglass-half text-warning"></i>
+                                            <i class="fa-solid fa-hourglass-half"></i>
                                         @endif
+                                        <bdi>{{ $event->date->format("Y, M d h:ia") }}</bdi>
                                     </span>
                                     <div class="event-description mt-1">
                                         {{ $event->description }}
