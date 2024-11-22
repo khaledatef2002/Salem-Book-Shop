@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\BookRequestsStatesType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Translatable\HasTranslations;
 
 class Book extends Model
@@ -50,6 +52,11 @@ class Book extends Model
 
     public function authReview()
     {
-        return $this->hasMany(BookReview::class)->where('user_id', auth()->user()->id);
+        return $this->hasMany(BookReview::class)->where('user_id', Auth::user()->id);
+    }
+
+    public function authUnlocked()
+    {
+        return Auth::check() && $this->hasMany(BookRequest::class)->where('user_id', Auth::user()->id)->where('state', BookRequestsStatesType::approved->value)->count() > 0;
     }
 }
