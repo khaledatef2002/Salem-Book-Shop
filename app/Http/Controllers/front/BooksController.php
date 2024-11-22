@@ -181,42 +181,26 @@ class BooksController extends Controller
     public function download($id)
     {
         $book = Book::findOrFail($id);
+        // if(!$book->authUnlocked())
+        //     abort(401, "Need to unlock this book first");
+            
         if (!$book->downloadable) {
-            die("This book isn't downloadable");
+            abort(401, "This book isn't downloadable");
         }
         $pdfPath = $book->source;
         if (!Storage::disk('public')->exists($pdfPath)) {
-            die("Invalid book source");
+            abort(401, "Invalid book source");
         }
         return Storage::disk('public')->download($pdfPath);
     }
 
     public function read($id, $page)
     {
-        // putenv('PATH=' . getenv('PATH') . ';C:\Program Files\gs\gs10.04.0\bin');
-    
-        // // Retrieve the book
-        // $book = Book::findOrFail($id);
-
-        // if(!Storage::disk('local')->exists("/books_images/" . $book->id))
-        // {
-        //     Storage::disk('local')->makeDirectory("/books_images/" . $book->id);
-        // }
-
-        // if(!Storage::disk('local')->exists("/books_images/{$book->id}/{$page}.jpg"))
-        // {
-        //     // Define the PDF path in the private folder
-        //     $pdfPath = storage_path("app/private/{$book->source}");
-    
-        //     $pdf = new \Drenso\PdfToImage\Pdf($pdfPath);
-        //     $pdf->setPage($page)
-        //     ->saveImage(storage_path("app/private/books_images/{$book->id}/{$page}.jpg"));
-        // }
-        // $image = Storage::disk('local')->get("/books_images/{$book->id}/{$page}.jpg");
-        // return response($image, 200)->header('Content-Type', 'image/jpeg');
-
         // Retrieve the book
         $book = Book::findOrFail($id);
+
+        // if($book->authUnlocked())
+        //     abort(401, 'Need to unlock this book first');
 
         if(!Storage::disk('public')->exists("/books_images/" . $book->id))
         {
@@ -230,6 +214,10 @@ class BooksController extends Controller
     public function getImages(Request $request)
     {
         $book = Book::findOrFail($request->id);
+
+        // if($book->authUnlocked())
+        //     abort(401, 'Need to unlock this book first');
+        
         $page = $request->page;
 
         $pageFile = storage_path("app/public/pdf-images/{$book->id}/page-$page.jpg");
@@ -255,10 +243,21 @@ class BooksController extends Controller
 
     private function getPagesCount(Book $book)
     {
+        if($book->pagescount > 0)
+        {
+            return $book->pagescount;
+        }
+
         $path = Storage::disk('public')->path($book->source);
         $pdf = new \Spatie\PdfToImage\Pdf($path);
 
-        return $pdf->pageCount();
+        $pagesCount = $pdf->pageCount();
+
+        $book->update([
+            'pagescount' => $pagesCount
+        ]);
+
+        return $pagesCount;
     }
 
     /**
