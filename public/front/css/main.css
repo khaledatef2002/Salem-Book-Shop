@@ -84,8 +84,8 @@ textarea
 .owl-nav {
     position: absolute;
     top: 50%;
-    transform: translate(-2%, -50%);
-    width: 103%;
+    transform: translate(-16px, -50%);
+    width: calc(100% + 18px);
     display: flex;
     justify-content: space-between;
 }
