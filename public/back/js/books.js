@@ -93,6 +93,7 @@ $("#edit-book-form").submit(function(e){
                 icon: "success"
             });
             submit_button.prop("disabled", false)
+            $("input[name='source'").val("")
         },
         error: function(xhr) {
             var errors = xhr.responseJSON.errors;

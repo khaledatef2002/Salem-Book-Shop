@@ -1141,12 +1141,14 @@ div.select-box ol li {
 }
 #book-read .page
 {
-    height: 100%;
+    height: 98%;
     margin-top: 10px;
+    max-height: fit-content;
 }
 #book-read .page img
 {
     max-height: 100%;
+    max-width: 95%;
 }
 #book-read .pages-navigator
 {
