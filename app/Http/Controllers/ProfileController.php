@@ -110,4 +110,10 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function books(Request $request)
+    {
+        $books = Auth::user()->unlocked_books()->paginate(5);
+        return view('front.profile.unlocked-books', compact('books'));
+    }
 }

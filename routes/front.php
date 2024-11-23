@@ -35,6 +35,7 @@ Route::name('front.')->group(function(){
         Route::get('book/unlock/cancel/{book}', [BooksController::class, 'cancel_request_unlock']);
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+        Route::get('/profile/unlocked_books', [ProfileController::class, 'books'])->name('profile.unlocked_books');
         Route::post('/profile/general_info', [ProfileController::class, 'update'])->name('profile.general');
         Route::post('/profile/update_password', [ProfileController::class, 'update_password'])->name('profile.password');
     

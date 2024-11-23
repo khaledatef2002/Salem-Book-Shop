@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\BookRequestsStatesType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -93,5 +95,11 @@ class User extends Authenticatable
     public function getDisplayImageAttribute()
     {
         return asset($this->image ? 'storage/' . $this->image : 'front/imgs/user-dummy-img.jpg');
+    }
+
+    public function unlocked_books()
+    {
+        return $this->belongsToMany(Book::class, 'book_requests', 'user_id', 'book_id')
+        ->wherePivot('state', BookRequestsStatesType::approved->value);
     }
 }
