@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-7 col-11 ps-md-4 mb-md-0 mb-5">
-                <h2>{{ $book->title }}</h2>
+                <h2>{!! !$book->authUnlocked() ? '<i class="fas fa-lock fs-4" id="title_lock_icon"></i>' : '' !!} {{ $book->title }}</h2>
                 <hr>
                 <p>
                     <i class="fa-solid fa-pen-nib"></i> {{ $book->author->name }}
@@ -49,16 +49,25 @@
                         @endfor
                     </span>
                 </div>
-                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#book-read">@lang('custom.books.read')</a>
-                @if($book->downloadable)
-                    <a href="{{ route('front.books.download', $book) }}" class="btn btn-success" target="_blank">@lang('custom.books.download')</a>
+                @if ($book->authUnlocked())
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#book-read">@lang('custom.books.read')</a>
+                    @if($book->downloadable)
+                        <a href="{{ route('front.books.download', $book) }}" class="btn btn-success" target="_blank">@lang('custom.books.download')</a>
+                    @else
+                        <p>@lang('custom.books.no-download')</p>
+                    @endif
+                @elseif ($book->authPendingRequest())
+                    <div class="mt-3">
+                        <p class="mb-0 fs-6 text-muted">You have already a pending request</p>
+                        <button class="btn btn-danger px-3" onclick="cancel_request_unlock_book(this, {{ $book->id }})">Cancel Request</button>
+                    </div>
                 @else
-                    <p>@lang('custom.books.no-download')</p>
+                    <button class="btn btn-primary px-3" onclick="request_unlock_book(this, {{ $book->id }})"><i class="fas fa-unlock-alt pe-1"></i> Request Unlock</button>    
                 @endif
             </div>
         </div>
         @if ($book->description)
-            <div class="row">
+            <div class="row mt-2">
                 <p class="fw-bold mb-0">@lang('dashboard.description'):</p>
                 <p>{{ $book->description }}</p>
             </div>
