@@ -1,5 +1,6 @@
 @php
     $unaproavedBlogs = App\Models\Blog::where('approaved', App\ApproavedStatusType::pending->value)->count();
+    $unrespondedBookRequests = App\Models\BookRequest::where('state', App\BookRequestsStatesType::pending->value)->count();
 @endphp
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
@@ -51,6 +52,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('dashboard.books.index') }}" class="nav-link">@lang('dashboard.books.all-books')</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('dashboard.books-requests.index') }}" class="nav-link">@lang('dashboard.books.all-requests') <span class="badge bg-warning">{{ $unrespondedBookRequests }}</span></a>
                                     </li>
                                 </ul>
                             </div>

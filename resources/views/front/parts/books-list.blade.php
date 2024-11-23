@@ -9,7 +9,7 @@
                                 <img src="{{ asset('storage/' . $book->images->first()->url) }}" alt="{{ $book->title }}" title="{{ $book->title }}">
                             </div>
                             <div class="content d-flex flex-column mt-2">
-                                <h3 class="fs-6 text-center text-dark fw-bold flex-fill d-flex align-items-center justify-content-center">{{ $book->title }}</h3>
+                                <h3 class="fs-6 text-center text-dark fw-bold flex-fill d-flex align-items-center justify-content-center">{!! !$book->authUnlocked() ? '<i class="fas fa-lock pe-1"></i>' : '' !!} {{ $book->title }}</h3>
                                 <h3 class="text-dark fs-6 text-center mb-0">
                                     <i class="fa-solid fa-feather"></i>
                                     <span>{{ $book->author->name }}</span>

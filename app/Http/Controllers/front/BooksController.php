@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\front;
 
+use App\BookRequestsStatesType;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\BookRequest;
 use App\Models\BookReview;
 use App\Models\TemporaryLink;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
@@ -282,5 +285,49 @@ class BooksController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function request_unlock(Request $request, Book $book)
+    {
+        $user_id = Auth::id();
+        
+        $old_pending_request = BookRequest::where('book_id', $book->id)
+        ->where('user_id', $user_id)
+        ->where('state', BookRequestsStatesType::pending->value)
+        ->count();
+
+        if($old_pending_request)
+        {
+            abort(400, 'Already Have requests');
+        }
+
+        BookRequest::create([
+            'user_id' => $user_id,
+            'book_id' => $book->id,
+            'state' => BookRequestsStatesType::pending->value
+        ]);
+
+        return '<div class="mt-3">
+                    <p class="mb-0 fs-6 text-muted">You have already a pending request</p>
+                    <button class="btn btn-danger px-3" onclick="cancel_request_unlock_book(this,' . $book->id . ')">Cancel Request</button>
+                </div>';
+    }
+
+    public function cancel_request_unlock(Request $request, Book $book)
+    {
+        $user_id = Auth::id();
+        
+        $old_pending_request = BookRequest::where('book_id', $book->id)
+        ->where('user_id', $user_id)
+        ->where('state', BookRequestsStatesType::pending->value);
+
+        if(!$old_pending_request->count())
+        {
+            abort(400, 'No existing requests');
+        }
+
+        $old_pending_request->delete();
+
+        return '<button class="btn btn-primary px-3" onclick="request_unlock_book(this,' . $book->id .')"><i class="fas fa-unlock-alt pe-1"></i> Request Unlock</button>';
     }
 }

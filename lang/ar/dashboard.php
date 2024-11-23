@@ -45,6 +45,8 @@ return [
     'show' => 'عرض',
     'delete' => 'إزالة',
     'approve' => 'الموافقة',
+    'state' => 'الحالة',
+    'books_requests' => 'طلبات الكتب',
     
     'events_reviews' => 'مراجعات الاحداث',
     'blogs_likes' => 'إعجابات المدونة',
@@ -82,6 +84,7 @@ return [
     'books.source' => 'المصدر',
     'books.add' => 'إضافة كتاب',
     'return.all-books' => 'العودة إلى جميع الكتب',
+    'books.all-requests' => 'جميع الطلبات',
 
     'books.categories' => 'تصنيفات الكتب',
     'books.categories.add' => 'إضافة تصنيف',

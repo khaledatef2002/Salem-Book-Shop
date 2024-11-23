@@ -386,6 +386,29 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>@lang('dashboard.books_requests')</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input name="permission[]" class="form-check-input" type="checkbox" id="{{ \App\PermissionsType::books_requests_show->value }}" value="{{ \App\PermissionsType::books_requests_show->value }}" {{ $role->hasPermissionTo(\App\PermissionsType::books_requests_show->value) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="{{ \App\PermissionsType::books_requests_show->value }}">
+                                            @lang('dashboard.show')
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="permission[]" class="form-check-input" type="checkbox" id="{{ \App\PermissionsType::books_requests_delete->value }}" value="{{ \App\PermissionsType::books_requests_delete->value }}" {{ $role->hasPermissionTo(\App\PermissionsType::books_requests_delete->value) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="{{ \App\PermissionsType::books_requests_delete->value }}">
+                                            @lang('dashboard.delete')
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="permission[]" class="form-check-input" type="checkbox" id="{{ \App\PermissionsType::books_requests_action->value }}" value="{{ \App\PermissionsType::books_requests_action->value }}" {{ $role->hasPermissionTo(\App\PermissionsType::books_requests_action->value) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="{{ \App\PermissionsType::books_requests_action->value }}">
+                                            @lang('dashboard.action')
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>@lang('dashboard.books_reviews')</td>
                                 <td>
                                     <div class="form-check">

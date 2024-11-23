@@ -123,7 +123,7 @@ return [
     'article.add-comment' => 'إضافة تعليق',
     'article.comment.sign-in-to-comment' => 'سجل دخول لتستطيع اضافة تعليق',
     'all-articles' => 'جميع المقالات',
-
+    'articles.list-of-all' => 'جميع المقالات',
 
     'all-blogs' => 'جميع التدوينات',
     'blogs.list-of-all' => 'قائمة بجميع التدوينات',

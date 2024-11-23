@@ -45,6 +45,8 @@ return [
     'show' => 'Show',
     'delete' => 'Delete',
     'approve' => 'Approval',
+    'state' => 'State',
+    'books_requests' => 'Books Requests',
 
     'events_reviews' => 'Events Reviews',
     'blogs_likes' => 'Blogs Likes',
@@ -82,6 +84,7 @@ return [
     'books.source' => 'Source',
     'books.add' => 'Add Book',
     'return.all-books' => 'Return to all books',
+    'books.all-requests' => 'All Requests',
 
     'books.categories' => 'Books Categories',
     'books.categories.add' => 'Add Category',

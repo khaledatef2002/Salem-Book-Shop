@@ -9,6 +9,7 @@ use App\Http\Controllers\dashboard\BlogsComentsController;
 use App\Http\Controllers\dashboard\BlogsController;
 use App\Http\Controllers\dashboard\BlogsLikesController;
 use App\Http\Controllers\dashboard\BookController;
+use App\Http\Controllers\dashboard\BookRequestsController;
 use App\Http\Controllers\dashboard\BooksCategoriesController;
 use App\Http\Controllers\dashboard\BooksReviewsController;
 use App\Http\Controllers\dashboard\ContactsController;
@@ -39,7 +40,14 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::resource('articles-category', ArticlesCategories::class);
     
     Route::resource('books', BookController::class);
-    
+
+    Route::controller(BookRequestsController::class)->name('books-requests.')->group(function(){
+        Route::get('books-requests', 'index')->name('index');
+        Route::post('books-requests/cancel/{book}/{user}', 'cancel')->name('cancel');
+        Route::post('books-requests/accept/{book}/{user}', 'accept')->name('accept');
+        Route::delete('books-requests/{book}/{user}', 'destroy')->name('destroy');
+    });
+
     Route::resource('book-review', BooksReviewsController::class);
     Route::get('book/{book}/review', [BooksReviewsController::class, 'index'])->name('book-review.index');
     Route::delete('review/{review}', [BooksReviewsController::class, 'destroy']);

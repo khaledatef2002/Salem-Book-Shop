@@ -31,6 +31,8 @@ Route::name('front.')->group(function(){
         Route::post('book/editReview', [BooksController::class, 'updateReview']);
         Route::get('book/review/data', [BooksController::class, 'getReview']);
         Route::delete('book/review/delete', [BooksController::class, 'deleteReview']);
+        Route::get('book/unlock/{book}', [BooksController::class, 'request_unlock']);
+        Route::get('book/unlock/cancel/{book}', [BooksController::class, 'cancel_request_unlock']);
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
         Route::post('/profile/general_info', [ProfileController::class, 'update'])->name('profile.general');

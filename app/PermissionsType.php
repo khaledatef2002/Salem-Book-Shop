@@ -80,6 +80,11 @@ enum PermissionsType: string
     case books_delete = 'books_delete';
     case books_create = 'books_create';
 
+    // Books Requests
+    case books_requests_show = 'books_requests_show';
+    case books_requests_delete = 'books_requests_delete';
+    case books_requests_action = 'books_requests_action';
+
     // books reviews
     case books_reviews_show = 'books_reviews_show';
     case books_reviews_delete = 'books_reviews_delete';

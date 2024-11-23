@@ -122,6 +122,7 @@ return [
     'article.add-comment' => 'Add Comment',
     'article.comment.sign-in-to-comment' => 'Sign in to be able to add comment',
     'all-articles' => 'All Articles',
+    'articles.list-of-all' => 'List of all aricles',
 
     'all-blogs' => 'All Blogs',
     'blogs.list-of-all' => 'List Of All Blogs',

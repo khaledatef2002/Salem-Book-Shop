@@ -297,3 +297,47 @@ setInterval(function(){
         }
     }
 }, 1000)
+
+function request_unlock_book(button, id){
+    button = $(button)
+    button.prop("disabled", true)
+
+    $.ajax({
+        url: "/book/unlock/" + id,  // Laravel route to handle name change
+        method: 'GET',
+        success: function(response) {
+            button.replaceWith(response)
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var firstKey = Object.keys(errors)[0];
+            Swal.fire({
+                text: errors[firstKey][0],
+                icon: "error"
+            });
+            button.prop("disabled", false)
+        }
+    });
+}
+
+function cancel_request_unlock_book(button, id){
+    button = $(button)
+    button.prop("disabled", true)
+
+    $.ajax({
+        url: "/book/unlock/cancel/" + id,  // Laravel route to handle name change
+        method: 'GET',
+        success: function(response) {
+            button.parent().replaceWith(response)
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var firstKey = Object.keys(errors)[0];
+            Swal.fire({
+                text: errors[firstKey][0],
+                icon: "error"
+            });
+            button.prop("disabled", false)
+        }
+    });
+}

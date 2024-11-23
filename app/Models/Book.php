@@ -59,4 +59,9 @@ class Book extends Model
     {
         return Auth::check() && $this->hasMany(BookRequest::class)->where('user_id', Auth::user()->id)->where('state', BookRequestsStatesType::approved->value)->count() > 0;
     }
+
+    public function authPendingRequest()
+    {
+        return Auth::check() && $this->hasMany(BookRequest::class)->where('user_id', Auth::user()->id)->where('state', BookRequestsStatesType::pending->value)->count() > 0;
+    }
 }
