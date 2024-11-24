@@ -8,10 +8,6 @@ class BookRequest extends Model
 {
     protected $guarded = [];
 
-    public $incrementing = false; 
-    
-    protected $primaryKey = null;
-
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -9,7 +9,7 @@
         <table class="table table-bordered table-striped" id="dataTables">
             <thead>
                 <tr class="table-dark">
-                    <th>#</th>
+                    <th>@lang('dashboard.id')</th>
                     <th>@lang('dashboard.book')</th>
                     <th>@lang('dashboard.user')</th>
                     <th>@lang('dashboard.state')</th>
@@ -31,7 +31,7 @@
                 serverSide: true,
                 ajax: "{{ route('dashboard.books-requests.index') }}",
                 columns: [
-                            { data: 'DT_RowIndex', name: 'DT_RowIndex', title: '#'  },
+                            { data: 'id', name: 'id'},
                             { data: 'book', name: 'book' },
                             { data: 'user', name: 'user' },
                             { data: 'state', name: 'state' },

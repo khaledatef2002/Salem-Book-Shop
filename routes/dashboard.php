@@ -43,9 +43,9 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
 
     Route::controller(BookRequestsController::class)->name('books-requests.')->group(function(){
         Route::get('books-requests', 'index')->name('index');
-        Route::post('books-requests/cancel/{book}/{user}', 'cancel')->name('cancel');
-        Route::post('books-requests/accept/{book}/{user}', 'accept')->name('accept');
-        Route::delete('books-requests/{book}/{user}', 'destroy')->name('destroy');
+        Route::post('books-requests/cancel/{book_request}', 'cancel')->name('cancel');
+        Route::post('books-requests/accept/{book_request}', 'accept')->name('accept');
+        Route::delete('books-requests/{book_request}', 'destroy')->name('destroy');
     });
 
     Route::resource('book-review', BooksReviewsController::class);

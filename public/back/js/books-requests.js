@@ -4,11 +4,10 @@ function remove(form) {
     var submit_button = $(form).find("button[type='submit']")
     submit_button.prop("disabled", true)
     
-    let book_id = $(form).attr("data-book-id")
-    let user_id = $(form).attr("data-user-id")
+    let request_id = $(form).attr("data-id")
     
     $.ajax({
-        url: "books-requests/" + book_id + "/" + user_id,
+        url: "books-requests/" + request_id,
         method: 'POST', 
         data: formData,
         contentType: false,
@@ -34,16 +33,16 @@ function remove(form) {
 }
 
 function cancel_book_request(button) {
+    console.log(button)
     var submit_button = $(button)
     submit_button.prop("disabled", true)
     
-    let book_id = submit_button.parent().attr("data-book-id")
-    let user_id = submit_button.parent().attr("data-user-id")
+    let request_id = submit_button.parent().attr("data-id")
 
     var formData = new FormData(submit_button.parent().get(0));
 
     $.ajax({
-        url: "books-requests/cancel/" + book_id + "/" + user_id,
+        url: "books-requests/cancel/" + request_id,
         method: 'POST', 
         data: formData,
         processData: false,
@@ -72,13 +71,12 @@ function accept_book_request(button) {
     var submit_button = $(button)
     submit_button.prop("disabled", true)
     
-    let book_id = submit_button.parent().attr("data-book-id")
-    let user_id = submit_button.parent().attr("data-user-id")
+    let request_id = submit_button.parent().attr("data-id")
 
     var formData = new FormData(submit_button.parent().get(0));
 
     $.ajax({
-        url: "books-requests/accept/" + book_id + "/" + user_id,
+        url: "books-requests/accept/" + request_id,
         method: 'POST', 
         data: formData,
         processData: false,

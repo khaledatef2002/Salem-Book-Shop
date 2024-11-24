@@ -13,11 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('book_requests', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('book_id');
             $table->foreign('book_id')->on('books')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade')->onUpdate('cascade');
-            $table->primary(['book_id', 'user_id']);
             $table->enum('state', [BookRequestsStatesType::approved->value, BookRequestsStatesType::pending->value, BookRequestsStatesType::canceled->value]);
             $table->timestamps();
         });

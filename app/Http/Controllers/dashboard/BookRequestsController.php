@@ -23,18 +23,17 @@ class BookRequestsController extends Controller
             $quotes = BookRequest::get();
             return DataTables::of($quotes)
             ->rawColumns(['action'])
-            ->addIndexColumn()
             ->addColumn('action', function(BookRequest $book_request){
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
                 ( Auth::user()->hasPermissionTo('books_requests_delete') && $book_request->state == BookRequestsStatesType::pending->value ?
                 "
-                    <form id='cancel_book_request' data-user-id='".$book_request->user_id."' data-book-id='".$book_request->book_id."' onsubmit='cancel_book_request(event, this)'>
+                    <form id='cancel_book_request' data-id='".$book_request->id."' onsubmit='cancel_book_request(event, this)'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='cancel_book_request(this)' type='button'><i class='ri-close-line text-danger fs-4'></i></button>
                     </form>
-                    <form id='accept_book_request' data-user-id='".$book_request->user_id."' data-book-id='".$book_request->book_id."' onsubmit='accept_book_request(event, this)'>
+                    <form id='accept_book_request' data-id='".$book_request->id."' onsubmit='accept_book_request(event, this)'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='accept_book_request(this)' type='button'><i class='ri-check-double-line text-success fs-4'></i></button>
                     </form>
@@ -42,7 +41,7 @@ class BookRequestsController extends Controller
                 .
                 ( Auth::user()->hasPermissionTo('books_requests_delete') ?
                 "
-                    <form id='remove_request' data-user-id='".$book_request->user_id."' data-book-id='".$book_request->book_id."' onsubmit='remove_request(event, this)'>
+                    <form id='remove_request' data-id='".$book_request->id."' onsubmit='remove_request(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>
@@ -75,62 +74,24 @@ class BookRequestsController extends Controller
         return view('dashboard.books.requests.index');
     }
 
-    public function cancel(Request $request, Book $book, User $user)
+    public function cancel(Request $request, BookRequest $book_request)
     {
-        $bookRequest = BookRequest::where('book_id', $book->id)
-            ->where('user_id', $user->id)
-            ->first();
-
-        if (!$bookRequest) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Book request not found.',
-            ], 404);
-        }
-
-        $bookRequest->state = BookRequestsStatesType::canceled->value;
-        $bookRequest->save();
+        $book_request->state = BookRequestsStatesType::canceled->value;
+        $book_request->save();
     }
 
-    public function accept(Request $request, Book $book, User $user)
+    public function accept(Request $request, BookRequest $book_request)
     {
-        $bookRequest = BookRequest::where('book_id', $book->id)
-            ->where('user_id', $user->id)
-            ->first();
-
-        if (!$bookRequest) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Book request not found.',
-            ], 404);
-        }
-
-        $bookRequest->state = BookRequestsStatesType::approved->value;
-        $bookRequest->save();
+        $book_request->state = BookRequestsStatesType::approved->value;
+        $book_request->save();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, Book $book, User $user)
+    public function destroy(Request $request, BookRequest $book_request)
     {
         // Attempt to delete the record directly
-        $deleted = BookRequest::where('book_id', $book->id)
-            ->where('user_id', $user->id)
-            ->delete();
-
-        // Check if a record was deleted
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Book request deleted successfully.',
-            ]);
-        }
-
-        // If no record was found, return a 404 response
-        return response()->json([
-            'success' => false,
-            'message' => 'Book request not found.',
-        ], 404);
+        $book_request->delete();
     }
 }
