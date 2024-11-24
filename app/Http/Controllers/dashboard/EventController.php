@@ -43,16 +43,16 @@ class EventController extends Controller implements HasMiddleware
                 $action = "<div class='d-flex align-items-center justify-content-center gap-2'>";
 
                 
-                if($event->date <= now() && Auth::user()->hasPermissionTo('quote_reviews_show'))
+                if($event->date <= now() && Auth::user()->hasPermissionTo('events_reviews_show'))
                 {
                     $action .= "<a href='" . route('dashboard.event.review.index', $event) . "'><i class='ri-message-2-line fs-4' type='submit'></i></a>";
                 }
-                if(Auth::user()->hasPermissionTo('quote_edit'))
+                if(Auth::user()->hasPermissionTo('events_edit'))
                 {
                     $action .= "<a href='" . route('dashboard.events.edit', $event) . "'><i class='ri-settings-5-line fs-4' type='submit'></i></a>";
                 }
 
-                if(Auth::user()->hasPermissionTo('quote_delete'))
+                if(Auth::user()->hasPermissionTo('events_delete'))
                 {
                     $action .=
                     "
@@ -213,7 +213,7 @@ class EventController extends Controller implements HasMiddleware
             'date' => ['required', 'date'],
             'instructor_id' => ['required', 'array'],
             'instructor_id.*' => ['required', 'numeric', Rule::exists('people', 'id')->where('type', PeopleType::Instructor->value)],
-            $cover_validation
+            ...$cover_validation
         ]);
 
         $data = $request->except('instructor_id', 'upload_images', 'delete_images');
