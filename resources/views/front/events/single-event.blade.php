@@ -49,7 +49,7 @@
                         <i class="fa-solid fa-calendar-days"></i> <bdi>{{ $event->date->format('Y, M d h:ia') }}</bdi>
                     </p>
                     <p>
-                        {{ $event->description }}
+                        {!! $event->description !!}
                     </p>
                 </div>
             </div>
