@@ -4,11 +4,13 @@ namespace App\Http\Controllers\dashboard;
 
 use App\BookRequestsStatesType;
 use App\Http\Controllers\Controller;
+use App\Mail\BookRequestMail;
 use App\Models\Book;
 use App\Models\BookRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 
 class BookRequestsController extends Controller
@@ -78,12 +80,18 @@ class BookRequestsController extends Controller
     {
         $book_request->state = BookRequestsStatesType::canceled->value;
         $book_request->save();
+
+        $email = $book_request->user->email; // Set the recipient's email address
+        Mail::to($email)->send(new BookRequestMail($book_request->book, false));
     }
 
     public function accept(Request $request, BookRequest $book_request)
     {
         $book_request->state = BookRequestsStatesType::approved->value;
         $book_request->save();
+
+        $email = $book_request->user->email; // Set the recipient's email address
+        Mail::to($email)->send(new BookRequestMail($book_request->book, true));
     }
 
     /**
