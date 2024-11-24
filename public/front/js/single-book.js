@@ -309,10 +309,9 @@ function request_unlock_book(button, id){
             button.replaceWith(response)
         },
         error: function(xhr) {
-            var errors = xhr.responseJSON.errors;
-            var firstKey = Object.keys(errors)[0];
+            var error = xhr.responseJSON.message;
             Swal.fire({
-                text: errors[firstKey][0],
+                text: error,
                 icon: "error"
             });
             button.prop("disabled", false)
@@ -331,10 +330,9 @@ function cancel_request_unlock_book(button, id){
             button.parent().replaceWith(response)
         },
         error: function(xhr) {
-            var errors = xhr.responseJSON.errors;
-            var firstKey = Object.keys(errors)[0];
+            var error = xhr.responseJSON.message;
             Swal.fire({
-                text: errors[firstKey][0],
+                text: error,
                 icon: "error"
             });
             button.prop("disabled", false)
