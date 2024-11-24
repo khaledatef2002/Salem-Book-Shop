@@ -67,7 +67,7 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <img src="{{ asset('storage/' . $book->images->first()->url) }}" class="mx-2" alt="{{ $book->title }}" title="{{ $book->title }}">
                                 </div>
-                                <h3 class="mb-0 fs-5 text-center fw-bold">{{ $book->title }}</h3>
+                                <h3 class="mb-0 mt-2 fs-5 text-center fw-bold">{{ $book->title }}</h3>
                                 <div class="content d-flex flex-column justify-content-evenly align-items-center mt-3">
                                     <h3 class="text-dark fs-6 mb-0">
                                         <i class="fa-solid fa-feather"></i>
