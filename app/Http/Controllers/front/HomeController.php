@@ -34,6 +34,11 @@ class HomeController extends Controller
         }
 
         $books = Book::inRandomOrder()->take(10)->with('images', 'author')->get(['id', 'title', 'author_id']);
+        foreach($books as $book)
+        {
+            $book->title = truncatePostAndRemoveImages($book->title, 55);
+        }
+
         $quotes = Quote::inRandomOrder()->take(10)->with('author')->get(['id', 'title', 'author_id']);
 
         $top_authors = $this->getTopAuthors();
