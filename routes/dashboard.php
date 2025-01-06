@@ -17,6 +17,7 @@ use App\Http\Controllers\dashboard\EventController;
 use App\Http\Controllers\dashboard\EventReviewsController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\PeopleController;
+use App\Http\Controllers\Dashboard\PostsApiController;
 use App\Http\Controllers\dashboard\QuotesController;
 use App\Http\Controllers\dashboard\RolesController;
 use App\Http\Controllers\dashboard\UsersController;
@@ -86,4 +87,8 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
     Route::resource('users', UsersController::class)->except('show');
 
     Route::resource('roles', RolesController::class)->except('show');
+
+    Route::get('api/posts', [PostsApiController::class, 'index'])->name('api.posts.index');
+    Route::delete('api/post/{post}', [PostsApiController::class, 'delete'])->name('api.post.delete');
+    Route::post('api/post/approve/{post}', [PostsApiController::class, 'approve'])->name('api.post.approve');
 });

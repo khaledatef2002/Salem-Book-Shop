@@ -9,6 +9,7 @@
         "codezero/laravel-unique-translation": "^4.3",
         "intervention/image": "^3.9",
         "laravel/framework": "^11.9",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "mcamara/laravel-localization": "^2.0",
         "spatie/laravel-permission": "^6.10",
