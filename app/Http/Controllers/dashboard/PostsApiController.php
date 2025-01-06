@@ -7,6 +7,8 @@ use App\Models\ApiPost;
 use App\Models\Article;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -16,8 +18,16 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\Encoders\AutoEncoder;
 
-class PostsApiController extends Controller
+class PostsApiController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:posts_api_show', only: ['index']),
+            new Middleware('can:posts_api_delete', only: ['delete']),
+            new Middleware('can:posts_api_approve', only: ['approve']),
+        ];
+    }
     public function index(Request $request)
     {
         if($request->ajax())
@@ -28,15 +38,15 @@ class PostsApiController extends Controller
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
-                ( Auth::user()->hasPermissionTo('people_edit') && $row['approved'] == false ?
+                ( Auth::user()->hasPermissionTo('api_posts_approve') && $row['approved'] == false ?
                 "
                     <button class='remove_button' onclick='approve_api_post({$row['id']})'><i class='ri-check-double-line text-success fs-4' type='submit'></i></button>
                 " : ''
                 )
                 .
-                ( Auth::user()->hasPermissionTo('people_delete') ?
+                ( Auth::user()->hasPermissionTo('api_posts_delete') ?
                 "
-                    <form id='remove_people' class='mb-0' data-id='".$row['id']."' onsubmit='remove_people(event, this)'>
+                    <form id='remove_api_post' class='mb-0' data-id='".$row['id']."' onsubmit='remove_api_post(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
                         <input type='hidden' name='_token' value='" . csrf_token() . "'>
                         <button class='remove_button' onclick='remove_button(this)' type='button'><i class='ri-delete-bin-5-line text-danger fs-4'></i></button>

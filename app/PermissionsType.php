@@ -100,4 +100,9 @@ enum PermissionsType: string
     case roles_edit = 'roles_edit';
     case roles_delete = 'roles_delete';
     case roles_create = 'roles_create';
+
+    // posts api
+    case posts_api_show = 'posts_api_show';
+    case posts_api_delete = 'posts_api_delete';
+    case posts_api_approve = 'posts_api_approve';
 }
