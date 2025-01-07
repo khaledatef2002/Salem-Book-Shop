@@ -17,7 +17,7 @@ use App\Http\Controllers\dashboard\EventController;
 use App\Http\Controllers\dashboard\EventReviewsController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\PeopleController;
-use App\Http\Controllers\Dashboard\PostsApiController;
+use App\Http\Controllers\dashboard\PostsApiController;
 use App\Http\Controllers\dashboard\QuotesController;
 use App\Http\Controllers\dashboard\RolesController;
 use App\Http\Controllers\dashboard\UsersController;
