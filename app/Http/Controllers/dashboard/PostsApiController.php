@@ -38,13 +38,13 @@ class PostsApiController extends Controller implements HasMiddleware
                 return 
                 "<div class='d-flex align-items-center justify-content-center gap-2'>"
                 .
-                ( Auth::user()->hasPermissionTo('api_posts_approve') && $row['approved'] == false ?
+                ( Auth::user()->hasPermissionTo('posts_api_approve') && $row['approved'] == false ?
                 "
                     <button class='remove_button' onclick='approve_api_post({$row['id']})'><i class='ri-check-double-line text-success fs-4' type='submit'></i></button>
                 " : ''
                 )
                 .
-                ( Auth::user()->hasPermissionTo('api_posts_delete') ?
+                ( Auth::user()->hasPermissionTo('posts_api_delete') ?
                 "
                     <form id='remove_api_post' class='mb-0' data-id='".$row['id']."' onsubmit='remove_api_post(event, this)'>
                         <input type='hidden' name='_method' value='DELETE'>
