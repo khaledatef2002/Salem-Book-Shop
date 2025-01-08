@@ -56,6 +56,9 @@ class PostsApiController extends Controller implements HasMiddleware
                 .
                 "</div>";
             })
+            ->editColumn('content', function(Article $article){
+                return truncatePostAndRemoveImages($article->content, 150);
+            })
             ->editColumn('imageUrl', function(ApiPost $posts){
                 return "
                     <div class='d-flex align-items-center gap-2'>
@@ -66,7 +69,7 @@ class PostsApiController extends Controller implements HasMiddleware
             ->editColumn('created_at', function(ApiPost $posts){
                 return $posts->created_at->diffForHumans();
             })
-            ->rawColumns(['imageUrl', 'action'])
+            ->rawColumns(['content', 'imageUrl', 'action'])
             ->make(true);
         }
         return view('dashboard.api.posts.index');
