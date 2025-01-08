@@ -56,8 +56,8 @@ class PostsApiController extends Controller implements HasMiddleware
                 .
                 "</div>";
             })
-            ->editColumn('content', function(Article $article){
-                return truncatePostAndRemoveImages($article->content, 150);
+            ->editColumn('content', function(ApiPost $posts){
+                return truncatePostAndRemoveImages($posts->content, 150);
             })
             ->editColumn('imageUrl', function(ApiPost $posts){
                 return "
