@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\ApiPost;
 use App\Models\Article;
 use App\Models\ArticleImage;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -101,6 +103,11 @@ class ArticlesController extends Controller implements HasMiddleware
      */
     public function create()
     {
+        if(request()->has('api_post_id'))
+        {
+            $api_post = ApiPost::findOrFail(request('api_post_id'));
+            return view('dashboard.articles.create', compact('api_post'));
+        }
         return view('dashboard.articles.create');
     }
 
@@ -144,7 +151,7 @@ class ArticlesController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validations = [
             'title' => ['required', 'array'],
             'title.*' => ['required', 'min:2'],
 
@@ -153,8 +160,14 @@ class ArticlesController extends Controller implements HasMiddleware
 
             'category_id' => ['required', 'exists:article_categories,id'],
             'keywords' => ['required'],
-            'cover' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480']
-        ]);
+        ];
+
+        if(!$request->has('post_api'))
+        {
+            $validations['cover'] = ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20480'];
+        }
+
+        $data = $request->validate($validations);
 
 
         $date = now()->format('Y-m-d H:i');
@@ -197,7 +210,24 @@ class ArticlesController extends Controller implements HasMiddleware
 
         $data['user_id'] = Auth::id();
 
-        $cover = $request->file('cover');
+
+        $cover = null;
+
+        if($request->has('post_api') && !$request->has('cover'))
+        {
+            $post = ApiPost::findOrFail($request->post_api);
+            $imageUrl = $post->imageUrl;
+            $cover = file_get_contents($imageUrl);
+
+            if ($cover === false) {
+                throw new Exception('Unable to retrieve the image from the provided URL.');
+            }
+        }
+        else
+        {
+            $cover = $request->file('cover');
+        }
+        
         $manager = new ImageManager(new GdDriver());
         $optimizedCover = $manager->read($cover)
             ->scale(height:450)
@@ -215,6 +245,13 @@ class ArticlesController extends Controller implements HasMiddleware
                 'article_id' => $article->id,
                 'url' => $image
             ]);
+        }
+
+        if($request->has('post_api'))
+        {
+            $post = ApiPost::findOrFail($request->post_api);
+            $post->approved = true;
+            $post->save();
         }
 
         return response()->json(['redirectUrl' => route('dashboard.articles.edit', $article)]);

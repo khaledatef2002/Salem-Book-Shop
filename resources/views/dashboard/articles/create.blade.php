@@ -24,13 +24,13 @@
                     @foreach (LaravelLocalization::getSupportedLocales() as $locale)
                         <div class="mb-3">
                             <label class="form-label" for="{{ $locale['locale'] }}.title">@lang('dashboard.'. $locale['locale'] .'.article.title')</label>
-                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.title" name="title[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.title')">
+                            <input type="text" class="form-control" id="{{ $locale['locale'] }}.title" name="title[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.title')" value="{{ $api_post['title'] ?? '' }}">
                         </div>
                     @endforeach
                     @foreach (LaravelLocalization::getSupportedLocales() as $locale)
                         <div class="mb-3">
                             <label class="form-label" for="{{ $locale['locale'] }}.content">@lang('dashboard.'. $locale['locale'] .'.article.content')</label>
-                            <textarea class="form-control" id="{{ $locale['locale'] }}.content" name="content[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.content')"></textarea>
+                            <textarea class="form-control" id="{{ $locale['locale'] }}.content" name="content[{{ $locale['locale'] }}]" placeholder="@lang('dashboard.enter') @lang('dashboard.content')">{{ $api_post['content'] ?? '' }}</textarea>
                         </div>
                     @endforeach
                 </div>
@@ -42,6 +42,9 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">Select Category</h5>
+                    @if ($api_post['category'])
+                        <p class="mb-0">@lang('dashboard.category-from-api'): {{ $api_post['category'] }}</p>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
@@ -75,7 +78,7 @@
                     <div class="auto-image-show">
                         <input id="cover" name="cover" type="file" class="profile-img-file-input" accept="image/*" hidden>
                         <label for="cover" class="profile-photo-edit d-flex justify-content-center align-items-center" style="width: 100%;aspect-ratio: 1 / 0.45;overflow:hidden">
-                            <img src="" style="min-width:100%;min-height:100%;" alt="user-profile-image">
+                            <img src="{{ $api_post['imageUrl'] }}" style="min-width:100%;min-height:100%;" alt="user-profile-image">
                         </label>
                     </div>                               
                 </div>
@@ -89,6 +92,7 @@
             <button type="submit" class="btn btn-success w-sm">@lang('dashboard.create')</button>
         </div>
     </div>
+    <input type="hidden" name="post_api" value="{{ $api_post['id'] }}">
 </form>
 
 @endsection

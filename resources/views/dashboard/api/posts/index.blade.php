@@ -24,30 +24,6 @@
 </div>
 @endsection
 
-<!-- Modal -->
-<div class="modal fade" id="approvePost" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">@lang('dashboard.api.post.approve')</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label" for="category_id">@lang('dashboard.category')</label>
-                    <select class="form-control" id="category_id" name="category_id">
-                        <option></option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('dashboard.close')</button>
-                <button type="button" class="btn btn-primary approve-button">@lang('dashboard.approve')</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section('custom-js')
     <script src="{{ asset('back/js/ApiPost.js') }}"></script>
     <script>

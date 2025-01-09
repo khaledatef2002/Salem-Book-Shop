@@ -41,7 +41,7 @@ class PostsApiController extends Controller implements HasMiddleware
                 .
                 ( Auth::user()->hasPermissionTo('posts_api_approve') && $row['approved'] == false ?
                 "
-                    <button class='remove_button' onclick='approve_api_post({$row['id']})'><i class='ri-check-double-line text-success fs-4' type='submit'></i></button>
+                   <a href='". route('dashboard.articles.create', ['api_post_id' => $row['id']]) ."'><i class='ri-check-double-line text-success fs-4' type='submit'></i></a>
                 " : ''
                 )
                 .
@@ -79,62 +79,5 @@ class PostsApiController extends Controller implements HasMiddleware
     public function delete(Request $request, ApiPost $post)
     {
         $post->delete();
-    }
-
-    public function approve(Request $request, ApiPost $post)
-    {
-        // dd($request->all());
-        $data = $request->validate([
-            'category_id' => ['required', 'exists:article_categories,id'],
-        ]);
-
-        $date = now()->format('Y-m-d H:i');
-        
-        $title = [];
-        $content = [];
-        foreach (LaravelLocalization::getSupportedLocales() as $locale)
-        {
-            $title[$locale['locale']] = $post->title;
-            $content[$locale['locale']] = $post->content;
-        }
-
-        $data['slug'] = [];
-
-        foreach (LaravelLocalization::getSupportedLocales() as $locale)
-        {
-            $data['slug'][$locale['locale']] = Str::of($title[$locale['locale']] . '-' . $date)->trim()->lower()->replace(' ', '-');
-        }
-
-        $data['user_id'] = Auth::id();
-
-        $imageUrl = $post->imageUrl;
-        $imageContent = file_get_contents($imageUrl);
-        if ($imageContent === false) {
-            throw new Exception('Unable to retrieve the image from the provided URL.');
-        }
-        $manager = new ImageManager(new GdDriver());
-        $optimizedCover = $manager->read($imageContent)
-            ->scale(height:450)
-            ->encode(new AutoEncoder("image/jpeg", quality: 75));
-
-        $coverPath = 'articles/' . uniqid() . '.jpg';
-        Storage::disk('public')->put($coverPath, (string) $optimizedCover);
-        $data['cover'] = $coverPath;
-
-        $article = Article::create([
-            'title' => $title,
-            'content' => $content,
-            'category_id' => $data['category_id'],
-            'slug' => $data['slug'],    
-            'user_id' => $data['user_id'],  
-            'cover' => $data['cover'],  
-            'keywords' => " ",
-        ]);
-
-        $post->approved = true;
-        $post->save();
-        
-        return response()->json(['message' => 'Post approved successfully']);
-
     }
 }

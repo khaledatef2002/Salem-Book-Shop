@@ -90,5 +90,4 @@ Route::name('dashboard.')->middleware('auth', 'admin')->prefix('dashboard')->gro
 
     Route::get('api/posts', [PostsApiController::class, 'index'])->name('api.posts.index');
     Route::delete('api/post/{post}', [PostsApiController::class, 'delete'])->name('api.post.delete');
-    Route::post('api/post/approve/{post}', [PostsApiController::class, 'approve'])->name('api.post.approve');
 });
