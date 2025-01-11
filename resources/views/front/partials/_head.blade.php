@@ -36,3 +36,5 @@
 @endif
 <link rel="stylesheet" href="{{ asset('front') }}/css/minimized/responsive.min.css">
 @yield('custom-css')
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5949535713923274"
+     crossorigin="anonymous"></script>

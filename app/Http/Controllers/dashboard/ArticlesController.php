@@ -212,12 +212,13 @@ class ArticlesController extends Controller implements HasMiddleware
 
 
         $cover = null;
-
+        $coverExtension = null;
         if($request->has('post_api') && !$request->has('cover'))
         {
             $post = ApiPost::findOrFail($request->post_api);
             $imageUrl = $post->imageUrl;
             $cover = file_get_contents($imageUrl);
+            $coverExtension = pathinfo($imageUrl, PATHINFO_EXTENSION);
 
             if ($cover === false) {
                 throw new Exception('Unable to retrieve the image from the provided URL.');
@@ -226,6 +227,7 @@ class ArticlesController extends Controller implements HasMiddleware
         else
         {
             $cover = $request->file('cover');
+            $coverExtension = $cover->getClientOriginalExtension();
         }
         
         $manager = new ImageManager(new GdDriver());
@@ -233,7 +235,7 @@ class ArticlesController extends Controller implements HasMiddleware
             ->scale(height:450)
             ->encode(new AutoEncoder(quality: 75));
             
-        $coverPath = 'articles/' . uniqid() . '.' . $cover->getClientOriginalExtension();
+        $coverPath = 'articles/' . uniqid() . '.' . $coverExtension;
         Storage::disk('public')->put($coverPath, (string) $optimizedCover);
         $data['cover'] = $coverPath;
  
