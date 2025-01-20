@@ -66,7 +66,7 @@
         </div>
         <hr>
         <div class="copyrights d-flex justify-content-center">
-            <p class="text-white">@lang('custom.footer.copyright') &copy; {{ $date("Y") }} {{ $website_settings->site_title }}.</p>
+            <p class="text-white">@lang('custom.footer.copyright') &copy; {{ date("Y") }} {{ $website_settings->site_title }}.</p>
         </div>
     </div>
 </footer>
